@@ -1,26 +1,197 @@
-@import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+.service-one .owl-dot span {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: transparent;
+  border: 2px solid #c7d2fe;
+  position: relative;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.service-one .owl-dot.active span {
+  border-color: #4f46e5;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.service-one .owl-dot.active span::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  background: #4f46e5;
+  border-radius: 50%;
+}
+
+
+
+
+
+
+
+.section-headings{
+  margin-block: 60px;
+}
+.section-headings h2 {
+  position: relative;
+  font-size: 50px;
+  font-weight: 900;
+  color: var(--ostech-base); 
+  z-index: 1;
+}
+
+.section-headings h2 span {
+  position: absolute;
+  left: 0;
+  top: 70%;
+  transform: translateY(-50%);
+  font-size: 95px;
+  font-weight: 800;
+  color: cyan;
+  opacity: 0.09;
+  z-index: -1;
+  white-space: nowrap;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+}
+
+@media (max-width: 768px) {
+  .section-headings h2 {
+    font-size: 32px;
+  }
+
+  .section-headings h2 span {
+    font-size: 50px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (min-width: 268px) and (max-width: 600px) {
+  .section-headings h2 {
+    font-size: 25px;
+  }
+
+  .section-headings h2 span {
+    font-size: 40px;
+  }
+}
+
+
+
+
+
+
+
+html,body{
+  background: var(--ostech-black) !important;
+}
+.mylogo{
+  font-size:40px;
+  font-weight:900;
+  color: #fff;
+}
+.mytext{
+    background: var(--ostech-base-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+
+        .owl-arrows {
+          background: #fff;
+          border: 2px solid var(--ostech-base);
+          border-radius: 50%;
+          width: 44px;
+          height: 44px;
+          display: flex;
+          margin-block: 15px;
+          margin-inline: 10px;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          font-size: 24px;
+          color: #374151;
+          -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
+          -ms-border-radius: 50%;
+          -o-border-radius: 50%;
+}
+        
+        .owl-arrows:hover {
+          background: var(--ostech-base);
+          border-color: var(--ostech-base);
+          color: white;
+          transform: scale(1.05);
+        }
+        
+        .owl-arrows.left {
+          order: 1;
+        }
+        
+        .owl-arrows.right {
+          order: 3;
+        }
+        
+        .owl-dotss {
+          order: 2;
+          display: flex;
+          gap: 8px;
+          justify-content: center;
+        }
+        
+        .owl-dotss {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background: #d1d5db;
+          border: none;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          padding: 0;
+        }
+        
+        .owl-dotdotss:hover {
+          background: #9ca3af;
+        }
+        
+        .owl-dotss.active {
+          background: var(--ostech-base);
+          transform: scale(1.2);
+        }
+        
+        @media (max-width: 768px) {
+          .owl-arrows {
+            width: 36px;
+            height: 36px;
+            font-size: 18px;
+          }
+          
+          .owl-dotss {
+            width: 10px;
+            height: 10px;
+          }
+        }
+
+
+
+
+ .BrandCard {
+  background: var(--ostech-white, #FFAA17);
+  height: 200px;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 6px;
+  margin-block: 15px;
+  border-image:2px solid var(--ostech-base-gradient);
+}
+
+.BrandCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  background: var(--ostech-white, #FFAA17);
+box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
