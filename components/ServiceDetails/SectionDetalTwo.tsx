@@ -10,7 +10,7 @@ export default function StatsBar() {
       <div className="container">
         <div className="row text-center align-items-center">
           
-          <div className="col-6 col-lg-3 stat-item">
+          <div className="col-md-6 col-lg-3 stat-item">
            
 
 
@@ -27,7 +27,7 @@ export default function StatsBar() {
             </div>
           </div>
 
-          <div className="col-6 col-lg-3 stat-item">
+          <div className="col-md-6 col-lg-3 stat-item">
             <div className="row">
               <div className="col-md-1">
 
@@ -41,7 +41,7 @@ export default function StatsBar() {
             </div>
           </div>
 
-          <div className="col-6 col-lg-3 stat-item">
+          <div className="col-md-6 col-lg-3 stat-item">
             
 
             <div className="row">
@@ -58,7 +58,7 @@ export default function StatsBar() {
             </div>
           </div>
 
-          <div className="col-6 col-lg-3 stat-item">
+          <div className="col-md-6 col-lg-3 stat-item">
             <div className="row">
               <div className="col-md-1">
                 <HiMiniDevicePhoneMobile className="stat-icon"/>

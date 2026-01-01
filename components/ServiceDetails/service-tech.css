@@ -1,6 +1,6 @@
 .tech{
     background: rgb(25, 26, 26);
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
     color: var(--ostech-white);
     padding: 30px;

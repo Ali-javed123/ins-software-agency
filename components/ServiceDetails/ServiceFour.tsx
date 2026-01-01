@@ -45,7 +45,8 @@ const ServiceFour = () => {
 
         {/* Icons Display */}
         {show === "Frontend" && (
-          <div className="row d-flex justify-content-around align-content-start">
+                  <div className="row d-flex justify-content-around align-content-start">
+                   
             <IconCard Icon={FaReact} color="skyblue" label="React JS" />
             <IconCard Icon={RiNextjsFill} color="white" label="Next JS" />
             <IconCard Icon={FaAngular} color="#DD0031" label="Angular JS" />
@@ -54,7 +55,7 @@ const ServiceFour = () => {
         )}
 
         {show === "database" && (
-          <div className="row d-flex justify-content-around align-content-start">
+          <div className="row d-flex  justify-content-around align-content-start">
             <IconCard Icon={SiMongodb} color="#47A248" label="MongoDB" />
             <IconCard Icon={DiMysql} color="#00758F" label="MySQL" />
             <IconCard Icon={SiPostgresql} color="#336791" label="PostgreSQL" />
