@@ -9,7 +9,8 @@ const Navbar = () => {
     <div className="main-header__inner">
       <div className="main-header__logo logo-ostech">
               <Link href="/">
-                            <img src="/assets/images/logos.png" alt="Ostech HTML" width="226px"/>
+                            <img loading='lazy'
+              decoding="async" src="/assets/images/logos.png" alt="Ostech HTML" width="226px"/>
 
             {/* <span className='mylogo'>InS Tech Lab</span> */}
         </Link>

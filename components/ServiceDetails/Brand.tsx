@@ -18,19 +18,13 @@ const Brand = () => {
       <div className="container position-relative">
 
         {/* Custom Navigation */}
-        <button ref={prevRef} className="owl-arrows left">
-          <span className="fa fa-angle-left" />
-        </button>
-
-        <button ref={nextRef} className="owl-arrows right">
-          <span className="fa fa-angle-right" />
-        </button>
+        <div className='fs-2 fw-bolder'>Trusted by the Top Brands</div>
 
         <Swiper
           modules={[Autoplay, Navigation]}
           loop
-          // autoplay={{ delay: 6000, disableOnInteraction: false }}
-          // speed={700}
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          speed={700}
           spaceBetween={25}
           slidesPerView={5}
           onBeforeInit={(swiper) => {
@@ -53,11 +47,22 @@ const Brand = () => {
           {images.map((src, index) => (
             <SwiperSlide key={index} className='BrandCard'>
               <div className="client-carousel__one__item ">
-                <Image src={src} alt="brand" width={180} height={80} />
+                <img  loading='lazy'
+              decoding="async" src={src} alt="brand" width={180} height={80} />
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
+        <div className='d-flex w-100 h-100 gap-4 my-3'>
+
+        <button ref={prevRef} className="owl-arrows left">
+          <span className="fa fa-angle-left" />
+        </button>
+
+        <button ref={nextRef} className="owl-arrows right">
+          <span className="fa fa-angle-right" />
+        </button>
+        </div>
       </div>
     </section>
   );

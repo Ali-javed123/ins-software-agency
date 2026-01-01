@@ -96,8 +96,8 @@ html,body{
 
 
         .owl-arrows {
-          background: #fff;
-          border: 2px solid var(--ostech-base);
+          background: var(--ostech-base-gradient);
+          border: 2px solid var(--ostech-whitef);
           border-radius: 50%;
           width: 44px;
           height: 44px;
@@ -131,6 +131,13 @@ html,body{
           order: 3;
         }
         
+        .owl-arrows.left .fa-angle-left,
+        .owl-arrows.right .fa-angle-right {
+          font-size: 28px ;
+          font-weight: 900;
+          color: #fff;
+        }
+
         .owl-dotss {
           order: 2;
           display: flex;
@@ -184,9 +191,13 @@ html,body{
   align-items: center;
   transition: all 0.3s ease;
   border-radius: 8px;
-box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 6px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 6px;
   margin-block: 15px;
   border-image:2px solid var(--ostech-base-gradient);
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
 }
 
 .BrandCard:hover {
@@ -194,4 +205,67 @@ box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 6px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.2);
   background: var(--ostech-white, #fff);
 box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.stats-bar {
+  background: linear-gradient(
+    180deg,
+    #021926 0%,
+    #02111a 100%
+  );
+  padding: 50px 0;
+}
+
+.stat-item {
+  color: #fff;
+  padding: 20px 10px;
+}
+
+.stat-icon {
+  display: inline-flex;
+  font-size: 57px !important;
+  font-weight: 900;
+  /* border: 2px solid #ff8a00; */
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  color: var(--ostech-base);
+  font-size: 26px;
+  margin-bottom: 12px;
+}
+
+.stat-item h3 {
+  font-size: 34px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.stat-item p {
+  font-size: 14px;
+  line-height: 1.4;
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* Mobile spacing */
+@media (max-width: 767px) {
+  .stat-item {
+    margin-bottom: 25px;
+  }
 }

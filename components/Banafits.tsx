@@ -63,7 +63,8 @@ const Banafits = () => {
     </div>
   </div>
   <div className="benefit-one__shape">
-    <img src="/assets/images/shapes/benefit-shape-1-1.png" alt="benefit shape" />
+    <img loading='lazy'
+              decoding="async" src="/assets/images/shapes/benefit-shape-1-1.png" alt="benefit shape" />
   </div>
 </section>
 {/* Benefit section End */}

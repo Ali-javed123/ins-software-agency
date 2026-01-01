@@ -1,6 +1,16 @@
 import Banner from "@/components/Banner";
-import Navbar from "@/components/Navbar";
 import Brand from "@/components/ServiceDetails/Brand";
+import ServiceDetailTwo from "@/components/ServiceDetails/SectionDetalTwo";
+import ServiceFour from "@/components/ServiceDetails/ServiceFour";
+import ServiceFive from "@/components/ServiceDetails/ServiceFive";
+import Review from "@/components/ServiceDetails/Review";
+import ContactUs from "@/components/ContactUsForm";
+
+import ServiceThree from "@/components/ServiceDetails/ServiceThree";
+import Testimonial from "@/components/Testimonials";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
+
 import { notFound } from "next/navigation";
 const Services = [
   {
@@ -156,6 +166,14 @@ const ServiceDetail = async ({ params }) => {
       <Navbar/>
       <Banner title={service?.title} />
         <Brand />
+        <ServiceDetailTwo />
+        <ServiceThree />
+        <ServiceFour />
+        <ServiceFive />
+        {/* <Review/> */}
+        <Testimonial />
+        <ContactUs />
+        <Footer/>
         </div>
     </>
   );

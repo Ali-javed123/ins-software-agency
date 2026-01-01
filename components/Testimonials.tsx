@@ -4,9 +4,16 @@ import React from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 // owl-carousel is browser-only
+import $ from "jquery";
+
 const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
   ssr: false,
 });
+if (typeof window !== "undefined") {
+  window.$ = $;
+ 
+  window.jQuery = $;
+}
 
 // ================= MAIN SLIDER OPTIONS =================
 const mainOptions = {

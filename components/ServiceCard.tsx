@@ -291,7 +291,8 @@ const services = [
 export default function ServiceSlider() {
   
   return (
-    <section className="service-page service-page--page">
+    <section className="service-three">
+      <div className="service-three__bg" style={{backgroundImage: `url(assets/images/shapes/service-shape-2-1.png)`}}></div>
       <div className="container">
         {Services.map((e ,i) => (
          <div key={i}>
@@ -322,29 +323,32 @@ export default function ServiceSlider() {
           }}
         >
               {e.data.map((item) => (
-            
-            <div key={item.id} className="service-card ">
-              <div className="service-card__inner" >
-                    <div className="service-card__content">
-                      <Link             key={item.id}          href={`/services/${item.slug}`}
+                <div key={item.id}>
+                  
+     <div className="service-three__item" >
+  <div className="service-three__item__inner">
+    <div className="service-three__item__icon">
+      <div className="service-three__item__icon__inner">
+        <i className="icon-software-1" />
+      </div>
+    </div>
+    <div className="service-three__item__thumb">
+      <img src={item.image} alt="ostech image" />
+    </div>
+                      <div className="service-three__item__content">
+         <Link href={`/services/${item.slug}`}>
+                        
+      <h4 className="service-three__item__title">{item.title}</h4>
+                  </Link>   
+      <Link href="/service-d-development.html" className="service-three__item__link">
+        <span className="service-three__item__link__icon" />
+      </Link>
+    </div>
+  </div>
+</div>
+       </div>
 
->
-                  <h4
-                    className="service-card__title"
-                    dangerouslySetInnerHTML={{ __html: item.title }}
-                  />
-                      </Link>
-                  <div className="service-card__icon">
-                    <i className={item.icon} />
-                  </div>
-                </div>
-
-                <div className="service-card__thumb">
-                  <img src={item.image} alt="service" width={"100%"} height={"422px"} />
-                </div>
-              </div>
-            </div>
-          ))}
+                 ))}
         </OwlCarousel>
          </div>
        ))} 

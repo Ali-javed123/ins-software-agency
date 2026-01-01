@@ -1,0 +1,65 @@
+.tech{
+    background: rgb(25, 26, 26);
+    height: 100vh;
+    width: 100%;
+    color: var(--ostech-white);
+    padding: 30px;
+
+}
+.sdfs{
+    width: 100%;
+    min-height: 200px;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+gap: 10px;
+    
+}
+.btn{
+    min-width: 70px;
+    height: 30px;
+    padding-inline: 20px;
+    padding-block: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--ostech-base);
+    background:  var(--ostech-secondry);
+    color: var(--ostech-white);
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    -o-border-radius: 12px;
+}
+.btn.active{
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--ostech-base-gradient);
+    color: var(--ostech-white);
+}
+.sdf{
+    width: 100%;
+    min-height: 200px;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.df{
+    font-size:60px;
+    font-weight: 800;
+    
+
+}
+.sd2{
+color: var(--ostech-white);
+font-size: 20px;
+font-weight: 400;
+line-height: 35px;
+}

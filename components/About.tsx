@@ -11,10 +11,12 @@ const About = () => {
         <div className="about-one__left wow fadeInLeft" data-wow-delay="500ms">
           <div className="about-one__thumb">
             <div className="about-one__thumb__item">
-              <img src="/assets/images/about/about-1-1.png" alt="ostech image" />
+              <img loading='lazy'
+              decoding="async" src="/assets/images/about/about-1-1.png" alt="ostech image" />
             </div>
             <div className="about-one__thumb__item about-one__thumb__item--two">
-              <img src="/assets/images/about/about-1-2.png" alt="ostech image" />
+              <img loading='lazy'
+              decoding="async" src="/assets/images/about/about-1-2.png" alt="ostech image" />
             </div>
           </div>
           <div className="about-one__funfact__item count-box">
@@ -37,7 +39,8 @@ const About = () => {
           <div className="about-one__top wow fadeInUp" data-wow-delay="500ms">
             <div className="sec-title  wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="000ms">
               <div className="d-flex align-items-center justify-content-start">
-                <img src="/assets/images/shapes/sec-title-s-1.png" alt="About Us" className="sec-title__img" />
+                <img loading='lazy'
+              decoding="async" src="/assets/images/shapes/sec-title-s-1.png" alt="About Us" className="sec-title__img" />
                 <h6 className="sec-title__tagline">About Us</h6>
               </div>
               <h3 className="sec-title__title">Provide the Best Easy Solution for Your IT Problem</h3>

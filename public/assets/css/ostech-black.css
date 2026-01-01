@@ -12559,12 +12559,12 @@ body.megamenu-popup-active .mobile-nav__content {
   width: 94px;
   height: 94px;
   border-radius: 50%;
-  background: var(--ostech-secondary, #232429);
+  background: var(--ostech-base-gradient, #232429);
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 45px;
-  color: var(--ostech-base, #FFAA17);
+  color: var(--ostech-white, #FFAA17);
   margin-left: 60px;
   margin-bottom: -40px;
   position: relative;
@@ -12598,13 +12598,15 @@ body.megamenu-popup-active .mobile-nav__content {
   position: relative;
   margin-top: -35px;
   padding: 20px 40px;
+  height:100px;
   z-index: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   transition: all 0.4s ease-in;
-  background: linear-gradient(90deg, #171717 50%, rgba(23, 23, 23, 0) 126.12%);
+  background: var(--ostech-base-gradient);
+  /*  */
 }
 .service-three__item__title {
   font-size: 24px;
@@ -12658,13 +12660,16 @@ body.megamenu-popup-active .mobile-nav__content {
   animation: bounceIn 1s linear;
 }
 .service-three__item:hover .service-three__item__content {
-  background: var(--ostech-base-gradient, #FFAA17);
+  background: linear-gradient(90deg, #171717 50%, rgba(23, 23, 23, 0) 126.12%);
 }
 .service-three__item:hover .service-three__item__title {
-  color: var(--ostech-secondary, #232429);
+  color: var(--ostech-white, #232429);
 }
 .service-three__item:hover .service-three__item__thumb img {
   transform: scale(1.1);
+}
+.service-three__item:hover .service-three__item__icon__inner{
+  background: linear-gradient(90deg, #171717 50%, rgba(23, 23, 23, 0) 126.12%);
 }
 
 /*--------------------------------------------------------------

@@ -1,0 +1,21 @@
+.formSec{
+    background: var(--ostech-black);
+    color: var(--ostech-white);
+    height: 100vh;
+    width: 100%;
+    display:flex ;
+    flex-direction: column;
+    padding: 30px;
+}
+.tils{
+    font-size: 25px;
+    font-weight: 900;
+    color: var(--ostech-white);
+    line-height: 30px;
+}
+.tilsv2{
+    font-size: 25px;
+    font-weight: 600;
+    color: var(--ostech-white);
+    line-height: 30px;
+}

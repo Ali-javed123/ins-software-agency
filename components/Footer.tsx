@@ -15,9 +15,9 @@ const Footer = () => {
             <h3 className="cta-two__item__title">Internet &amp; Cyber Security Solutions</h3>
             <Link href="#" className=" ostech-two-btn">Discover More</Link>
           </div>
-          <div className="cta-two__item__shape">
+          {/* <div className="cta-two__item__shape">
             <img src="assets/images/shapes/cta-shape.png" alt="ostech image" />
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="col-lg-6">
@@ -43,9 +43,9 @@ const Footer = () => {
     <div className="container">
       <div className="main-footer__top__inner">
         <div className="main-footer__top__logo">
-          <a href="index.html" className="footer__logo ostech-logo">
-            <img src="/assets/images/logo-light.png" width={120} alt="Ostech HTML Template" />
-          </a>
+          <Link href="/" className="footer__logo ostech-logo">
+            <img src="/assets/images/logos.png" width="226px" alt="Ostech HTML Template" />
+          </Link>
         </div>
         <div className="main-footer__top__social">
           <a href="https://facebook.com/"><i className="icon-facebook-f" aria-hidden="true" /><span className="sr-only">Facebook</span></a>
