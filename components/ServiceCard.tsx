@@ -306,9 +306,9 @@ export default function ServiceSlider() {
         <OwlCarousel
           loop
           margin={30}
-          // autoplay
-          // autoplayTimeout={2500}
-          // smartSpeed={800}
+          autoplay
+          autoplayTimeout={2500}
+          smartSpeed={800}
           dots
           nav
           navText={[
@@ -325,6 +325,7 @@ export default function ServiceSlider() {
               {e.data.map((item) => (
                 <div key={item.id}>
                   
+     <Link href={`/services/${item.slug}`}>
      <div className="service-three__item" >
   <div className="service-three__item__inner">
     <div className="service-three__item__icon">
@@ -336,16 +337,15 @@ export default function ServiceSlider() {
       <img src={item.image} alt="ostech image" />
     </div>
                       <div className="service-three__item__content">
-         <Link href={`/services/${item.slug}`}>
                         
       <h4 className="service-three__item__title">{item.title}</h4>
-                  </Link>   
-      <Link href="/service-d-development.html" className="service-three__item__link">
+      {/* <Link href="/service-d-development.html" className="service-three__item__link"> */}
         <span className="service-three__item__link__icon" />
-      </Link>
+      {/* </Link> */}
     </div>
   </div>
 </div>
+                  </Link>   
        </div>
 
                  ))}

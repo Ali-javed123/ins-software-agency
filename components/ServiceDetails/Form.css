@@ -1,21 +1,56 @@
-.formSec{
-    background: var(--ostech-black);
-    color: var(--ostech-white);
-    height: 100vh;
-    width: 100%;
-    display:flex ;
-    flex-direction: column;
-    padding: 30px;
+.sectionForm{
+  background: var(--ostech-black);
+  color: var(--ostech-white);
+  min-height: 80vh;
+  width: 100%;
+  display: flex;
+  padding: 60px;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+  overflow: hidden;
 }
-.tils{
-    font-size: 25px;
-    font-weight: 900;
-    color: var(--ostech-white);
-    line-height: 30px;
+.ri{
+  color: var(--ostech-white);
+  min-height: 80vh;
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: flex-start;
+  flex-direction: column;
 }
-.tilsv2{
-    font-size: 25px;
-    font-weight: 600;
-    color: var(--ostech-white);
-    line-height: 30px;
+.ritle{
+font-size: 30px;
+font-weight: 900;
+color: var(--ostech-white);
+line-height: 40px;
+
+}
+.ritlev2{
+font-size: 18px;
+font-weight: 400;
+color: var(--ostech-white);
+line-height: 30px;
+
+}
+.ritlev3{
+font-size: 28px;
+font-weight: 700;
+color: var(--ostech-white);
+line-height: 34px;
+
+}
+.form-card{
+  background: var(--ostech-base-gradient);
+  height: 100%;
+  width: 100%;
+  color: var(--ostech-white);
+  padding: 25px;
+  border-radius: 35px 0 35px 0;
+  -webkit-border-radius: 35px 0 35px 0;
+  -moz-border-radius: 35px 0 35px 0;
+  -ms-border-radius: 35px 0 35px 0;
+  -o-border-radius: 35px 0 35px 0;
 }

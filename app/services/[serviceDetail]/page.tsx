@@ -7,9 +7,12 @@ import Review from "@/components/ServiceDetails/Review";
 import ContactUs from "@/components/ContactUsForm";
 
 import ServiceThree from "@/components/ServiceDetails/ServiceThree";
+import OurServices from "@/components/ServiceDetails/OurServices";
 import Testimonial from "@/components/Testimonials";
+import Faq from "@/components/ServiceDetails/Faq";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import ServiceForm from  "@/components/ServiceDetails/ServiceForm";
 
 import { notFound } from "next/navigation";
 const Services = [
@@ -166,13 +169,16 @@ const ServiceDetail = async ({ params }) => {
       <Navbar/>
       <Banner title={service?.title} />
         <Brand />
+        <OurServices/>
         <ServiceDetailTwo />
         <ServiceThree />
         <ServiceFour />
         <ServiceFive />
         {/* <Review/> */}
         <Testimonial />
-        <ContactUs />
+        <Faq/>
+        {/* <ContactUs /> */}
+        <ServiceForm/>
         <Footer/>
         </div>
     </>

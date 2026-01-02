@@ -1,0 +1,70 @@
+.ourservices{
+    min-height: 60vh;
+    padding: 60px;
+    background: var(--ostech-black);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--ostech-white);
+}
+.head{
+    font-size: 30px;
+    font-weight: 900;
+    line-height: 40px;
+
+}
+.headspan{
+    font-size: 30px;
+    font-weight: 900;
+    line-height: 40px;
+    color: var(--ostech-base);
+}
+.ourservicesCard{
+    min-height:380px;
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    color: var(--ostech-white);
+    background: var(--ostech-base-gradient);
+    border-bottom: 2px solid var(--ostech-white);
+    border-radius:25px 0 20px 0 ;
+    -webkit-border-radius:25px 0 20px 0 ;
+    -moz-border-radius:25px 0 20px 0 ;
+    -ms-border-radius:25px 0 20px 0 ;
+    -o-border-radius:25px 0 20px 0 ;
+}
+.ouricon{
+    font-size: 35px;
+    font-weight: 900;
+    color: var(--ostech-black);
+    line-height: 40px;
+
+}
+.ouriconwrap{
+    height: 50px;
+    min-width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--ostech-white);
+    border-radius: 40px;
+    /* padding: 5px; */
+    background: var(--ostech-white);
+    -webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
+    -ms-border-radius: 40px;
+    -o-border-radius: 40px;
+}
+.ourdes{
+    font-size:15px ;
+    font-weight: 500;
+    color: var(--ostech-white);
+    line-height: 30px;
+}
+.ourhead{
+    font-size:25px ;
+    font-weight: 800;
+    color: var(--ostech-white);
+    line-height: 30px;
+}

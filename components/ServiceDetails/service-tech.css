@@ -1,5 +1,8 @@
 .tech{
-    background: rgb(25, 26, 26);
+    /* background: rgb(25, 26, 26); 
+    */
+  background: linear-gradient(180deg, #001d2b 0%, #000f17 100%);
+
     min-height: 100vh;
     width: 100%;
     color: var(--ostech-white);

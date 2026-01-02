@@ -2,7 +2,7 @@
 .serviceDe-two {
   background: var(--base-black);
   color: var(--base-white);
-  padding: 60px 20px; /* Add horizontal padding for mobile */
+  padding: 60px; /* Add horizontal padding for mobile */
   position: relative;
 }
 

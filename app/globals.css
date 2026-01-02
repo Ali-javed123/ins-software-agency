@@ -182,10 +182,11 @@ html,body{
 
 
  .BrandCard {
-  background: var(--ostech-white, #FFAA17);
+  background: var(--ostech-base-gradient, #FFAA17);
   height: 200px;
   width: 100%;
   padding: 20px;
+  border:2px solid white;
   display: flex;
   justify-content: center;
   align-items: center;
