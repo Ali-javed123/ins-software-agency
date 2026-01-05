@@ -210,9 +210,36 @@ box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px
 
 
 
+.slc{
+  font-size:17px;
+  font-weight:900;
+  line-height:35px;
+  color:var(--ostech-white)
+}
+.feature-one__item:hover  .slc{
+  font-size:17px;
+  font-weight:900;
+  line-height:35px;
+  color:var(--ostech-black)
+}
 
 
 
+
+
+.contSec{
+  min-height: 100vh;
+  width: 100%;
+  /* padding: 50px; */
+  margin-top: 30px;
+}
+.contactright{
+  height: 100vh;
+  width: 100%;
+  background-image: url('/assets/images/contact-us.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 
 
 

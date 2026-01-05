@@ -334,7 +334,7 @@ export default function ServiceSlider() {
       </div>
     </div>
     <div className="service-three__item__thumb">
-      <img src={item.image} alt="ostech image" />
+      <img src={item.image} alt="ostech image" height={"300px"}/>
     </div>
                       <div className="service-three__item__content">
                         

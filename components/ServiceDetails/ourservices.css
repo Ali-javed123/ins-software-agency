@@ -27,12 +27,19 @@
     flex-direction: column;
     color: var(--ostech-white);
     background: var(--ostech-base-gradient);
-    border-bottom: 2px solid var(--ostech-white);
-    border-radius:25px 0 20px 0 ;
-    -webkit-border-radius:25px 0 20px 0 ;
-    -moz-border-radius:25px 0 20px 0 ;
-    -ms-border-radius:25px 0 20px 0 ;
-    -o-border-radius:25px 0 20px 0 ;
+    border: 2px solid var(--ostech-white);
+    border-radius:25px 0 25px 0 ;
+    -webkit-border-radius:25px 0 25px 0 ;
+    -moz-border-radius:25px 0 25px 0 ;
+    -ms-border-radius:25px 0 25px 0 ;
+    -o-border-radius:25px 0 25px 0 ;
+    border: 2px solid var(--ostech-white);
+}
+.ourservicesCard:hover,
+.ourservicesCard:focus
+{
+   background: linear-gradient(180deg, #001d2b 0%, #000f17 100%);
+;
 }
 .ouricon{
     font-size: 35px;

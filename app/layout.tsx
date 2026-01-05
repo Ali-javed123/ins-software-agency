@@ -22,6 +22,8 @@ import "@/public/assets/vendors/owl-carousel/css/owl.theme.default.min.css";
 import "@/public/assets/css/ostech-black.css";
 import "@/public/assets/vendors/owl-carousel/css/owl.carousel.min.css";
 import "@/public/assets/vendors/owl-carousel/css/owl.theme.default.min.css";
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 const barlow = Barlow({
   subsets: ["latin"],
@@ -69,7 +71,9 @@ export default function RootLayout({
   return (
     <html lang="en">
 
-
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/fontawesome.min.css" integrity="sha512-M5Kq4YVQrjg5c2wsZSn27Dkfm/2ALfxmun0vUE3mPiJyK53hQBHYCVAtvMYEC7ZXmYLg8DVG4tF8gD27WmDbsg=="   />
+  </head>
 
       <body
         className={`${barlow.variable} ${barlow.variable} antialiased custom-cursor`}

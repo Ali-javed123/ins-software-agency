@@ -8,6 +8,9 @@ import React from 'react'
 import type { Metadata } from "next";
 import Footer from "@/components/Footer"
 
+
+const img1 = '/assets/images/aboutsus.webp';
+
 export const metadata: Metadata = {
   title: "Ins Software Agency | Aboutus",
   description:
@@ -23,7 +26,7 @@ const AboutUsPage = () => {
       <>
            <div className="page-wrapper"> 
     <Navbar/>
-              <Banner title={"about us"} />
+              <Banner image={img1} title={"about us"} />
               <AboutTwo />
               <WhyChooseTwo />
               <Testimonialtwo />

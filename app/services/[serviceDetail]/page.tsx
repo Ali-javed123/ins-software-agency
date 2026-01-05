@@ -8,6 +8,7 @@ import ContactUs from "@/components/ContactUsForm";
 
 import ServiceThree from "@/components/ServiceDetails/ServiceThree";
 import OurServices from "@/components/ServiceDetails/OurServices";
+import Highvalue from "@/components/ServiceDetails/HighValue";
 import Testimonial from "@/components/Testimonials";
 import Faq from "@/components/ServiceDetails/Faq";
 import Footer from "@/components/Footer";
@@ -168,7 +169,8 @@ const ServiceDetail = async ({ params }) => {
            <div className="page-wrapper"> 
       <Navbar/>
       <Banner title={service?.title} />
-        <Brand />
+        {/* <Brand /> */}
+        <Highvalue/>
         <OurServices/>
         <ServiceDetailTwo />
         <ServiceThree />
@@ -178,7 +180,7 @@ const ServiceDetail = async ({ params }) => {
         <Testimonial />
         <Faq/>
         {/* <ContactUs /> */}
-        <ServiceForm/>
+        <ServiceForm />
         <Footer/>
         </div>
     </>

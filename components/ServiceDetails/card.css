@@ -26,8 +26,13 @@ justify-content: flex-start;
     -ms-border-radius: 12px;
     -o-border-radius: 12px;
 }
+.cards1:hover,
+.cards1:focus
+{
+    background:var(--ostech-navy-gradient);
+}
 .titlenum{
-color: var(--ostech-text);
+color: rgb(204, 203, 203);
 font-size: 30px ;
 font-weight: 900;
 line-height: 42px;

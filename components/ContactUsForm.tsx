@@ -6,43 +6,8 @@ const ContactUsForm = () => {
  <section className="contact-one"  style={{marginBottom:"120px"}}>
   <div className="container">
     <div className="row gutter-y-30">
-      <div className="col-lg-4">
-        <div className="contact-one__left">
-          <ul className="contact-one__list list-unstyled">
-            <li className="contact-one__list__item">
-              <div className="contact-one__list__icon">
-                <i className="icon-telephone" />
-              </div>
-              <div className="contact-one__list__content">
-                <span className="contact-one__list__subtitle">Have any question?</span>
-                <p className="contact-one__list__action">Free <a href="tel:+23-000-8050"> + 23 (000)-8050</a></p>
-              </div>
-            </li>
-            <li className="contact-one__list__item">
-              <div className="contact-one__list__icon">
-                <i className="icon-email2" />
-              </div>
-              <div className="contact-one__list__content">
-                <span className="contact-one__list__subtitle">Send Email</span>
-                <p className="contact-one__list__action"><a href="mailto:demo@gmail.com">demo@gmail.com</a></p>
-              </div>
-            </li>
-            <li className="contact-one__list__item">
-              <div className="contact-one__list__icon">
-                <i className="icon-Pin" />
-              </div>
-              <div className="contact-one__list__content">
-                <span className="contact-one__list__subtitle">Visit Anytime</span>
-                <p className="contact-one__list__action">6391 Elgin St. Delaware</p>
-              </div>
-            </li>
-          </ul>
-          <div className="contact-one__thumb mt-2 ">
-            <img src="/assets/images/resources/contact-1-1.png" height={'403px'} alt="contact thumb"  />
-          </div>
-        </div>
-      </div>
-      <div className="col-lg-8">
+
+      <div className="col-lg-6 text-center">
         <div className="contact-one__right">
           <div className="contact-one__top">
             <div className="sec-title wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="000ms">

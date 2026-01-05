@@ -5,6 +5,7 @@ import ServiceCard from '@/components/ServiceCard'
 import React from 'react'
 import type { Metadata } from "next";
 import Footer from "@/components/Footer"
+const img1 = '/assets/images/aboutsus.webp';
 
 export const metadata: Metadata = {
   title: "Ins Software Agency | Services",
@@ -21,7 +22,7 @@ const ServicesPage = () => {
     <>
           <div className="page-wrapper"> 
               <Navbar/>
-              <Banner title={'Services'}/>
+              <Banner image={img1} title={'Services'}/>
               <ServiceCard/>
         <Banafits />
         <Footer/>
