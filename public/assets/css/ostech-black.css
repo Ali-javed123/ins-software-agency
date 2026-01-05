@@ -10894,7 +10894,7 @@ body.megamenu-popup-active .mobile-nav__content {
   position: absolute;
   top: 0%;
   left: 0%;
-  background: var(black, #232429);
+  background: var(--ostech-secondary, #232429);
   height: 300px;
   z-index: -1;
 }
