@@ -3,14 +3,19 @@ import Link from "next/link";
 import '@/components/ServiceDetails/Form.css'
 import { MdMessage } from "react-icons/md";
 import { FaPhoneSquareAlt } from "react-icons/fa";
+import { useInView } from "react-intersection-observer";
 
 const ContactUstwo = () => {
+  const { ref, inView } = useInView({
+      threshold: 0.2, // trigger when 20% of the element is visible
+      // triggerOnce: true, // animation only triggers once
+    });
     return (
         <>
-            <div className="sectionForm">
+            <div className="sectionForm" ref={ref}>
                 <div className="container">
                     <div className="row">
-                        <div className="col-md-6">
+                        <div className={`col-md-6 ${inView} ? "zoom-ins" : "zoom-outs"}`}>
                             <div className="ri">
                                 <h2 className="ritle my-2" >Let&apos;s Connect With Our Experts</h2>
                                 <span className="d-block ritlev2 my-2">Get valuable consultation from our professionals to discuss your mobile application development project. We are here to help you with all of your queries.</span>
@@ -95,8 +100,8 @@ const ContactUstwo = () => {
   <label htmlFor="floatingTextarea">Describe Your Project Need</label>
   <textarea className="form-control" placeholder="Describe Your Project Need" id="floatingTextarea"  defaultValue={""}  rows={7}/>
                                         </div>
-                                        <div className="mt-2">
-                                            <button className=" ostech-two-btn">Get to Touch</button>
+                                        <div className="mt-4">
+                                            <button className=" ostech-btn ostech-btn--secondary">Get to Touch</button>
                                         </div>
 
 

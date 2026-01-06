@@ -1,4 +1,6 @@
+"use client"
 import React from 'react'
+import { useInView } from "react-intersection-observer";
 
 const ContactUsForm = () => {
   return (

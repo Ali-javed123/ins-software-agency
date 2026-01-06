@@ -297,3 +297,222 @@ box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px
     margin-bottom: 25px;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===============================
+   CONTACT FEATURE SECTION
+================================ */
+
+.contact-feature {
+  padding: 120px 0;
+  background:
+var(--ostech-black)
+}
+
+/* ===============================
+   CARD DESIGN
+================================ */
+
+.contact-card {
+  height: 100%;
+  /* background: var(--ostech-navy-gradient); */
+    background: rgba(255, 255, 255, 0.04); /* less color */
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 26px;
+  border: 1px solid var(--ostech-white);
+  padding: 45px 35px;
+  text-align: center;
+  transition: all 0.45s ease;
+  position: relative;
+  overflow: hidden;
+  
+}
+
+.contact-card:hover {
+  transform: translateY(-14px);
+  border-color: var(--ostech-white);
+  /* box-shadow: 0 5px 5px rgba(146, 146, 146, 0.25); */
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+/* ===============================
+   ICON 
+================================ */
+
+.contact-card__icon {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 25px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  color: var(--ostech-white);
+  background: var(--ostech-navy-gradient)
+  ;
+  box-shadow: 0 0 0 12px rgba(212, 211, 208, 0.623);
+  transition: all 0.45s ease;
+}
+
+.contact-card:hover .contact-card__icon {
+  box-shadow:
+    0 0 0 16px rgba(235, 234, 233, 0.726),
+    0 0 40px rgba(202, 202, 202, 0.356);
+}
+
+/* ===============================
+   TITLE & TEXT
+================================ */
+
+.contact-card__title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.contact-card__text {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.78);
+  margin-bottom: 10px;
+  line-height: 1.8;
+}
+
+.contact-card__text span {
+  display: inline-block;
+  min-width: 32px;
+  font-weight: 600;
+  color: var(--ostech-base);
+}
+
+/* ===============================
+   FOOTER TEXT
+================================ */
+
+.contact-card__footer {
+  margin-top: 25px;
+  padding-top: 15px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  border-top: 1px dashed rgba(255, 255, 255, 0.15);
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 767px) {
+  .contact-feature {
+    padding: 80px 0;
+  }
+
+  .contact-card {
+    padding: 35px 25px;
+  }
+
+  .contact-card__title {
+    font-size: 22px;
+  }
+}
+
+/* ---------------------- */
+/* animation */
+/* ===============================
+   Custom Zoom-In Animation
+================================= */
+@keyframes zoomIns{
+  0% {
+    transform: scale(0.5); /* start smaller */
+    opacity: 0;             /* start invisible */
+  }
+  50% {
+    transform: scale(1.1);  /* slightly bigger than normal */
+    opacity: 0.8;           
+  }
+  100% {
+    transform: scale(1);    /* final size */
+    opacity: 1;             
+  }
+}
+
+/* Apply the animation to any element */
+.zoom-ins {
+  display: block;
+  animation: zoomIns 0.8s ease-out forwards;
+  -webkit-animation: zoomIns 0.8s ease-out forwards;
+}
+
+
+
+/* Define the zoom-out animation */
+@keyframes zoomOuts {
+  0% {
+    transform: scale(1);
+    /*Startatnormalsize*/opacity: 1;
+               
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+}
+  50% {
+    transform: scale(0.8);
+    /*Shrinkabit*/opacity: 0.7;
+            
+    -webkit-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    -o-transform: scale(0.8);
+}
+  100% {
+    transform: scale(0);
+      opacity: 0;
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+}
+}
+
+/* Apply animation to your element */
+.zoom-outs {
+  display: block;
+  animation: zoomOuts 1s ease-in-out forwards;
+  -webkit-animation: zoomOuts 1s ease-in-out forwards;
+}
+
+
+
+/* Keyframes for left-to-right movement */
+@keyframes slideRight {
+  0% {
+    transform: translateX(-100%); /* Start off-screen left */
+    opacity: 0; /* optional fade-in */
+  }
+  50% {
+    opacity: 1; /* fade in */
+  }
+  100% {
+    transform: translateX(0); /* End at original position */
+  }
+}
+
+/* Apply animation to element */
+.animate-left-to-right {
+  display: block;
+  /*orblock*/animation: slideRight 1.2s ease-out forwards;
+  -webkit-animation: slideRight 1.2s ease-out forwards;
+}

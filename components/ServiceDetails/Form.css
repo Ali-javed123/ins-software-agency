@@ -24,8 +24,9 @@
 .ritle{
 font-size: 30px;
 font-weight: 900;
-color: var(--ostech-white);
+color: var(--ostech-base);
 line-height: 40px;
+  
 
 }
 .ritlev2{
@@ -43,14 +44,21 @@ line-height: 34px;
 
 }
 .form-card{
-  background: var(--ostech-base-gradient);
+  /*background: var(--ostech-gradient);
+  */background: rgba(255, 255, 255, 0.04);
+  /*lesscolor*/backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 26px;
+  border: 1px solid var(--ostech-white);
+  padding: 45px 35px;
   height: 100%;
   width: 100%;
   color: var(--ostech-white);
   padding: 25px;
-  border-radius: 35px 0 35px 0;
-  -webkit-border-radius: 35px 0 35px 0;
-  -moz-border-radius: 35px 0 35px 0;
-  -ms-border-radius: 35px 0 35px 0;
-  -o-border-radius: 35px 0 35px 0;
+  border-radius: 23px;
+  -webkit-border-radius: 23px;
+  -moz-border-radius: 23px;
+  -ms-border-radius: 23px;
+  -o-border-radius: 23px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }

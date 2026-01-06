@@ -115,7 +115,7 @@ export default function RootLayout({
     {/* <!--  countdown js plugins --> */}
     <Script src="assets/vendors/countdown/countdown.min.js"></Script>
     {/* <!--  Chart.js js plugins --> */}
-    <Script src="../../cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></Script>
+    {/* <Script src="../../cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></Script> */}
     {/* <!--  jquery-circleType js plugins --> */}
     <Script src="assets/vendors/jquery-circleType/jquery.circleType.js"></Script>
     <Script src="assets/vendors/jquery-lettering/jquery.lettering.min.js"></Script>
