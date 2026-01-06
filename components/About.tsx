@@ -87,7 +87,7 @@ const About = () => {
             <li className="about-one__list__item"><i className="fas fa-check-circle" />Expert many variations teacher</li>
           </ul>
           <div className="about-one__link wow fadeInUp" data-wow-delay="500ms">
-            <a href="about.html" className="about-one__link__btn ostech-btn ostech-btn--secondary">Discover More</a>
+            <a href="about.html" className="about-one__link__btn ostech-three-btn ">Discover More</a>
           </div>
         </div>
       </div>

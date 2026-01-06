@@ -19,7 +19,7 @@ import "@/public/assets/vendors/nouislider/nouislider.pips.css";
 import "@/public/assets/vendors/ostech-icons/style.css";
 import "@/public/assets/vendors/owl-carousel/css/owl.carousel.min.css";
 import "@/public/assets/vendors/owl-carousel/css/owl.theme.default.min.css";
-import "@/public/assets/css/ostech-black.css";
+import "@/public/assets/css/ostech-professional.css";
 import "@/public/assets/vendors/owl-carousel/css/owl.carousel.min.css";
 import "@/public/assets/vendors/owl-carousel/css/owl.theme.default.min.css";
 import '@fortawesome/fontawesome-free/css/all.min.css';

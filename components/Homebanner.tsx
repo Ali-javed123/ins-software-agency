@@ -189,8 +189,8 @@ const HomeSliderTwo: React.FC = () => {
                     </span>
                   </h2>
                   <div className="main-slider-two__link">
-                    <a href="services.html" className="ostech-btn ostech-btn--base">Discover More</a>
-                    <a href="services.html" className="ostech-btn ostech-btn--secondary">Take Service</a>
+                    <a href="services.html" className="ostech-two-btn ">Discover More</a>
+                    <a href="services.html" className="ostech-btn ">Take Service</a>
                   </div>
                 </div>
               </div>

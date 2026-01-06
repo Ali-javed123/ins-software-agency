@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import { useInView } from "react-intersection-observer";
 

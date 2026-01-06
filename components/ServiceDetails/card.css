@@ -14,12 +14,13 @@ justify-content: flex-start;
 
 }
 .cards1{
-    background: var(--ostech-base-gradient);
+    background: var(--ostech-black-soft);
     width: 100%;
     min-height: 45vh;
     padding: 20px;
     color: var(--ostech-white);
-    border:1px solid var(--ostech-white);
+ border: 2px solid rgba(255, 255, 255, 0.08);
+
     border-radius: 12px;
     -webkit-border-radius: 12px;
     -moz-border-radius: 12px;
@@ -29,10 +30,16 @@ justify-content: flex-start;
 .cards1:hover,
 .cards1:focus
 {
-    background:var(--ostech-navy-gradient);
+    box-shadow:    0 10px 30px rgba(0, 0, 0, 0.45),    0 0 0 1px rgba(255, 255, 255, 0.04);
+  transform: translateY(-7px);
+  transition:transform 1.45s cubic-bezier(0.22, 1, 0.36, 1);
+  -webkit-transition:transform 1.45s cubic-bezier(0.22, 1, 0.36, 1);
+  -moz-transition:transform 1.45s cubic-bezier(0.22, 1, 0.36, 1);
+  -ms-transition:transform 1.45s cubic-bezier(0.22, 1, 0.36, 1);
+  -o-transition:transform 1.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .titlenum{
-color: rgb(204, 203, 203);
+color: var(--ostech-base);
 font-size: 30px ;
 font-weight: 900;
 line-height: 42px;

@@ -35,9 +35,9 @@ const mainOptions = {
 const thumbOptions = {
   items: 3,
   margin: 10,
-  smartSpeed: 700,
+  // smartSpeed: 700,
   loop: true,
-  autoplay: true,
+  // autoplay: true,
   center: true,
   dots: false,
   URLhashListener: false,

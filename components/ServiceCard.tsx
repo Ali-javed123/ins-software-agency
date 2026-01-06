@@ -306,9 +306,9 @@ export default function ServiceSlider() {
         <OwlCarousel
           loop
           margin={30}
-          autoplay
-          autoplayTimeout={2500}
-          smartSpeed={800}
+          // autoplay
+          // autoplayTimeout={2500}
+          // smartSpeed={800}
           dots
           nav
           navText={[
@@ -339,9 +339,9 @@ export default function ServiceSlider() {
                       <div className="service-three__item__content">
                         
       <h4 className="service-three__item__title">{item.title}</h4>
-      {/* <Link href="/service-d-development.html" className="service-three__item__link"> */}
+      <span className="service-three__item__link">
         <span className="service-three__item__link__icon" />
-      {/* </Link> */}
+      </span>
     </div>
   </div>
 </div>

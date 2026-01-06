@@ -131,7 +131,7 @@ const WhyChooseTwo = () => {
             <div className="why-choose-two__cta__bg" style={{backgroundImage: 'url(assets/images/shapes/cta-2-1.png)'}} />
             <h3 className="why-choose-two__cta__title">Get The Best source for IT solutions and Service</h3>
             <div className="why-choose-two__cta__link">
-              <a href="#" className="why-choose-two__cta__link__btn ostech-btn ostech-btn--secondary">Get In Touch</a>
+              <a href="#" className="why-choose-two__cta__link__btn ostech-two-btn ">Get In Touch</a>
             </div>
           </div>
         </div>

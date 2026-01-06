@@ -119,8 +119,8 @@ const Form = () => {
   <label htmlFor="floatingTextarea">Describe Your Project Need</label>
   <textarea className="form-control" placeholder="Describe Your Project Need" id="floatingTextarea"  defaultValue={""}  rows={7}/>
                                         </div>
-                                        <div className="mt-2">
-                                            <button className=" ostech-two-btn">Get to Touch</button>
+                                        <div className="mt-3">
+                                            <button className=" ostech-btn">Get to Touch</button>
                                         </div>
 
 

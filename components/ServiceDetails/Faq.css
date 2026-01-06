@@ -1,5 +1,5 @@
 .faq-section {
-  background: linear-gradient(180deg, #001d2b 0%, #000f17 100%);
+  background: var(--ostech-black-soft);
   color: #fff;
 }
 

@@ -35,8 +35,8 @@ const AboutTwo = () => {
           <div className="about-two__top">
             <div className="sec-title wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="000ms">
               <div className="d-flex align-items-center justify-content-start">
-                <img loading='lazy'
-              decoding="async" src="/assets/images/shapes/sec-title-s-1.png" alt="About Us" className="sec-title__img" />
+                {/* <img loading='lazy'
+              decoding="async" src="/assets/images/shapes/sec-title-s-1.png" alt="About Us" className="sec-title__img" /> */}
                 <h6 className="sec-title__tagline">About Us</h6>
               </div>
               <h3 className="sec-title__title">Provide the Best Easy Solution for Your IT Problem</h3>

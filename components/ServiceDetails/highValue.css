@@ -4,6 +4,7 @@
     background-repeat: no-repeat;
     min-height: 100vh;
     width: 100%;
+    padding-block: 40px;
 }
 .highhead{
     font-size:25px ;
@@ -32,8 +33,26 @@
     width: 100%;
     min-height: 180px;
     padding: 20px;
-    border:2px solid var(--ostech-white);
-    background: var(--ostech-base-gradient);
+    border:2px solid var(--ostech-black-soft);
+    background: var(--ostech-black-soft);
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+.highCard:hover,.highCard:focus{
+    display: flex;
+  box-shadow:    0 10px 30px rgba(0, 0, 0, 0.45),    0 0 0 1px rgba(255, 255, 255, 0.04);
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 180px;
+    padding: 20px;
+    border:2px solid var(--ostech-black-soft);
+    background: var(--ostech-black-soft);
     border-radius: 10px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;

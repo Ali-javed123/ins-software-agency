@@ -88,7 +88,7 @@ html,body{
   color: #fff;
 }
 .mytext{
-    background: var(--ostech-base-gradient);
+    background: var(--ostech-white);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -96,8 +96,9 @@ html,body{
 
 
         .owl-arrows {
-          background: var(--ostech-base-gradient);
-          border: 2px solid var(--ostech-whitef);
+          background: var(--ostech-base);
+          border: 2px solid var(--ostech-white);
+         color: 2px solid var(--ostech-white);
           border-radius: 50%;
           width: 44px;
           height: 44px;
@@ -252,11 +253,7 @@ box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px
 
 
 .stats-bar {
-  background: linear-gradient(
-    180deg,
-    #021926 0%,
-    #02111a 100%
-  );
+  background: var(--ostech-black-soft,gray);
   padding: 50px 0;
 }
 
@@ -326,12 +323,15 @@ var(--ostech-black)
 .contact-card {
   height: 100%;
   /* background: var(--ostech-navy-gradient); */
-    background: rgba(255, 255, 255, 0.04); /* less color */
+    background: var(--ostech-black-soft); /* less color */
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   border-radius: 26px;
-  border: 1px solid var(--ostech-white);
+  /* border: 1px solid var(--ostech-white); */
+
+border: 1px solid rgba(255,255,255,0.1);
   padding: 45px 35px;
   text-align: center;
   transition: all 0.45s ease;
@@ -340,11 +340,17 @@ var(--ostech-black)
   
 }
 
-.contact-card:hover {
+.contact-card:hover ,.contact-card:focus{
   transform: translateY(-14px);
-  border-color: var(--ostech-white);
-  /* box-shadow: 0 5px 5px rgba(146, 146, 146, 0.25); */
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-color: var(--ostech-black-soft);
+  /*box-shadow: 0 5px 5px rgba(146, 146, 146, 0.25);
+  */box-shadow:    0 10px 30px rgba(0, 0, 0, 0.45),    0 0 0 1px rgba(255, 255, 255, 0.04);
+  transform: translateY(-6px);
+  transform: translateY(-6px);
+  -webkit-transform: translateY(-14px);
+  -moz-transform: translateY(-14px);
+  -ms-transform: translateY(-14px);
+  -o-transform: translateY(-14px);
 }
 
 /* ===============================
@@ -371,6 +377,7 @@ var(--ostech-black)
   box-shadow:
     0 0 0 16px rgba(235, 234, 233, 0.726),
     0 0 40px rgba(202, 202, 202, 0.356);
+    
 }
 
 /* ===============================

@@ -1,6 +1,6 @@
 .ourservices{
     min-height: 60vh;
-    padding: 60px;
+    padding-block: 30px;
     background: var(--ostech-black);
     display: flex;
     justify-content: center;
@@ -26,20 +26,28 @@
     display: flex;
     flex-direction: column;
     color: var(--ostech-white);
-    background: var(--ostech-base-gradient);
-    border: 2px solid var(--ostech-white);
+    background: var(--ostech-black-soft);
+    border: 2px solid rgba(255, 255, 255, 0.08);
+
     border-radius:25px 0 25px 0 ;
     -webkit-border-radius:25px 0 25px 0 ;
     -moz-border-radius:25px 0 25px 0 ;
     -ms-border-radius:25px 0 25px 0 ;
     -o-border-radius:25px 0 25px 0 ;
-    border: 2px solid var(--ostech-white);
+    /* border: 2px solid var(--ostech-white); */
+    
 }
 .ourservicesCard:hover,
 .ourservicesCard:focus
 {
-   background: linear-gradient(180deg, #001d2b 0%, #000f17 100%);
-;
+  background: var(--ostech-black-soft);
+  box-shadow:    0 10px 30px rgba(0, 0, 0, 0.45),    0 0 0 1px rgba(255, 255, 255, 0.04);
+  transform: translateY(-7px);
+  transition:transform 1.45s cubic-bezier(0.22, 1, 0.36, 1);
+  -webkit-transition:transform 1.45s cubic-bezier(0.22, 1, 0.36, 1);
+  -moz-transition:transform 1.45s cubic-bezier(0.22, 1, 0.36, 1);
+  -ms-transition:transform 1.45s cubic-bezier(0.22, 1, 0.36, 1);
+  -o-transition:transform 1.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .ouricon{
     font-size: 35px;
@@ -51,6 +59,7 @@
 .ouriconwrap{
     height: 50px;
     min-width: 50px;
+    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
