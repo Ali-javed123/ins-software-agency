@@ -7,7 +7,7 @@ const Banner = ({ title,image }: { title: string,image?:string }) => {
 
    const { ref, inView } = useInView({
     threshold: 0.2, // trigger when 20% of the element is visible
-    // triggerOnce: true, // animation only triggers once
+    triggerOnce: true, // animation only triggers once
   });
 
   return (
