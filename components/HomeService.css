@@ -1,0 +1,218 @@
+/* Navigation Buttons - Top Right */
+.custom-nav-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--ostech-base, #FFAA17);
+  border: 2px solid var(--ostech-white, #fff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.custom-nav-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.custom-nav-btn:hover::before {
+  opacity: 1;
+}
+
+.custom-nav-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(255, 170, 23, 0.3);
+}
+
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  stroke: white;
+  stroke-width: 2.5;
+  position: relative;
+  z-index: 1;
+}
+
+/* Custom Vertical Pagination - Bottom Center */
+.custom-pagination-vertical {
+  position: relative;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.pagination-wrapper-vertical {
+  display: flex;
+  flex-direction: row; /* Changed from column to row */
+  align-items: center;
+  justify-content: center;
+  gap: 20px; /* Increased gap for horizontal layout */
+}
+
+.pagination-dot-vertical {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.dot-bg-vertical {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.pagination-dot-vertical:hover .dot-bg-vertical,
+.pagination-dot-vertical.active .dot-bg-vertical {
+  background: rgba(104, 106, 111, 0.23);
+}
+
+.dot-inner-vertical {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--ostech-gray, #F4F5F8);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.pagination-dot-vertical:hover .dot-inner-vertical,
+.pagination-dot-vertical.active .dot-inner-vertical {
+  background: var(--ostech-base, #FFAA17);
+  transform: scale(1.2);
+}
+
+/* Animation for active dot */
+.pagination-dot-vertical.active .dot-inner-vertical {
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 170, 23, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(255, 170, 23, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 170, 23, 0);
+  }
+}
+
+/* Number indicator for dots */
+.pagination-dot-vertical::after {
+  content: attr(data-index);
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ostech-text, #686A6F);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.pagination-dot-vertical.active::after {
+  opacity: 1;
+  color: var(--ostech-base, #FFAA17);
+}
+
+.pagination-dot-vertical:hover::after {
+  opacity: 1;
+}
+
+/* Layout Styles */
+.flex.items-center.justify-between.mb-8 {
+  margin-bottom: 2rem;
+}
+
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .flex.items-center.justify-between.mb-8 {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  
+  .custom-nav-btn {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .nav-icon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .pagination-wrapper-vertical {
+    gap: 16px;
+  }
+  
+  .pagination-dot-vertical {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .dot-inner-vertical {
+    width: 10px;
+    height: 10px;
+  }
+}
+  
+
+@media (max-width: 576px) {
+  .pagination-wrapper-vertical {
+    gap: 12px;
+  }
+  
+  .pagination-dot-vertical {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .dot-inner-vertical {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .pagination-dot-vertical::after {
+    font-size: 10px;
+    top: -22px;
+  }
+}
+
+/* Swiper Container Spacing */
+.service-three__carousel {
+  padding-bottom: 20px;
+}
+
+/* Hide default Swiper pagination */
+.swiper-pagination {
+  display: none !important;
+}

@@ -104,13 +104,398 @@
 
 
 
+// "use client";
+
+// import React, { useState, useEffect, useMemo } from "react";
+// import dynamic from "next/dynamic";
+// import type { Options } from "react-owl-carousel";
+// import Link from 'next/link'
+
+// const OwlCarousel = dynamic(() => import("react-owl-carousel"), { ssr: false });
+
+// interface SliderItem {
+//   id: number;
+//   bgImage: string;
+//   subTitle: string;
+//   title: string;
+//   shapeImage: string;
+// }
+
+// const SLIDES: SliderItem[] = [
+//   {
+//     id: 1,
+//     bgImage: "/assets/images/backgrounds/slider-1-2.jpg",
+//     subTitle: "IT Software Solution",
+//     title: "IT Software <br> Tech & Solutions",
+//     shapeImage: "/assets/images/shapes/frame-hero-2-1.png"
+//   },
+//   {
+//     id: 2,
+//     bgImage: "/assets/images/backgrounds/slider-1-1.jpg",
+//     subTitle: "IT Software Solution",
+//     title: "IT Software <br/> Tech & Solutions",
+//     shapeImage: "/assets/images/shapes/frame-hero-2-1.png"
+//   },
+//   {
+//     id: 3,
+//     bgImage: "/assets/images/backgrounds/slider-1-3.jpg",
+//     subTitle: "IT Software Solution",
+//     title: "IT Software <br/> Tech & Solutions",
+//     shapeImage: "/assets/images/shapes/frame-hero-2-1.png"
+//   },
+// ];
+
+// const options: Options = {
+//   loop: true,
+//   items: 1,
+//   autoplay: true,
+//   autoplayTimeout: 7000,
+//   smartSpeed: 1000,
+//   nav: false,
+//   dots: true,
+//   margin: 0,
+// };
+
+// const HomeSliderTwo: React.FC = () => {
+//   const [mounted, setMounted] = useState(false);
+
+//   useEffect(() => {
+//     const timer = setTimeout(() => setMounted(true), 0);
+//     return () => clearTimeout(timer);
+//   }, []);
+
+//   const renderSlides = useMemo(() => {
+//     return SLIDES.map((slide) => (
+//       <div key={slide.id} className="item">
+//         <div className="main-slider-two__item">
+//           <div
+//             className="main-slider-two__bg"
+//             style={{ backgroundImage: `url(${slide.bgImage})` }}
+//           />
+//           <div className="container">
+//             <div className="row">
+//               <div className="col-md-12">
+//                 <div className="main-slider-two__content">
+//                   <h5 className="main-slider-two__sub-title">{slide.subTitle}</h5>
+//                   <h2 className="main-slider-two__title"
+                 
+                     
+//                   >
+//                                         <span dangerouslySetInnerHTML={{ __html: slide.title }} />
+
+//                     <span className="main-slider-two__title__overlay-group">
+//                       {Array.from({ length: 6 }).map((_, i) => (
+//                         <span key={i} className="main-slider-two__title__overlay" />
+//                       ))}
+//                     </span>
+//                   </h2>
+//                   <div className="main-slider-two__link">
+//                     <Link href="/services" className="ostech-two-btn ">Discover More</Link>
+//                     <Link href="/services" className="ostech-btn ">Take Service</Link>
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//           <div className="main-slider-two__item__shape">
+//             <img
+//               src={slide.shapeImage}
+//               alt="Shape"
+//               loading="lazy"
+//               decoding="async"
+//             />
+//           </div>
+//         </div>
+//       </div>
+//     ));
+//   }, []);
+
+//   const carouselProps = useMemo(() => ({
+//     className: "main-slider-two__carousel ostech-owl__carousel owl-carousel",
+//     ...options
+//   }), []);
+
+//   if (!mounted) return null;
+
+//   return (
+//     <section className="main-slider-two">
+//       <OwlCarousel {...carouselProps}>{renderSlides}</OwlCarousel>
+//     </section>
+//   );
+// };
+
+// export default React.memo(HomeSliderTwo);
+
+
+
+
+
+
+// "use client";
+
+// import React, { useMemo, useState } from "react";
+// import { Swiper, SwiperSlide } from "swiper/react";
+// import { Autoplay, Pagination } from "swiper/modules";
+// import "swiper/css";
+// import "swiper/css/pagination";
+// import Link from "next/link";
+
+// interface SliderItem {
+//   id: number;
+//   bgImage: string;
+//   subTitle: string;
+//   title: string;
+//   shapeImage: string;
+// }
+
+// const SLIDES: SliderItem[] = [
+//   {
+//     id: 1,
+//     bgImage: "/assets/images/backgrounds/slider-1-2.jpg",
+//     subTitle: "IT Software Solution",
+//     title: "IT Software <br> Tech & Solutions",
+//     shapeImage: "/assets/images/shapes/frame-hero-2-1.png",
+//   },
+//   {
+//     id: 2,
+//     bgImage: "/assets/images/backgrounds/slider-1-1.jpg",
+//     subTitle: "IT Software Solution",
+//     title: "IT Software <br/> Tech & Solutions",
+//     shapeImage: "/assets/images/shapes/frame-hero-2-1.png",
+//   },
+//   {
+//     id: 3,
+//     bgImage: "/assets/images/backgrounds/slider-1-3.jpg",
+//     subTitle: "IT Software Solution",
+//     title: "IT Software <br/> Tech & Solutions",
+//     shapeImage: "/assets/images/shapes/frame-hero-2-1.png",
+//   },
+// ];
+
+// const HomeSliderTwo: React.FC = () => {
+//   const [activeIndex, setActiveIndex] = useState(0);
+
+//   const slides = useMemo(
+//     () =>
+//       SLIDES.map((slide, index) => {
+//         const isActive = index === activeIndex;
+//         return (
+//        <SwiperSlide key={slide.id}>
+//   <div className={`main-slider-two__item ${isActive ? "active" : ""}`}>
+//     <div
+//       className="main-slider-two__bg"
+//       style={{ backgroundImage: `url(${slide.bgImage})` }}
+//     />
+//     <div className="container">
+//       <div className="row">
+//         <div className="col-md-12">
+//           <div className="main-slider-two__content">
+//             <h5 className="main-slider-two__sub-title">{slide.subTitle}</h5>
+//             <h2 className="main-slider-two__title">
+//               <span dangerouslySetInnerHTML={{ __html: slide.title }} />
+//               {/* Overlay group */}
+//               {Array.from({ length: 6 }).map((_, i) => (
+//                 <span
+//                   key={i}
+//                   className="main-slider-two__title__overlay"
+//                 />
+//               ))}
+//             </h2>
+//             <div className="main-slider-two__link">
+//               <Link href="/services" className="ostech-two-btn">
+//                 Discover More
+//               </Link>
+//               <Link href="/services" className="ostech-btn">
+//                 Take Service
+//               </Link>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//     <div className="main-slider-two__item__shape">
+//       <img src={slide.shapeImage} alt="Shape" loading="lazy" decoding="async" />
+//     </div>
+//   </div>
+// </SwiperSlide>
+
+//         );
+//       }),
+//     [activeIndex]
+//   );
+
+//   return (
+//     <section className="main-slider-two">
+//       <Swiper
+//         modules={[Autoplay, Pagination]}
+//         slidesPerView={1}
+//         loop
+//         speed={1000}
+//         autoplay={{ delay: 7000, disableOnInteraction: false }}
+//         pagination={{
+//           el: ".owl-dots",
+//           clickable: true,
+//         }}
+//         onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+//         className="main-slider-two__carousel ostech-owl__carousel owl-carousel"
+//       >
+//         {slides}
+//         {/* ❗ reuse same owl dots CSS */}
+//         <div className="owl-dots"></div>
+//       </Swiper>
+//     </section>
+//   );
+// };
+
+// export default React.memo(HomeSliderTwo);
+
+
+
+
+// "use client";
+
+// import React, { useMemo, useState, useRef } from "react";
+// import { Swiper, SwiperSlide } from "swiper/react";
+// import { Autoplay } from "swiper/modules";
+// import type { Swiper as SwiperType } from "swiper";
+// import "swiper/css";
+// import Link from "next/link";
+
+// interface SliderItem {
+//   id: number;
+//   bgImage: string;
+//   subTitle: string;
+//   title: string;
+//   shapeImage: string;
+// }
+
+// const SLIDES: SliderItem[] = [
+//   {
+//     id: 1,
+//     bgImage: "/assets/images/backgrounds/slider-1-2.jpg",
+//     subTitle: "IT Software Solution",
+//     title: "IT Software <br> Tech & Solutions",
+//     shapeImage: "/assets/images/shapes/frame-hero-2-1.png",
+//   },
+//   {
+//     id: 2,
+//     bgImage: "/assets/images/backgrounds/slider-1-1.jpg",
+//     subTitle: "IT Software Solution",
+//     title: "IT Software <br/> Tech & Solutions",
+//     shapeImage: "/assets/images/shapes/frame-hero-2-1.png",
+//   },
+//   {
+//     id: 3,
+//     bgImage: "/assets/images/backgrounds/slider-1-3.jpg",
+//     subTitle: "IT Software Solution",
+//     title: "IT Software <br/> Tech & Solutions",
+//     shapeImage: "/assets/images/shapes/frame-hero-2-1.png",
+//   },
+// ];
+
+// const HomeSliderTwo: React.FC = () => {
+//   const [activeIndex, setActiveIndex] = useState(0);
+//   const swiperRef = useRef<SwiperType | null>(null);
+
+//   const handleDotClick = (index: number) => {
+//     if (swiperRef.current) {
+//       swiperRef.current.slideTo(index);
+//     }
+//   };
+
+//   const slides = useMemo(
+//     () =>
+//       SLIDES.map((slide, index) => {
+//         const isActive = index === activeIndex;
+//         return (
+//           <SwiperSlide key={slide.id}>
+//             <div className={`main-slider-two__item ${isActive ? "active" : ""}`}>
+//               <div
+//                 className="main-slider-two__bg"
+//                 style={{ backgroundImage: `url(${slide.bgImage})` }}
+//               />
+//               <div className="container">
+//                 <div className="row">
+//                   <div className="col-md-12">
+//                     <div className="main-slider-two__content">
+//                       <h5 className="main-slider-two__sub-title">{slide.subTitle}</h5>
+//                       <h2 className="main-slider-two__title">
+//                         <span dangerouslySetInnerHTML={{ __html: slide.title }} />
+//                         {/* Overlay group */}
+//                         {Array.from({ length: 6 }).map((_, i) => (
+//                           <span
+//                             key={i}
+//                             className="main-slider-two__title__overlay"
+//                           />
+//                         ))}
+//                       </h2>
+//                       <div className="main-slider-two__link">
+//                         <Link href="/services" className="ostech-two-btn">
+//                           Discover More
+//                         </Link>
+//                         <Link href="/services" className="ostech-btn">
+//                           Take Service
+//                         </Link>
+//                       </div>
+//                     </div>
+//                   </div>
+//                 </div>
+//               </div>
+//               <div className="main-slider-two__item__shape">
+//                 <img src={slide.shapeImage} alt="Shape" loading="lazy" decoding="async" />
+//               </div>
+//             </div>
+//           </SwiperSlide>
+//         );
+//       }),
+//     [activeIndex]
+//   );
+
+//   return (
+//     <section className="main-slider-two">
+//       <Swiper
+//         modules={[Autoplay]}
+//         slidesPerView={1}
+//         loop
+//         speed={1000}
+//         autoplay={{ delay: 7000, disableOnInteraction: false }}
+//         onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+//         onSwiper={(swiper) => {
+//           swiperRef.current = swiper;
+//         }}
+//         className="main-slider-two__carousel ostech-owl__carousel owl-carousel"
+//       >
+//         {slides}
+//       </Swiper>
+      
+//       {/* Custom Pagination Dots - Owl Carousel Style */}
+//       <div className="owl-dots">
+//         {SLIDES.map((_, index) => (
+//           <button
+//             key={index}
+//             className={`owl-dot ${activeIndex === index ? "active" : ""}`}
+//             onClick={() => handleDotClick(index)}
+//             aria-label={`Go to slide ${index + 1}`}
+//           >
+//             <span></span>
+//           </button>
+//         ))}
+//       </div>
+//     </section>
+//   );
+// };
+
+// export default React.memo(HomeSliderTwo);
+
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
-import dynamic from "next/dynamic";
-import type { Options } from "react-owl-carousel";
-
-const OwlCarousel = dynamic(() => import("react-owl-carousel"), { ssr: false });
+import React, { useMemo, useState, useRef } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import type { Swiper as SwiperType } from "swiper";
+import "swiper/css";
+import Link from "next/link";
+// import "./HomeSliderTwo.css"; // Separate CSS file for custom styles
 
 interface SliderItem {
   id: number;
@@ -121,104 +506,119 @@ interface SliderItem {
 }
 
 const SLIDES: SliderItem[] = [
-  { 
-    id: 1, 
-    bgImage: "/assets/images/backgrounds/slider-1-2.jpg", 
+  {
+    id: 1,
+    bgImage: "/assets/images/backgrounds/slider-1-2.jpg",
     subTitle: "IT Software Solution",
     title: "IT Software <br> Tech & Solutions",
-    shapeImage: "/assets/images/shapes/frame-hero-2-1.png"
+    shapeImage: "/assets/images/shapes/frame-hero-2-1.png",
   },
-  { 
-    id: 2, 
-    bgImage: "/assets/images/backgrounds/slider-1-1.jpg", 
+  {
+    id: 2,
+    bgImage: "/assets/images/backgrounds/slider-1-1.jpg",
     subTitle: "IT Software Solution",
     title: "IT Software <br/> Tech & Solutions",
-    shapeImage: "/assets/images/shapes/frame-hero-2-1.png"
+    shapeImage: "/assets/images/shapes/frame-hero-2-1.png",
   },
-  { 
-    id: 3, 
-    bgImage: "/assets/images/backgrounds/slider-1-3.jpg", 
+  {
+    id: 3,
+    bgImage: "/assets/images/backgrounds/slider-1-3.jpg",
     subTitle: "IT Software Solution",
     title: "IT Software <br/> Tech & Solutions",
-    shapeImage: "/assets/images/shapes/frame-hero-2-1.png"
+    shapeImage: "/assets/images/shapes/frame-hero-2-1.png",
   },
 ];
 
-const options: Options = {
-  loop: true,
-  items: 1,
-  autoplay: true,
-  autoplayTimeout: 7000,
-  smartSpeed: 1000,
-  nav: false,
-  dots: true,
-  margin: 0,
-};
-
 const HomeSliderTwo: React.FC = () => {
-  const [mounted, setMounted] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const swiperRef = useRef<SwiperType | null>(null);
 
-  useEffect(() => {
-    const timer = setTimeout(() => setMounted(true), 0);
-    return () => clearTimeout(timer);
-  }, []);
+  const handleDotClick = (index: number) => {
+    if (swiperRef.current) {
+      swiperRef.current.slideToLoop(index);
+    }
+  };
 
-  const renderSlides = useMemo(() => {
-    return SLIDES.map((slide) => (
-      <div key={slide.id} className="item">
-        <div className="main-slider-two__item">
-          <div
-            className="main-slider-two__bg"
-            style={{ backgroundImage: `url(${slide.bgImage})` }}
-          />
-          <div className="container">
-            <div className="row">
-              <div className="col-md-12">
-                <div className="main-slider-two__content">
-                  <h5 className="main-slider-two__sub-title">{slide.subTitle}</h5>
-                  <h2 className="main-slider-two__title" 
-                 
-                     
-                  >
-                                        <span dangerouslySetInnerHTML={{ __html: slide.title }} />
-
-                    <span className="main-slider-two__title__overlay-group">
-                      {Array.from({ length: 6 }).map((_, i) => (
-                        <span key={i} className="main-slider-two__title__overlay" />
-                      ))}
-                    </span>
-                  </h2>
-                  <div className="main-slider-two__link">
-                    <a href="services.html" className="ostech-two-btn ">Discover More</a>
-                    <a href="services.html" className="ostech-btn ">Take Service</a>
+  const slides = useMemo(
+    () =>
+      SLIDES.map((slide, index) => {
+        const isActive = index === activeIndex;
+        return (
+          <SwiperSlide key={slide.id}>
+            <div className={`main-slider-two__item ${isActive ? "active" : ""}`}>
+              <div
+                className="main-slider-two__bg"
+                style={{ backgroundImage: `url(${slide.bgImage})` }}
+              />
+              <div className="container">
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="main-slider-two__content">
+                      <h5 className="main-slider-two__sub-title">{slide.subTitle}</h5>
+                      <h2 className="main-slider-two__title">
+                        <span dangerouslySetInnerHTML={{ __html: slide.title }} />
+                        {Array.from({ length: 6 }).map((_, i) => (
+                          <span
+                            key={i}
+                            className="main-slider-two__title__overlay"
+                          />
+                        ))}
+                      </h2>
+                      <div className="main-slider-two__link">
+                        <Link href="/services" className="ostech-two-btn">
+                          Discover More
+                        </Link>
+                        <Link href="/services" className="ostech-btn">
+                          Take Service
+                        </Link>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
+              <div className="main-slider-two__item__shape">
+                <img src={slide.shapeImage} alt="Shape" loading="lazy" decoding="async" />
+              </div>
             </div>
-          </div>
-          <div className="main-slider-two__item__shape">
-            <img 
-              src={slide.shapeImage} 
-              alt="Shape" 
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-        </div>
-      </div>
-    ));
-  }, []);
-
-  const carouselProps = useMemo(() => ({ 
-    className: "main-slider-two__carousel ostech-owl__carousel owl-carousel", 
-    ...options 
-  }), []);
-
-  if (!mounted) return null;
+          </SwiperSlide>
+        );
+      }),
+    [activeIndex]
+  );
 
   return (
     <section className="main-slider-two">
-      <OwlCarousel {...carouselProps}>{renderSlides}</OwlCarousel>
+      <Swiper
+        modules={[Autoplay]}
+        slidesPerView={1}
+        loop
+        speed={1000}
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
+        onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+        onSwiper={(swiper) => {
+          swiperRef.current = swiper;
+        }}
+        className="main-slider-two__carousel ostech-owl__carousel owl-carousel"
+      >
+        {slides}
+      </Swiper>
+      
+      {/* Horizontal Pagination Dots - Right Side */}
+      <div className="custom-pagination-horizontal">
+        <div className="pagination-wrapper">
+          {SLIDES.map((_, index) => (
+            <button
+              key={index}
+              className={`pagination-dot ${activeIndex === index ? "active" : ""}`}
+              onClick={() => handleDotClick(index)}
+              aria-label={`Go to slide ${index + 1}`}
+            >
+              <span className="dot-bg"></span>
+              <span className="dot-inner"></span>
+            </button>
+          ))}
+        </div>
+      </div>
     </section>
   );
 };

@@ -3,7 +3,7 @@ const ContactUsThree = () => {
     return (
     <section className="contact-two">
   <div className="container">
-    <div className="row">
+    <div className="row"> 
       <div className="col-lg-4">
         <div className="contact-two__left">
           <div className="contact-two__thumb wow fadeInLeft" data-wow-duration="1500ms" data-wow-delay="500ms">

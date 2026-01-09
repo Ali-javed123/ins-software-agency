@@ -523,3 +523,116 @@ border: 1px solid rgba(255,255,255,0.1);
   /*orblock*/animation: slideRight 1.2s ease-out forwards;
   -webkit-animation: slideRight 1.2s ease-out forwards;
 }
+
+
+
+
+
+
+
+
+
+/* Custom Horizontal Pagination Styles */
+.custom-pagination-horizontal {
+  position: absolute;
+  top: 50%;
+  right: 80px;
+  transform: translateY(-50%);
+  z-index: 10;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+}
+
+@media (max-width: 1199px) {
+  .custom-pagination-horizontal {
+    right: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .custom-pagination-horizontal {
+    right: 20px;
+  }
+}
+
+@media (max-width: 575px) {
+  .custom-pagination-horizontal {
+    display: none;
+  }
+}
+
+.pagination-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pagination-dot {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dot-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: transparent;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+}
+
+.pagination-dot:hover .dot-bg,
+.pagination-dot.active .dot-bg {
+  background: rgba(104, 106, 111, 0.23);
+}
+
+.dot-inner {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #F4F5F8;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+}
+
+.pagination-dot:hover .dot-inner,
+.pagination-dot.active .dot-inner {
+  background: var(--ostech-base);
+  transform: scale(1.2);
+}
+
+/* Animation for active dot */
+.pagination-dot.active .dot-inner {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--ostech-base);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(255, 170, 23, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 170, 23, 0);
+  }
+}
