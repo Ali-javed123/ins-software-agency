@@ -740,6 +740,7 @@ const ServiceSlide = memo(({ item }: { item: ServiceItem }) => (
             className="w-full h-[300px] object-cover"
             loading="lazy"
             decoding="async"
+            style={{height:"300px"}}
           />
         </div>
         <div className="service-three__item__content">
@@ -887,7 +888,7 @@ export default function ServiceSlider() {
                 </Swiper>
 
                 {/* Pagination */}
-                 <div className="custom-pagination-vertical mt-6">
+                 {/* <div className="custom-pagination-vertical mt-6">
                    <div className="pagination-wrapper-vertical">
                      {visibleDots.map((dotIndex) => (
                        <button
@@ -905,7 +906,24 @@ export default function ServiceSlider() {
                        </button>
                      ))}
                    </div>
-                 </div>
+                 </div> */}
+                                 <div className="custom-pagination-vertical mt-6">
+                  <div className="pagination-wrapper-vertical">
+                    {visibleDots.map((dotIndex) => (
+                      <button
+                        key={dotIndex}
+                        className={`pagination-dot-vertical ${activeIndices[groupIndex] === dotIndex ? "active" : ""}`}
+                        onClick={() => handleDotClick(groupIndex, dotIndex)}
+                        aria-label={`Go to slide ${dotIndex + 1}`}
+                        type="button"
+                      >
+                        <span className="dot-bg-vertical" />
+                        <span className="dot-inner-vertical" />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
               </div>
             </div>
           );
