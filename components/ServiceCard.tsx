@@ -662,24 +662,27 @@
 // }
 
 
+
+
+
 "use client";
 
-import React, { useRef, useState, useCallback, memo, lazy, Suspense } from "react";
+import React, { useRef, useState, useCallback, memo } from "react";
 import Link from "next/link";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Autoplay } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import "./HomeService.css";
 
-// Lazy load heavy dependencies
-const SwiperComponent = lazy(() => import("swiper/react").then(mod => ({ default: mod.Swiper })));
-const SwiperSlideComponent = lazy(() => import("swiper/react").then(mod => ({ default: mod.SwiperSlide })));
-
+// Service Types
 export interface ServiceItem {
   id: number;
   slug: string;
   title: string;
   icon: string;
   image: string;
-  width?: number;
-  height?: number;
 }
 
 export interface ServiceGroup {
@@ -688,216 +691,67 @@ export interface ServiceGroup {
   data: ServiceItem[];
 }
 
-// Optimized image data with dimensions
+// Mock Data
 export const Services: ServiceGroup[] = [
   {
     id: 1,
     title: "Core Services",
     data: [
-      { 
-        id: 1, 
-        slug: "web-and-app-development", 
-        title: "Web and App Development", 
-        icon: "icon-software-1", 
-        image: "/assets/images/service/service-4-4.png",
-        width: 400,
-        height: 300
-      },
-      { 
-        id: 2, 
-        slug: "ui-ux-designing", 
-        title: "UI/UX Designing", 
-        icon: "icon-layer-1", 
-        image: "/assets/images/service/service-1-2.png",
-        width: 400,
-        height: 300
-      },
-      { 
-        id: 3, 
-        slug: "digital-marketing", 
-        title: "Digital Marketing", 
-        icon: "icon-digital-marketing-1", 
-        image: "/assets/images/service/service-1-2.png",
-        width: 400,
-        height: 300
-      },
-      { 
-        id: 4, 
-        slug: "data-analysis", 
-        title: "Data Analysis", 
-        icon: "icon-analysis-1", 
-        image: "/assets/images/service/service-1-4.png",
-        width: 400,
-        height: 300
-      },
-      { 
-        id: 5, 
-        slug: "web-development", 
-        title: "Web Development", 
-        icon: "icon-cyber-security", 
-        image: "/assets/images/service/service-3-2.png",
-        width: 400,
-        height: 300
-      },
-      { 
-        id: 6, 
-        slug: "software-development", 
-        title: "Software Development", 
-        icon: "icon-cloud-computing", 
-        image: "/assets/images/service/service-3-2.png",
-        width: 400,
-        height: 300
-      },
-      { 
-        id: 7, 
-        slug: "it-staff-augmentation", 
-        title: "IT Staff Augmentation", 
-        icon: "icon-cloud-computing", 
-        image: "/assets/images/service/service-3-2.png",
-        width: 400,
-        height: 300
-      },
+      { id: 1, slug: "web-and-app-development", title: "Web and App Development", icon: "icon-software-1", image: "/assets/images/service/service-4-4.png" },
+      { id: 2, slug: "ui-ux-designing", title: "UI/UX Designing", icon: "icon-layer-1", image: "/assets/images/service/service-1-2.png" },
+      { id: 3, slug: "digital-marketing", title: "Digital Marketing", icon: "icon-digital-marketing-1", image: "/assets/images/service/service-1-2.png" },
+      { id: 4, slug: "data-analysis", title: "Data Analysis", icon: "icon-analysis-1", image: "/assets/images/service/service-1-4.png" },
+      { id: 5, slug: "web-development", title: "Web Development", icon: "icon-cyber-security", image: "/assets/images/service/service-3-2.png" },
+      { id: 6, slug: "software-development", title: "Software Development", icon: "icon-cloud-computing", image: "/assets/images/service/service-3-2.png" },
+      { id: 7, slug: "it-staff-augmentation", title: "IT Staff Augmentation", icon: "icon-cloud-computing", image: "/assets/images/service/service-3-2.png" },
     ],
   },
   {
     id: 2,
     title: "Expertise Solutions",
     data: [
-      { 
-        id: 1, 
-        slug: "fintech-solution", 
-        title: "Fintech Solution", 
-        icon: "icon-software-1", 
-        image: "/assets/images/service/service-3-3.png",
-        width: 400,
-        height: 300
-      },
-      { 
-        id: 2, 
-        slug: "ecommerce-solution", 
-        title: "Ecommerce Solution", 
-        icon: "icon-layer-1", 
-        image: "/assets/images/service/service-3-3.png",
-        width: 400,
-        height: 300
-      },
-      { 
-        id: 3, 
-        slug: "erp-solution", 
-        title: "ERP Solution", 
-        icon: "icon-layer-1", 
-        image: "/assets/images/service/service-3-3.png",
-        width: 400,
-        height: 300
-      },
-      { 
-        id: 4, 
-        slug: "healthcare-solution", 
-        title: "Healthcare Solution", 
-        icon: "icon-layer-1", 
-        image: "/assets/images/service/service-3-3.png",
-        width: 400,
-        height: 300
-      },
-      { 
-        id: 5, 
-        slug: "education-solution", 
-        title: "Education Solution", 
-        icon: "icon-layer-1", 
-        image: "/assets/images/service/service-3-3.png",
-        width: 400,
-        height: 300
-      },
-      { 
-        id: 6, 
-        slug: "on-demand-solution", 
-        title: "On-Demand Solution", 
-        icon: "icon-layer-1", 
-        image: "/assets/images/service/service-3-3.png",
-        width: 400,
-        height: 300
-      },
-      { 
-        id: 7, 
-        slug: "saas-solution", 
-        title: "SAAS Solution", 
-        icon: "icon-layer-1", 
-        image: "/assets/images/service/service-3-3.png",
-        width: 400,
-        height: 300
-      },
-      { 
-        id: 8, 
-        slug: "automation-solution", 
-        title: "Automation Solution", 
-        icon: "icon-layer-1", 
-        image: "/assets/images/service/service-3-3.png",
-        width: 400,
-        height: 300
-      },
-      { 
-        id: 9, 
-        slug: "real-estate-solution", 
-        title: "Real Estate Solution", 
-        icon: "icon-layer-1", 
-        image: "/assets/images/service/service-3-3.png",
-        width: 400,
-        height: 300
-      },
+      { id: 1, slug: "fintech-solution", title: "Fintech Solution", icon: "icon-software-1", image: "/assets/images/service/service-3-3.png" },
+      { id: 2, slug: "ecommerce-solution", title: "Ecommerce Solution", icon: "icon-layer-1", image: "/assets/images/service/service-3-3.png" },
+      { id: 3, slug: "erp-solution", title: "ERP Solution", icon: "icon-layer-1", image: "/assets/images/service/service-3-3.png" },
+      { id: 4, slug: "healthcare-solution", title: "Healthcare Solution", icon: "icon-layer-1", image: "/assets/images/service/service-3-3.png" },
+      { id: 5, slug: "education-solution", title: "Education Solution", icon: "icon-layer-1", image: "/assets/images/service/service-3-3.png" },
+      { id: 6, slug: "on-demand-solution", title: "On-Demand Solution", icon: "icon-layer-1", image: "/assets/images/service/service-3-3.png" },
+      { id: 7, slug: "saas-solution", title: "SAAS Solution", icon: "icon-layer-1", image: "/assets/images/service/service-3-3.png" },
+      { id: 8, slug: "automation-solution", title: "Automation Solution", icon: "icon-layer-1", image: "/assets/images/service/service-3-3.png" },
+      { id: 9, slug: "real-estate-solution", title: "Real Estate Solution", icon: "icon-layer-1", image: "/assets/images/service/service-3-3.png" },
     ],
   },
 ];
 
-// Pre-calculated dot logic without useCallback
-const getVisibleDots = (currentIndex: number, totalSlides: number): number[] => {
-  if (totalSlides <= 3) {
-    return Array.from({ length: totalSlides }, (_, i) => i);
-  }
-  
-  const start = Math.floor(currentIndex / 3) * 3;
-  const adjustedStart = Math.min(start, totalSlides - 3);
-  
-  return [0, 1, 2].map(i => adjustedStart + i).filter(i => i < totalSlides);
-};
-
-// Memoized service card component
-const ServiceCard = memo(({ item }: { item: ServiceItem }) => (
-  <Link 
-    href={`/services/${item.slug}`} 
-    className="block h-full group"
-    prefetch={false}
-  >
+// Memoized Slide Item
+const ServiceSlide = memo(({ item }: { item: ServiceItem }) => (
+  <Link href={`/services/${item.slug}`} className="block h-full">
     <div className="service-three__item h-full">
       <div className="service-three__item__inner h-full flex flex-col">
         <div className="service-three__item__icon">
-          <div className="service-three__item__icon__inner" aria-hidden="true">
+          <div className="service-three__item__icon__inner">
             <i className={item.icon} />
           </div>
         </div>
-        <div className="service-three__item__thumb flex-1 relative overflow-hidden rounded-lg">
-          <div className="aspect-w-4 aspect-h-3 bg-gray-200">
-            <img 
-              src={item.image} 
-              alt={item.title} 
-              width={item.width || 400}
-              height={item.height || 300}
-              loading="lazy"
-              decoding="async"
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-              sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
-            />
-          </div>
+        <div className="service-three__item__thumb flex-1">
+          <img
+            src={item.image}
+            alt={item.title}
+            className="w-full h-[300px] object-cover"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
         <div className="service-three__item__content">
           <h4 className="service-three__item__title">
-            {item.title.split('<br />').map((line, i) => (
+            {item.title.split("<br />").map((line, i) => (
               <React.Fragment key={i}>
                 {line}
-                {i < item.title.split('<br />').length - 1 && <br />}
+                {i < item.title.split("<br />").length - 1 && <br />}
               </React.Fragment>
             ))}
           </h4>
-          <span className="service-three__item__link" aria-hidden="true">
+          <span className="service-three__item__link">
             <span className="service-three__item__link__icon" />
           </span>
         </div>
@@ -905,99 +759,14 @@ const ServiceCard = memo(({ item }: { item: ServiceItem }) => (
     </div>
   </Link>
 ));
+ServiceSlide.displayName = "ServiceSlide";
 
-ServiceCard.displayName = 'ServiceCard';
-
-// Memoized navigation buttons
-const NavigationButtons = memo(({ 
-  onPrev, 
-  onNext 
-}: { 
-  onPrev: () => void; 
-  onNext: () => void;
-}) => (
-  <div className="flex gap-3 my-4 justify-end items-center">
-    <button
-      className="custom-nav-btn prev-btn"
-      onClick={onPrev}
-      aria-label="Previous slide"
-      type="button"
-      style={{ minWidth: '44px', minHeight: '44px' }}
-    >
-      <svg 
-        className="nav-icon" 
-        viewBox="0 0 24 24" 
-        fill="none" 
-        stroke="currentColor"
-        aria-hidden="true"
-      >
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
-      </svg>
-    </button>
-    <button
-      className="custom-nav-btn next-btn"
-      onClick={onNext}
-      aria-label="Next slide"
-      type="button"
-      style={{ minWidth: '44px', minHeight: '44px' }}
-    >
-      <svg 
-        className="nav-icon" 
-        viewBox="0 0 24 24" 
-        fill="none" 
-        stroke="currentColor"
-        aria-hidden="true"
-      >
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-      </svg>
-    </button>
-  </div>
-));
-
-NavigationButtons.displayName = 'NavigationButtons';
-
-// Memoized pagination dots
-const PaginationDots = memo(({ 
-  dots, 
-  activeIndex, 
-  onClick 
-}: { 
-  dots: number[]; 
-  activeIndex: number; 
-  onClick: (index: number) => void;
-}) => (
-  <div className="custom-pagination-vertical mt-6" role="tablist" aria-label="Slide navigation">
-    <div className="pagination-wrapper-vertical">
-      {dots.map((dotIndex) => (
-        <button
-          key={dotIndex}
-          className={`pagination-dot-vertical ${activeIndex === dotIndex ? "active" : ""}`}
-          onClick={() => onClick(dotIndex)}
-          aria-label={`Go to slide ${dotIndex + 1}`}
-          aria-selected={activeIndex === dotIndex}
-          role="tab"
-          type="button"
-          data-index={dotIndex + 1}
-        >
-          <span className="dot-bg-vertical" aria-hidden="true"></span>
-          <span className="dot-inner-vertical" aria-hidden="true"></span>
-        </button>
-      ))}
-    </div>
-  </div>
-));
-
-PaginationDots.displayName = 'PaginationDots';
-
-function ServiceSlider() {
+export default function ServiceSlider() {
   const swiperRefs = useRef<(SwiperType | null)[]>([]);
-  
-  // Initialize active indices
-  const [activeIndices, setActiveIndices] = useState<number[]>(() => 
+  const [activeIndices, setActiveIndices] = useState<number[]>(() =>
     Services.map(() => 0)
   );
 
-  // Memoized handlers
   const handlePrev = useCallback((index: number) => {
     swiperRefs.current[index]?.slidePrev();
   }, []);
@@ -1007,7 +776,7 @@ function ServiceSlider() {
   }, []);
 
   const handleSlideChange = useCallback((swiper: SwiperType, index: number) => {
-    setActiveIndices(prev => {
+    setActiveIndices((prev) => {
       const newIndices = [...prev];
       newIndices[index] = swiper.realIndex;
       return newIndices;
@@ -1018,7 +787,7 @@ function ServiceSlider() {
     const swiper = swiperRefs.current[groupIndex];
     if (swiper) {
       swiper.slideTo(slideIndex);
-      setActiveIndices(prev => {
+      setActiveIndices((prev) => {
         const newIndices = [...prev];
         newIndices[groupIndex] = slideIndex;
         return newIndices;
@@ -1026,87 +795,117 @@ function ServiceSlider() {
     }
   }, []);
 
+  const getVisibleDots = useCallback(
+    (groupIndex: number, totalSlides: number) => {
+      const currentIndex = activeIndices[groupIndex] || 0;
+      const dots: number[] = [];
+
+      if (totalSlides <= 3) {
+        for (let i = 0; i < totalSlides; i++) dots.push(i);
+      } else {
+        let start = Math.floor(currentIndex / 3) * 3;
+        if (start + 2 >= totalSlides) start = totalSlides - 3;
+        for (let i = 0; i < 3; i++) dots.push(start + i);
+      }
+
+      return dots;
+    },
+    [activeIndices]
+  );
+
   return (
-    <section className="service-three" role="region" aria-label="Services slider">
+    <section className="service-three">
       <div
         className="service-three__bg"
         style={{ backgroundImage: "url(/assets/images/shapes/service-shape-2-1.png)" }}
-        aria-hidden="true"
       />
       <div className="container">
         {Services.map((group, groupIndex) => {
-          const currentIndex = activeIndices[groupIndex] || 0;
-          const visibleDots = getVisibleDots(currentIndex, group.data.length);
-          
+          const visibleDots = getVisibleDots(groupIndex, group.data.length);
           return (
             <div key={group.id} className="mb-16">
-              {/* Section Heading with Navigation on Top */}
+              {/* Heading */}
               <div className="flex items-center justify-between mb-8">
                 <div className="text-start section-headings">
                   <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
-                    {group.title} 
+                    {group.title}
                     <span className="block text-ostech-base opacity-30 text-2xl md:text-3xl font-normal">
                       {group.title}
                     </span>
                   </h2>
                 </div>
-                
-                {/* Navigation Buttons */}
-                <NavigationButtons 
-                  onPrev={() => handlePrev(groupIndex)}
-                  onNext={() => handleNext(groupIndex)}
-                />
               </div>
 
-              {/* Swiper Container */}
-              <div className="service-three__carousel relative">
-                <Suspense fallback={
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-pulse">
-                    {[1, 2, 3].map(i => (
-                      <div key={i} className="bg-gray-200 rounded-lg h-[400px]"></div>
-                    ))}
-                  </div>
-                }>
-                  {/* Dynamically import Swiper only when needed */}
-                  {typeof window !== 'undefined' && (
-                    <SwiperComponent
-                      modules={[Navigation, Autoplay].filter(Boolean) as any}
-                      spaceBetween={30}
-                      slidesPerView={3}
-                      loop={true}
-                      speed={800}
-                      autoplay={{
-                        delay: 3000,
-                        disableOnInteraction: false,
-                        pauseOnMouseEnter: true,
-                      }}
-                      onSlideChange={(swiper: SwiperType) => handleSlideChange(swiper, groupIndex)}
-                      onSwiper={(swiper: SwiperType) => {
-                        swiperRefs.current[groupIndex] = swiper;
-                      }}
-                      breakpoints={{
-                        0: { slidesPerView: 1, spaceBetween: 20 },
-                        576: { slidesPerView: 1, spaceBetween: 20 },
-                        768: { slidesPerView: 2, spaceBetween: 30 },
-                        992: { slidesPerView: 3, spaceBetween: 30 },
-                      }}
-                      className="owl-carousel"
-                    >
-                      {group.data.map((item) => (
-                        <SwiperSlideComponent key={item.id}>
-                          <ServiceCard item={item} />
-                        </SwiperSlideComponent>
-                      ))}
-                    </SwiperComponent>
-                  )}
-                </Suspense>
+              {/* Navigation */}
+              <div className="d-flex gap-4 my-2 justify-content-end align-items-center">
+                <button
+                  className="custom-nav-btn prev-btn"
+                  onClick={() => handlePrev(groupIndex)}
+                  aria-label="Previous slide"
+                  type="button"
+                >
+                  <svg className="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <button
+                  className="custom-nav-btn next-btn"
+                  onClick={() => handleNext(groupIndex)}
+                  aria-label="Next slide"
+                  type="button"
+                >
+                  <svg className="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
 
-                {/* Pagination Dots */}
-                <PaginationDots 
-                  dots={visibleDots}
-                  activeIndex={currentIndex}
-                  onClick={(dotIndex) => handleDotClick(groupIndex, dotIndex)}
-                />
+              {/* Swiper */}
+              <div className="service-three__carousel relative">
+                <Swiper
+                  modules={[Navigation, Autoplay]}
+                  spaceBetween={30}
+                  slidesPerView={3}
+                  loop
+                  speed={800}
+                  autoplay={{ delay: 3000, disableOnInteraction: false, pauseOnMouseEnter: true }}
+                  onSlideChange={(swiper) => handleSlideChange(swiper, groupIndex)}
+                  onSwiper={(swiper) => (swiperRefs.current[groupIndex] = swiper)}
+                  breakpoints={{
+                    0: { slidesPerView: 1, spaceBetween: 20 },
+                    576: { slidesPerView: 1, spaceBetween: 20 },
+                    768: { slidesPerView: 2, spaceBetween: 30 },
+                    992: { slidesPerView: 3, spaceBetween: 30 },
+                  }}
+                  className="owl-carousel"
+                >
+                  {group.data.map((item) => (
+                    <SwiperSlide key={item.id}>
+                      <ServiceSlide item={item} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+
+                {/* Pagination */}
+                 <div className="custom-pagination-vertical mt-6">
+                   <div className="pagination-wrapper-vertical">
+                     {visibleDots.map((dotIndex) => (
+                       <button
+                         key={dotIndex}
+                         className={`pagination-dot-vertical ${
+                           activeIndices[groupIndex] === dotIndex ? "active" : ""
+                         }`}
+                         onClick={() => handleDotClick(groupIndex, dotIndex)}
+                         aria-label={`Go to slide ${dotIndex + 1}`}
+                         type="button"
+                         data-index={dotIndex + 1}
+                       >
+                         <span className="dot-bg-vertical"></span>
+                         <span className="dot-inner-vertical"></span>
+                       </button>
+                     ))}
+                   </div>
+                 </div>
               </div>
             </div>
           );
@@ -1115,6 +914,3 @@ function ServiceSlider() {
     </section>
   );
 }
-
-// Optimized export
-export default memo(ServiceSlider);
