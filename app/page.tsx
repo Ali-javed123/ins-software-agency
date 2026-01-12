@@ -10,9 +10,11 @@ import {Slides} from "@/components/Slides";
 import Project from "@/components/Project";
 import ServiceCard from "@/components/ServiceCard";
 import Blogs from "@/components/Blogs";
+import ProjectCard from "@/components/project/ProjectCardSection";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer"
 export default function Home() {
+  
   return (
     <div className="page-wrapper"> 
     <Navbar/>
@@ -26,7 +28,10 @@ export default function Home() {
       <Team/>
       <Banafits/>
       <Slides />
-      <Project />
+      <div className="project-card-sticky-section">
+
+      <ProjectCard />
+      </div>
       <Blogs />
       <Footer/>
     </div>
