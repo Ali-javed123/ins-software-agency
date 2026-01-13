@@ -1,6 +1,8 @@
 .faq-section {
-  background: var(--ostech-black-soft);
+  background: var(--ostech-black);
   color: #fff;
+  padding-block:60px;
+  min-height: 80vh;
 }
 
 .faq-title {

@@ -562,7 +562,9 @@ a:visited {
   color: inherit;
   opacity: 1;
 }
-
+a,
+span,
+p,
 h1,
 h2,
 h3,
@@ -570,7 +572,7 @@ h4,
 h5,
 h6 {
   font-family: var(--ostech-heading-font, "Barlow", sans-serif);
-  color: var(--ostech-text-dark, #222429);
+  color: var(--ostech-white, #222429) !important;
 }
 @media (max-width: 575px) {
   h1 br,
@@ -2950,7 +2952,7 @@ textarea::placeholder {
 }
 .footer-widget--contact {
   margin-top: 4px;
-  background: var(--ostech-black, #171717);
+  background: var(--ostech-black-soft, #171717);
   padding: 30px;
   margin-bottom: 0;
   max-width: 370px;
@@ -5143,6 +5145,9 @@ body.megamenu-popup-active .mobile-nav__content {
   letter-spacing: 0px;
   margin-bottom: 10px;
 }
+a{
+text-decoration:none !important;  
+}
 @media (max-width: 991px) {
   .testimonials-one__item__star {
     font-size: 20px;
@@ -5655,11 +5660,12 @@ body.megamenu-popup-active .mobile-nav__content {
   }
 }
 .cta-two__item__title {
-  font-size: 30px;
-  font-weight: 700;
+  font-size: 25px;
+  font-weight: 800;
   line-height: 133.333%;
   text-transform: uppercase;
   margin-bottom: 23px;
+  color: var(--ostech-white);
 }
 @media (max-width: 1199px) and (min-width: 991px) {
   .cta-two__item__title {
@@ -12605,7 +12611,7 @@ body.megamenu-popup-active .mobile-nav__content {
   position: relative;
   z-index: 1;
   padding: 120px 0px;
-  background-color: var(--ostech-secondary, #232429);
+  background-color: var(--ostech-black-soft, #232429);
 }
 @media (max-width: 991px) {
   .service-three {

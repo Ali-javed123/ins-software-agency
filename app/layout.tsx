@@ -7,7 +7,6 @@ import Script from "next/script";
 import "./globals.css";
 
 // Vendor CSS imports
-import "@/public/assets/vendors/bootstrap/css/bootstrap.min.css";
 import "@/public/assets/vendors/bootstrap-select/bootstrap-select.min.css";
 import "@/public/assets/vendors/animate/animate.min.css";
 import "@/public/assets/vendors/fontawesome/css/all.min.css";
@@ -20,6 +19,7 @@ import "@/public/assets/vendors/ostech-icons/style.css";
 import "@/public/assets/vendors/owl-carousel/css/owl.carousel.min.css";
 import "@/public/assets/vendors/owl-carousel/css/owl.theme.default.min.css";
 import "@/public/assets/css/ostech-professional.css";
+import "@/public/assets/vendors/bootstrap/css/bootstrap.min.css";
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 

@@ -61,7 +61,8 @@ const FAQSection = () => {
     <section className="faq-section py-5">
       <div className="container">
         <h2 className="faq-title text-center mb-5">
-          Mobile App Development FAQs
+Frequently Asked Questions
+
         </h2>
 
         {faqData.map((item: FAQItem) => {

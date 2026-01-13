@@ -7,7 +7,7 @@ const WhyChooseTwo = () => {
 <section className="why-choose-two">
   <div className="why-choose-two__bg jarallax" data-jarallax data-speed="0.3" data-imgposition="50% -100%" style={{backgroundImage: 'url(assets/images/backgrounds/why-choose-bg-1-1.png)'}} />
   <div className="container">
-    <div className="row">
+    {/* <div className="row">
       <div className="col-lg-3 col-md-6 col-sm-6">
         <div className="why-choose-two__funfact__item count-box wow fadeInUp" data-wow-delay="300ms">
           <div className="why-choose-two__funfact__item__icon">
@@ -68,14 +68,14 @@ const WhyChooseTwo = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div> */}
     <div className="why-choose-two__inner">
       <div className="row align-items-center">
         <div className="col-lg-6">
           <div className="why-choose-two__top__left">
             <div className="sec-title sec-title--two wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="000ms">
               <div className="d-flex align-items-center justify-content-start">
-                <img src="assets/images/shapes/sec-title-s-1.png" alt="Why Choose Us" className="sec-title__img" />
+                {/* <img src="assets/images/shapes/sec-title-s-1.png" alt="Why Choose Us" className="sec-title__img" /> */}
                 <h6 className="sec-title__tagline">Why Choose Us</h6>
               </div>
               <h3 className="sec-title__title">Why Our Technology Solutions Company Stands Out?</h3>

@@ -39,12 +39,12 @@
 .section-headings h2 span {
   position: absolute;
   left: 0;
-  top: 70%;
+  top: 50%;
   transform: translateY(-50%);
-  font-size: 95px;
+  font-size: 100px;
   font-weight: 800;
-  color: cyan;
-  opacity: 0.09;
+  color: cyan !important;
+  opacity: 0.12;
   z-index: -1;
   white-space: nowrap;
   -webkit-transform: translateY(-50%);
@@ -321,7 +321,7 @@ var(--ostech-black)
 ================================ */
 
 .contact-card {
-  height: 100%;
+  min-height: 360px;
   /* background: var(--ostech-navy-gradient); */
     background: var(--ostech-black-soft); /* less color */
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -358,8 +358,8 @@ border: 1px solid rgba(255,255,255,0.1);
 ================================ */
 
 .contact-card__icon {
-  width: 90px;
-  height: 90px;
+  width: 80px;
+  height: 80px;
   margin: 0 auto 25px;
   border-radius: 50%;
   display: flex;
@@ -396,6 +396,7 @@ border: 1px solid rgba(255,255,255,0.1);
   color: rgba(255, 255, 255, 0.78);
   margin-bottom: 10px;
   line-height: 1.8;
+  font-weight: 500;
 }
 
 .contact-card__text span {
@@ -410,8 +411,8 @@ border: 1px solid rgba(255,255,255,0.1);
 ================================ */
 
 .contact-card__footer {
-  margin-top: 25px;
-  padding-top: 15px;
+  margin-top: 10px;
+  padding-top: 10px;
   font-size: 14px;
   color: rgba(255, 255, 255, 0.6);
   border-top: 1px dashed rgba(255, 255, 255, 0.15);
@@ -434,7 +435,18 @@ border: 1px solid rgba(255,255,255,0.1);
     font-size: 22px;
   }
 }
-
+.contact__title{
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 30px;
+  color: var(--ostech-white);
+}
+.contact__des{
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 30px;
+  color: var(--ostech-white);
+}
 /* ---------------------- */
 /* animation */
 /* ===============================
@@ -636,25 +648,155 @@ border: 1px solid rgba(255,255,255,0.1);
     box-shadow: 0 0 0 0 rgba(255, 170, 23, 0);
   }
 }
+ /* team section */
+.teamsec{
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+
+  flex-direction: column;
+  padding-block:40px ;
+  background: var(--ostech-black);
+  color: var(--ostech-white);
+}
+.teamCard{
+  background: var(--ostech-black);
+  color: var(--ostech-white);
+  display: flex;
+  flex-wrap: wrap;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  /* padding:10px ; */
+}
+
+.imageWraper{
+  position:relative;
+  min-height: 350px;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+.teamImage{
+  display: block;
+  min-height: 350px;
+  width: 100%;
+  object-fit:fill;
+  border: 4px solid var(--ostech-base);
+  border-radius:50px;
+  /*-webkit-border-radius: 50%;
+  -moz-border-radius:50px;
+  -ms-border-radius:50px;
+  -o-border-radius:50px;
+  */
+  -webkit-border-radius:50px;
+}
 
 
+.teamContent{
+   position:relative;
+  height: 400px;
+  display: flex;
+  flex-wrap: wrap;
+
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+
+}
 
 
+.teamHeading{
+  font-size: 25px;
+  font-weight:900;
+  line-height:35px;
+  color:var(--ostech-base)
+}
+
+.teamPosition{
+  font-size: 20px;
+  font-weight:900;
+  line-height:35px;
+  color:var(--ostech-white)
+}
 
 
+.teamdes{
+  font-size: 18px;
+  font-weight:400;
+  line-height:28px;
+  color:var(--ostech-white)
+}
+.teamDivider{
+
+  width: 100%;
+  border: 1px solid rgba(202, 202, 202, 0.356);
+  margin-top: 10px;
+}
+
+.badgeWarpe {
+  display: flex;
+  flex-wrap: wrap;
+
+  flex-wrap: wrap;      /* allows badges to wrap on smaller screens */
+  justify-content: center;
+  align-items: center;
+  gap: 6px;             /* space between badges */
+  margin-top: 10px;
+}
+
+.stackbage {
+  display: inline-flex;
+  /*makescontentcenterproperly*/align-items: center;
+  justify-content: center;
+  padding: 5px 5px;
+  /*flexiblepadding*/font-size: 12px;
+  /*responsivefont*/white-space: nowrap;
+  /*preventstextfrombreakinginthemiddle*/color: var(--ostech-white);
+  border-radius: 50px;
+  border: 1px solid var(--ostech-base);
+  background: var(--ostech-base);
+  transition: transform 0.3s, font-size 0.3s;
+  -webkit-transition: transform 0.3s, font-size 0.3s;
+  -moz-transition: transform 0.3s, font-size 0.3s;
+  -ms-transition: transform 0.3s, font-size 0.3s;
+  -o-transition: transform 0.3s, font-size 0.3s;
+}
+
+.stackbage:hover {
+  transform: scale(1.05);
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  -o-transform: scale(1.05);
+}
+
+/* Optional: make badges smaller on very small screens */
+@media (max-width: 576px) {
+  .stackbage {
+    font-size: 0.7rem;
+    padding: 4px 10px;
+  }
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
+.iconsname{
+font-size: 25px;
+font-weight: 900;
+color: var(--ostech-white);
+}
+.icon-wrap{
+  min-height: 100px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
 
 
 

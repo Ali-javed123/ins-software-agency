@@ -3,7 +3,7 @@ import Link from 'next/link'
 const Footer = () => {
   return (
     <>
-      <section className="cta-two">
+      <section className="cta-two mt-5">
   <div className="container">
     <div className="row gutter-y-30">
       <div className="col-lg-6">
@@ -57,10 +57,27 @@ const Footer = () => {
     </div>
   </div>
   <div className="main-footer__middle">
-    <div className="container">
+    <div className="container-fluid">
       <div className="row">
-        
-        <div className="col-md-6 col-xl-3">
+              <div className="col-md-6 col-xl-3">
+                <div className="footer-widget footer-widget--about">
+                  <h2 className="footer-widget__title">About InS</h2>
+                  <p className="footer-widget__text">
+                    InS Software Agency delivers enterprise grade software,
+                    cloud, and digital solutions with a strong focus on
+                    security, performance, and scalability.
+                  </p>
+                
+                  <ul className="list-unstyled footer-widget__links">
+              <li className="footer-widget__links__item"><Link href="#">Agile Delivery Model</Link></li>
+              <li className="footer-widget__links__item"><Link href="#">Enterprise Security</Link></li>
+              <li className="footer-widget__links__item"><Link href="/services">Trusted IT Partner</Link></li>
+             
+            </ul>
+                </div>
+              </div>
+
+        <div className="col-md-6 col-xl-2">
           <div className="footer-widget footer-widget--links">
             <h2 className="footer-widget__title">Page</h2>
             <ul className="list-unstyled footer-widget__links">
@@ -72,7 +89,7 @@ const Footer = () => {
             </ul>
           </div>
               </div>
-              <div className="col-md-6 col-xl-3">
+              <div className="col-md-6 col-xl-2">
           <div className="footer-widget footer-widget--links">
             <h2 className="footer-widget__title">Enterprise Services</h2>
             <ul className="list-unstyled footer-widget__links">
@@ -88,7 +105,7 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-              <div className="col-md-6 col-xl-3">
+              <div className="col-md-6 col-xl-2">
           <div className="footer-widget footer-widget--links">
             <h2 className="footer-widget__title">Core Services</h2>
             <ul className="list-unstyled footer-widget__links">
@@ -139,8 +156,8 @@ const Footer = () => {
                   <i className="icon-call" />
                 </div>
                 <div className="footer-widget__contact__inner">
-                  <a href="tel:+92-3800-8060" className="footer-widget__contact__text">+92 3800 8060</a>
-                  <a href="tel:+21-9555-0114" className="footer-widget__contact__text">+21 9555-0114</a>
+                  <a href="tel:+92-3800-8060" className="footer-widget__contact__text">+880 1715-956363</a>
+                  <a href="tel:+21-9555-0114" className="footer-widget__contact__text">+92 323 0217282</a>
                 </div>
               </li>
               <li className="footer-widget__contact__item">
@@ -148,22 +165,22 @@ const Footer = () => {
                   <i className="icon-Earth" />
                 </div>
                 <div className="footer-widget__contact__inner">
-                  <a href="https://themeforest.net/user/bracket-web" className="footer-widget__contact__text">mitc@example.com</a>
-                  <a href="https://themeforest.net/user/bracket-web" className="footer-widget__contact__text">www.website.com</a>
+                  <a href="#" className="footer-widget__contact__text">support@instechlab.com</a>
+                  <a href="https://themeforest.net/user/bracket-web" className="footer-widget__contact__text">www.instechlab.com</a>
                 </div>
               </li>
-              <li className="footer-widget__contact__item">
+              {/* <li className="footer-widget__contact__item">
                 <div className="footer-widget__contact__icon">
                   <i className="icon-Pin" />
                 </div>
                 <div className="footer-widget__contact__inner">
                   <p className="footer-widget__contact__text">6391 Elgin st. delaware <br /> new york. usa</p>
                 </div>
-              </li>
+              </li> */}
             </ul>
-            <div className="footer-widget__thumb">
+            {/* <div className="footer-widget__thumb">
               <img src="/assets/images/resources/footer-1-1.png" alt="ostech image" />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

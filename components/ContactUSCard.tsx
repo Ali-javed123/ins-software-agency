@@ -111,8 +111,13 @@ const ContactUsCard = () => {
 </section> */}
 
         <section className="contact-feature my-3" ref={ref}>
-      <div className="container">
-        <div className="row g-4">
+        <div className="container">
+          <div className="text-center my-4">
+            <h2 className="contact__title">Let’s Build Something Great</h2>
+<p className="contact__des mt-1">Connect with our experts for web, app, and digital solutions.</p>
+
+          </div>
+        <div className="row g-4 d-flex justify-content-center align-items-center">
 
           {/* Phone */}
           <div className="col-lg-4 col-md-6">
@@ -126,14 +131,14 @@ const ContactUsCard = () => {
                     <div className="text-start">
 
               <p className="contact-card__text">
-                <span>UK</span> +44 7576 5855 12
+                <span>01</span> +880 1715-956363
               </p>
               <p className="contact-card__text">
-                <span>UK</span> +44 7471 0958 53
+                <span>02</span> +92 323 0217282
               </p>
-              <p className="contact-card__text">
+              {/* <p className="contact-card__text">
                 <span>PK</span> +92 2332 3432 76
-              </p>
+              </p> */}
 </div>
 </div>
 </div>
@@ -157,14 +162,14 @@ const ContactUsCard = () => {
                     <div className="text-start">
 
               <p className="contact-card__text">
-                <span>01</span> info@mail.com
+                <span>01</span> support@instechlab.com
               </p>
-              <p className="contact-card__text">
+              {/* <p className="contact-card__text">
                 <span>02</span> support@mail.com
               </p>
               <p className="contact-card__text">
                 <span>03</span> sales@mail.com
-                      </p>
+                      </p> */}
                       </div>
                       </div>
                       </div>
@@ -176,7 +181,7 @@ const ContactUsCard = () => {
           </div>
 
           {/* Location */}
-          <div className="col-lg-4 col-md-6">
+          {/* <div className="col-lg-4 col-md-6">
             <div className={`contact-card ${inView ? "zoom-ins" : "zoom-outs"}`}>
               <div className="contact-card__icon">
                 <FaMapMarkerAlt />
@@ -205,7 +210,7 @@ const ContactUsCard = () => {
                 Visit Our Offices
               </div>
             </div>
-          </div>
+          </div> */}
 
         </div>
       </div>

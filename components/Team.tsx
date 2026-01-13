@@ -20,8 +20,8 @@ const Team = () => {
             <div className="team-card__content">
               <div className="team-card__content__inner">
                 <div className="team-card__content__inner__item">
-                  <h3 className="team-card__content__title"><a href="team-details.html">Mike Hardson</a></h3>
-                  <h6 className="team-card__content__designation">Web Developer</h6>
+                  <h3 className="team-card__content__title"><a href="team-details.html">MD Ismail Alam Khan</a></h3>
+                  <h6 className="team-card__content__designation">CO Founder</h6>
                 </div>
                 <div className="team-card__content__hover">
                   <div className="team-card__content__hover__icon">
@@ -43,13 +43,13 @@ const Team = () => {
         <div className="team-card wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="100ms">
           <div className="team-card__inner">
             <div className="team-card__image">
-              <img src="/assets/images/team/team-1-2.jpg" alt="aleesha brown" />
+              <img src="/assets/images/team/team-1-5.jpg" alt="aleesha brown" />
             </div>
             <div className="team-card__content">
               <div className="team-card__content__inner">
                 <div className="team-card__content__inner__item">
-                  <h3 className="team-card__content__title"><a href="team-details.html">aleesha brown</a></h3>
-                  <h6 className="team-card__content__designation">Web Developer</h6>
+                  <h3 className="team-card__content__title"><a href="team-details.html">Mohammad Shoaib</a></h3>
+                  <h6 className="team-card__content__designation">Founder</h6>
                 </div>
                 <div className="team-card__content__hover">
                   <div className="team-card__content__hover__icon">
@@ -71,13 +71,13 @@ const Team = () => {
         <div className="team-card wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="200ms">
           <div className="team-card__inner">
             <div className="team-card__image">
-              <img src="/assets/images/team/team-1-3.jpg" alt="david cooper" />
+              <img src="/assets/images/team/team-1-2.jpg" alt="david cooper" />
             </div>
             <div className="team-card__content">
               <div className="team-card__content__inner">
                 <div className="team-card__content__inner__item">
-                  <h3 className="team-card__content__title"><a href="team-details.html">david cooper</a></h3>
-                  <h6 className="team-card__content__designation">Web Developer</h6>
+                  <h3 className="team-card__content__title"><a href="team-details.html">Amelia  henry</a></h3>
+                  <h6 className="team-card__content__designation">Project Manager</h6>
                 </div>
                 <div className="team-card__content__hover">
                   <div className="team-card__content__hover__icon">
@@ -127,7 +127,7 @@ const Team = () => {
         <div className="team-card wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="100ms">
           <div className="team-card__inner">
             <div className="team-card__image">
-              <img src="/assets/images/team/team-1-5.jpg" alt="kevin martin" />
+              <img src="/assets/images/team/team-1-3.jpg" alt="kevin martin" />
             </div>
             <div className="team-card__content">
               <div className="team-card__content__inner">
@@ -161,7 +161,7 @@ const Team = () => {
               <div className="team-card__content__inner">
                 <div className="team-card__content__inner__item">
                   <h3 className="team-card__content__title"><a href="team-details.html">christine eve</a></h3>
-                  <h6 className="team-card__content__designation">Web Developer</h6>
+                  <h6 className="team-card__content__designation">Backend Developer</h6>
                 </div>
                 <div className="team-card__content__hover">
                   <div className="team-card__content__hover__icon">
@@ -188,3 +188,146 @@ const Team = () => {
 }
 
 export default Team
+// import React, { FC } from "react";
+// import { FaGithub } from "react-icons/fa";
+// import { FaLinkedin } from "react-icons/fa";
+// import { FaFacebookF } from "react-icons/fa";
+// import { FaInstagram } from "react-icons/fa";
+
+// const Team: FC = () => {
+//   return (
+//     <section className="teamsec">
+//       <div className="container-fluid">
+        
+//         <div className="row">
+//           <div className="col-md-6">
+//             <div className="teamCard">
+//               <div className="row ">
+//                 <div className="col-lg-5">
+//                   <div className="imageWraper">
+//                     <img
+//                       src="/assets/images/team/team-1-1.jpg"
+//                       className="teamImage position-relative"
+//                       alt="sa"
+//                     />
+//                   </div>
+//                 </div>
+//                 <div className="col-lg-7">
+//                 <div className="teamContent mt-3">
+//                   <h2 className="teamHeading mt-3">Sam Monic</h2>
+//                  < h3 className="teamPosition mt-2">Web Developer</h3>
+//                     <span className="teamdes d-block " >4 years professioanl with modren Web  application</span>
+//                     <div className="teamDivider mt-3"></div>
+//                     <div className="badgeWarpe mt-3">
+//                   <div>
+
+//                       <button className="stackbage"> React JS</button>
+//                       </div>
+//                       <div>
+
+//                       <button className="stackbage"> Next JS</button>
+//                       </div>
+//                       <div>
+
+//                       <button className="stackbage"> Node JS</button>
+//                       </div>
+//                       <div>
+
+//                       <button className="stackbage"> PostgreSQL </button>
+//                       </div>
+//                          <div>
+
+//                       <button className="stackbage"> MongoDB </button>
+//                       </div>
+//                     </div>
+//                     <div className="icon-wrap mt-3">
+//                   <div>
+//                     <FaGithub className="iconsname"/>
+//                   </div>
+//                       <div>
+//                     <FaLinkedin className="iconsname"/>
+//                   </div>
+//                   <div>
+//                     <FaFacebookF className="iconsname"/>
+//                   </div>
+//                     <div>
+//                     <FaInstagram className="iconsname"/>
+//                   </div>
+
+//                 </div>
+//                   </div>
+//                   {/* You can add team member info here */}
+//                 </div>
+                
+//               </div>
+//             </div>
+//           </div>
+//              <div className="col-md-6">
+//             <div className="teamCard">
+//               <div className="row">
+//                 <div className="col-lg-5">
+//                   <div className="imageWraper">
+//                     <img
+//                       src="/assets/images/team/team-1-1.jpg"
+//                       className="teamImage position-relative"
+//                       alt="sa"
+//                     />
+//                   </div>
+//                 </div>
+//                 <div className="col-lg-7">
+//                 <div className="teamContent mt-3">
+//                   <h2 className="teamHeading mt-3">Sam Monic</h2>
+//                  < h3 className="teamPosition mt-2">Full Stack</h3>
+//                     <span className="teamdes d-block " >4 years professioanl with modren Stack application </span>
+//                     <div className="teamDivider mt-3"></div>
+//                     <div className="badgeWarpe mt-3">
+//                   <div>
+
+//                       <button className="stackbage"> React JS</button>
+//                       </div>
+//                       <div>
+
+//                       <button className="stackbage"> Next JS</button>
+//                       </div>
+//                       <div>
+
+//                       <button className="stackbage"> Node JS</button>
+//                       </div>
+//                       <div>
+
+//                       <button className="stackbage"> PostgreSQL </button>
+//                       </div>
+//                          <div>
+
+//                       <button className="stackbage"> MongoDB </button>
+//                       </div>
+//                     </div>
+//                     <div className="icon-wrap mt-3">
+//                   <div>
+//                     <FaGithub className="iconsname"/>
+//                   </div>
+//                       <div>
+//                     <FaLinkedin className="iconsname"/>
+//                   </div>
+//                   <div>
+//                     <FaFacebookF className="iconsname"/>
+//                   </div>
+//                     <div>
+//                     <FaInstagram className="iconsname"/>
+//                   </div>
+
+//                 </div>
+//                   </div>
+//                   {/* You can add team member info here */}
+//                 </div>
+                
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// };
+
+// export default Team;

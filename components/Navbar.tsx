@@ -84,7 +84,7 @@ const Navbar = () => {
               <li><a href="checkout.html">Checkout</a></li>
             </ul>
           </li> */}
-          <li className="dropdown">
+          {/* <li className="dropdown">
             <a href="#">Blog</a>
             <ul className="sub-menu">
               <li className="dropdown"><a href="#">Blog</a>
@@ -110,13 +110,13 @@ const Navbar = () => {
                 </ul>
               </li>
             </ul>
-          </li>
+          </li> */}
           <li>
             <Link href="/contactus">Contact Us</Link>
           </li>
         </ul>
       </nav>
-      <div className="main-header__right">
+      {/* <div className="main-header__right">
         <a href="tel:+92-3800-8060" className="main-header__right__call">
           <div className="main-header__right__icon">
             <i className="icon-call" />
@@ -129,13 +129,12 @@ const Navbar = () => {
         <div className="main-header__right__info">
           <a href="#" className="search-toggler main-header__right__info__item"><i className="icon-search" aria-hidden="true" /><span className="sr-only">Search</span></a>
           <a href="cart.html" className="main-header__right__info__item">
-            {/* <i className="icon-trolley-cart" aria-hidden="true" /> */}
             <span className="sr-only">Search</span></a>
         </div>
         <div className="mobile-nav__btn mobile-nav__toggler">
           <span /><span /><span />
         </div>
-      </div>
+      </div> */}
     </div>
   </div>
 </header>

@@ -13,6 +13,7 @@ import Blogs from "@/components/Blogs";
 import ProjectCard from "@/components/project/ProjectCardSection";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer"
+import Faq from "@/components/ServiceDetails/Faq"
 export default function Home() {
   
   return (
@@ -24,15 +25,16 @@ export default function Home() {
       <About />
       {/* <Service2 /> */}
       <Whychoose/>
-      <Testimonial />
+      {/* <Testimonial /> */}
       <Team/>
       <Banafits/>
       <Slides />
       <div className="project-card-sticky-section">
 
       <ProjectCard />
+      <Faq/>
       </div>
-      <Blogs />
+      {/* <Blogs /> */}
       <Footer/>
     </div>
   );
