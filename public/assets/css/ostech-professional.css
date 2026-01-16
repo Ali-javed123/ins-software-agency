@@ -12616,7 +12616,7 @@ text-decoration:none !important;
   position: relative;
   z-index: 1;
   padding: 120px 0px;
-  background-color: var(--ostech-black, #232429);
+  background-color: var(--ostech-black-soft, #232429);
 }
 @media (max-width: 991px) {
   .service-three {

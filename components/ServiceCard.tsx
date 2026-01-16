@@ -818,7 +818,7 @@ export default function ServiceSlider() {
     <section className="service-three">
       <div
         className="service-three__bg"
-        style={{ backgroundImage: "url(/assets/images/shapes/service-shape-2-1.png)" }}
+        // style={{ backgroundImage: "url(/assets/images/shapes/service-shape-2-1.png)" }}
       />
       <div className="container">
                     {/* <div className="row my-3 justify-content-end align-items-center" >
