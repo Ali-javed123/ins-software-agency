@@ -800,3 +800,11 @@ color: var(--ostech-white);
 
 
 
+
+.servicesvg{
+  width: 200px;
+  width: 200px;
+  object-fit: contain;
+   animation: rotates 4s linear infinite;
+    -webkit-animation: rotates 4s linear infinite;
+}

@@ -824,42 +824,57 @@ export default function ServiceSlider() {
         {Services.map((group, groupIndex) => {
           const visibleDots = getVisibleDots(groupIndex, group.data.length);
           return (
+            <div key={group.id}>
+
+            <div className="row my-3 justify-content-end align-items-center" >
+              <div className="col-md-3">
+                <img src="/assets/images/techsvg.png" className="img-fluid servicesvg" alt="Service Image "/>
+
+              </div>
+            </div>
+
             <div key={group.id} className="mb-16">
               {/* Heading */}
-              <div className="flex items-center justify-between mb-8">
-                <div className="text-start section-headings">
-                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
-                    {group.title}
-                    <span className="block text-ostech-base opacity-30 text-2xl md:text-3xl font-normal">
-                      {group.title}
-                    </span>
-                  </h2>
-                </div>
-              </div>
+              <div className="row align-items-center mb-5">
+  {/* Heading */}
+  <div className="col-md-6">
+    <div className="section-headings">
+      <h2 className="position-relative">
+        {group.title}
+        <span className="absolute-opacity">{group.title}</span>
+      </h2>
+    </div>
+  </div>
+
+  {/* Buttons */}
+                  <div className="col-md-6  ">
+           <div className="d-flex justify-content-end gap-2">         
+    <button
+      className="custom-nav-btn prev-btn"
+      onClick={() => handlePrev(groupIndex)}
+      aria-label="Previous slide"
+      type="button"
+    >
+      <svg className="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
+    <button
+      className="custom-nav-btn prev-btn"
+      onClick={() => handleNext(groupIndex)}
+      aria-label="Next slide"
+      type="button"
+    >
+      <svg className="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+    </div>
+  </div>
+</div>
+
 
               {/* Navigation */}
-              <div className="d-flex gap-4 my-2 justify-content-end align-items-center">
-                <button
-                  className="custom-nav-btn prev-btn"
-                  onClick={() => handlePrev(groupIndex)}
-                  aria-label="Previous slide"
-                  type="button"
-                >
-                  <svg className="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
-                  </svg>
-                </button>
-                <button
-                  className="custom-nav-btn next-btn"
-                  onClick={() => handleNext(groupIndex)}
-                  aria-label="Next slide"
-                  type="button"
-                >
-                  <svg className="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
 
               {/* Swiper */}
               <div className="service-three__carousel relative">
@@ -925,6 +940,7 @@ export default function ServiceSlider() {
                 </div>
 
               </div>
+            </div>
             </div>
           );
         })}

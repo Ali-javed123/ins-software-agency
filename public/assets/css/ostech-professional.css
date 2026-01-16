@@ -391,10 +391,12 @@
   -o-border-radius:15px;
 }
 .ostech-btn:hover {
-  color: var(--ostech-black, #FFAA17);
+  color: var(--ostech-black, #FFAA17) !important;
   background-color: var(--ostech-white, #222429);
 }
 .ostech-btn:before {
+  color: var(--ostech-black, #FFAA17) !important;
+
   content: "";
   background-color: var(--ostech-white, #232429);
   width: 0;
@@ -407,6 +409,8 @@
 }
 .ostech-btn:after {
   content: "";
+  color: var(--ostech-black, #FFAA17) !important;
+
   background-color: var(--ostech-white, #232429);
   width: 0;
   height: 50%;
@@ -421,6 +425,7 @@
   -o-transition: all 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
 }
 .ostech-btn:hover {
+
   color: var(--ostech-black, #000);
 }
 .ostech-btn:hover:before, .ostech-btn:hover:after {
