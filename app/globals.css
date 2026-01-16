@@ -44,7 +44,7 @@
   font-size: 100px;
   font-weight: 800;
   color: cyan !important;
-  opacity: 0.12;
+  opacity: 0.10 !important;
   z-index: -1;
   white-space: nowrap;
   -webkit-transform: translateY(-50%);
@@ -799,12 +799,29 @@ color: var(--ostech-white);
 }
 
 
+.axd{
+  position: relative;
+}
 
 
-.servicesvg{
-  width: 200px;
-  width: 200px;
-  object-fit: contain;
-   animation: rotates 4s linear infinite;
-    -webkit-animation: rotates 4s linear infinite;
+.section-headings h2::before {
+  content: '';
+  position: absolute;
+  top: -150%;
+  left: -10%;
+  transform: translate(-50%, -50%);
+  /*centerimage*/width: 250px;
+  height: 250px;
+  background-image: url('/assets/images/techsvg.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: block;
+  /*pseudo-elementvisiblehonekeliyezaroori*/z-index: 0;
+  animation: rotates 4s linear infinite;
+  -webkit-animation: rotates 4s linear infinite;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
 }

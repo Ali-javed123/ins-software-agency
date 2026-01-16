@@ -821,17 +821,18 @@ export default function ServiceSlider() {
         style={{ backgroundImage: "url(/assets/images/shapes/service-shape-2-1.png)" }}
       />
       <div className="container">
+                    {/* <div className="row my-3 justify-content-end align-items-center" >
+              <div className="col-md-3">
+                <img src="/assets/images/techsvg.png" className="img-fluid servicesvg" alt="Service Image "/>
+
+              </div>
+            </div> */}
+
         {Services.map((group, groupIndex) => {
           const visibleDots = getVisibleDots(groupIndex, group.data.length);
           return (
             <div key={group.id}>
 
-            <div className="row my-3 justify-content-end align-items-center" >
-              <div className="col-md-3">
-                <img src="/assets/images/techsvg.png" className="img-fluid servicesvg" alt="Service Image "/>
-
-              </div>
-            </div>
 
             <div key={group.id} className="mb-16">
               {/* Heading */}
@@ -848,6 +849,7 @@ export default function ServiceSlider() {
 
   {/* Buttons */}
                   <div className="col-md-6  ">
+             <div className="axd">
            <div className="d-flex justify-content-end gap-2">         
     <button
       className="custom-nav-btn prev-btn"
@@ -869,6 +871,7 @@ export default function ServiceSlider() {
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
       </svg>
     </button>
+    </div>
     </div>
   </div>
 </div>
