@@ -539,7 +539,7 @@ const BUCKET_NAME = "home-banner";
 const STORAGE_TYPE = "bucket";
 const CHUNK_SIZE = 60000;
 const DELIMITER = '|||CHUNK|||';
-const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
+// const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
 
 
 const HomeSliderTwo: React.FC = () => {
