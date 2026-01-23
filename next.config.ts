@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactStrictMode: false, // Strict Mode off
 // output:"export" ,
+
     images: {
     // allow any external domain if needed
     remotePatterns: [

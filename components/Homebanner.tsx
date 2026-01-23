@@ -489,13 +489,15 @@
 
 "use client";
 
-import React, { useMemo, useState, useRef } from "react";
+import React, { useMemo, useState, useRef,useCallback ,useEffect} from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import Link from "next/link";
+import type { User as User ,DatabaseUser} from "@/types/home/homeslider";
 // import "./HomeSliderTwo.css"; // Separate CSS file for custom styles
+import { supabase } from "@/lib/supabase-client"
 
 interface SliderItem {
   id: number;
@@ -529,9 +531,19 @@ const SLIDES: SliderItem[] = [
   },
 ];
 
+
+const BUCKET_NAME = "home-banner";
+const STORAGE_TYPE = "bucket";
+const CHUNK_SIZE = 60000;
+const DELIMITER = '|||CHUNK|||';
+const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
+
+
 const HomeSliderTwo: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const swiperRef = useRef<SwiperType | null>(null);
+const [users, setUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const handleDotClick = (index: number) => {
     if (swiperRef.current) {
@@ -539,6 +551,76 @@ const HomeSliderTwo: React.FC = () => {
     }
   };
 
+
+
+const reconstructFromChunks = (chunkedString: string | null | undefined): string | null => {
+    if (!chunkedString) return null;
+
+    if (!chunkedString.includes(DELIMITER)) {
+      return chunkedString;
+    }
+
+    return chunkedString.split(DELIMITER).join('');
+  };
+
+const convertToUser = (dbUser: DatabaseUser): User => {
+    if (STORAGE_TYPE === "bucket") {
+      // For bucket storage
+      return {
+        id: dbUser.id,
+        title: dbUser.title,
+        heading: dbUser.heading,
+        btnOne: dbUser.btnOne,
+        btnTwo: dbUser.btnTwo,
+        profileImage: null,
+        profileImageUrl: dbUser.profileImage || null
+      };
+    } else {
+      // For Base64 storage
+      return {
+        id: dbUser.id,
+        title: dbUser.title,
+        heading: dbUser.heading,
+        btnOne: dbUser.btnOne,
+        btnTwo: dbUser.btnTwo,
+        profileImage: reconstructFromChunks(dbUser.profileImage),
+        profileImageUrl: null
+      };
+    }
+  };
+
+
+
+ const fetchUsers = useCallback(async () => {
+    try {
+      const { data, error } = await supabase
+        .from("home-banner")
+        .select("*")
+        .order("created_at", { ascending: true });
+      console.log("Fetched users:", data);
+
+      if (error) {
+        console.error("Error fetching users:", error);
+        return;
+      }
+
+      // Safely convert database users to component users
+      const processedUsers = (data || []).map((dbUser) => convertToUser(dbUser as DatabaseUser));
+
+      setUsers(processedUsers);
+    } catch (error) {
+      console.error("Unexpected error:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchUsers();
+  }, [fetchUsers]);
+
+
+console.log("users:", users);
   const slides = useMemo(
     () =>
       SLIDES.map((slide, index) => {
