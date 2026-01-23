@@ -493,12 +493,15 @@ import React, { useMemo, useState, useRef,useCallback ,useEffect} from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
+
+import type { StaticImageData } from "next/image";
+
 import "swiper/css";
 import Link from "next/link";
 import type { User as User ,DatabaseUser} from "@/types/home/homeslider";
 // import "./HomeSliderTwo.css"; // Separate CSS file for custom styles
 import { supabase } from "@/lib/supabase-client"
-
+import img1 from "@/public/assets/images/backgrounds/slider-1-1.jpg";
 interface SliderItem {
   id: number;
   bgImage: string;
@@ -542,7 +545,7 @@ const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
 const HomeSliderTwo: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const swiperRef = useRef<SwiperType | null>(null);
-const [users, setUsers] = useState<User[]>([]);
+const [SlideData, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
 
   const handleDotClick = (index: number) => {
@@ -620,25 +623,52 @@ const convertToUser = (dbUser: DatabaseUser): User => {
   }, [fetchUsers]);
 
 
-console.log("users:", users);
+
+const getSafeImageSrc = (
+  dynamicSrc: string | null, 
+  fallbackSrc: string | StaticImageData | undefined
+): string => {
+  // Use dynamic source if available
+  if (dynamicSrc) return dynamicSrc;
+  
+  // Handle fallback source
+  if (!fallbackSrc) return `${img1}`;
+  
+  if (typeof fallbackSrc === 'string') {
+    return fallbackSrc;
+  }
+  
+  // Handle StaticImageData
+  if (fallbackSrc && typeof fallbackSrc === 'object' && 'src' in fallbackSrc) {
+    return fallbackSrc.src;
+  }
+  
+  return `${img1}`;
+};
+  const getImageUrl = (user: User): string | null => {
+    const url = STORAGE_TYPE === "bucket" ? user.profileImageUrl : user.profileImage;
+    return url || null;
+  };
+
+console.log("users:", SlideData);
   const slides = useMemo(
     () =>
-      SLIDES.map((slide, index) => {
+      SlideData.map((slide, index) => {
         const isActive = index === activeIndex;
         return (
           <SwiperSlide key={slide.id}>
             <div className={`main-slider-two__item ${isActive ? "active" : ""}`}>
               <div
                 className="main-slider-two__bg"
-                style={{ backgroundImage: `url(${slide.bgImage})` }}
+                style={{ backgroundImage: `url(${getSafeImageSrc(getImageUrl(slide), img1)})` }}
               />
               <div className="container">
                 <div className="row">
                   <div className="col-md-12">
                     <div className="main-slider-two__content">
-                      <h5 className="main-slider-two__sub-title">{slide.subTitle}</h5>
+                      <h5 className="main-slider-two__sub-title">{slide.title}</h5>
                       <h2 className="main-slider-two__title">
-                        <span dangerouslySetInnerHTML={{ __html: slide.title }} />
+                        <span dangerouslySetInnerHTML={{ __html: slide.heading }} />
                         {Array.from({ length: 6 }).map((_, i) => (
                           <span
                             key={i}
@@ -648,10 +678,11 @@ console.log("users:", users);
                       </h2>
                       <div className="main-slider-two__link">
                         <Link href="/services" className="ostech-two-btn">
-                          Discover More
+                          {slide.btnOne}
                         </Link>
                         <Link href="/services" className="ostech-btn">
-                          Take Service
+                          {slide.btnTwo}
+
                         </Link>
                       </div>
                     </div>
@@ -659,7 +690,7 @@ console.log("users:", users);
                 </div>
               </div>
               <div className="main-slider-two__item__shape">
-                <img src={slide.shapeImage} alt="Shape" loading="lazy" decoding="async" />
+                <img src={"/assets/images/shapes/frame-hero-2-1.png"} alt="Shape" loading="lazy" decoding="async" />
               </div>
             </div>
           </SwiperSlide>
