@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 
 const WhyChooseTwo = () => {
   return (
@@ -99,9 +100,9 @@ const WhyChooseTwo = () => {
                 <h4 className="why-choose-two__inner__item__text">We’re Navigating IT Solutions with Precision and best Excellence</h4>
               </div>
               <div className="why-choose-two__inner__item__link">
-                <a href="contact.html" className="why-choose-two__inner__item__link__btn">
+                <Link href="/contactus" className="why-choose-two__inner__item__link__btn">
                   <i className="icon-arrow-left" />
-                </a>
+                </Link>
               </div>
             </div>
             <div className="why-choose-two__inner__item wow fadeInUp" data-wow-delay="600ms">
@@ -112,9 +113,9 @@ const WhyChooseTwo = () => {
                 <h4 className="why-choose-two__inner__item__text">We’re Resolving Your Technology Woes with Expert Care</h4>
               </div>
               <div className="why-choose-two__inner__item__link">
-                <a href="contact.html" className="why-choose-two__inner__item__link__btn">
+                <Link href="/contactus" className="why-choose-two__inner__item__link__btn">
                   <i className="icon-arrow-left" />
-                </a>
+                </Link>
               </div>
             </div>
           </div>

@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Link from 'next/link'
 const AboutTwo = () => {
   return (
     <>
@@ -49,7 +49,7 @@ const AboutTwo = () => {
                 <i className="icon-solution-1" />
               </div>
               <div className="about-two__ostech__item__content">
-                <h4 className="about-two__ostech__item__title"><a href="about.html">Deliver Perfect Solution</a></h4>
+                <h4 className="about-two__ostech__item__title"><Link href="/aboutus">Deliver Perfect Solution</Link></h4>
                 <p className="about-two__ostech__item__text">There are inmaniy variations passages of Lorem Ipsum available, but the majority </p>
               </div>
             </div>
@@ -75,7 +75,7 @@ const AboutTwo = () => {
             </div>
           </div>
           <div className="about-two__btn">
-            <a href="blog-details.html" className="ostech-btn">More Details</a>
+            <Link href="/aboutus" className="ostech-btn">More Details</Link>
           </div>
         </div>
       </div>
