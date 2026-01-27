@@ -544,7 +544,7 @@ const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
 
 const HomeSliderTwo: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const swiperRef = useRef<SwiperType | null>(null);
+const swiperRef = useRef<SwiperType | null>(null);
 const [SlideData, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -699,6 +699,12 @@ console.log("users:", SlideData);
     [activeIndex]
   );
 
+
+// pagination functionality
+ const VISIBLE_DOTS = 3;
+
+
+
   return (
     <section className="main-slider-two">
       <Swiper
@@ -717,21 +723,25 @@ console.log("users:", SlideData);
       </Swiper>
       
       {/* Horizontal Pagination Dots - Right Side */}
-      <div className="custom-pagination-horizontal">
-        <div className="pagination-wrapper">
-          {SLIDES.map((_, index) => (
-            <button
-              key={index}
-              className={`pagination-dot ${activeIndex === index ? "active" : ""}`}
-              onClick={() => handleDotClick(index)}
-              aria-label={`Go to slide ${index + 1}`}
-            >
-              <span className="dot-bg"></span>
-              <span className="dot-inner"></span>
-            </button>
-          ))}
-        </div>
-      </div>
+     <div className="custom-pagination-horizontal">
+  <div className="pagination-wrapper">
+    {Array.from({ length: VISIBLE_DOTS }).map((_, index) => (
+      <button
+        key={index}
+        className={`pagination-dot ${
+          activeIndex % VISIBLE_DOTS === index ? "active" : ""
+        }`}
+        onClick={() => handleDotClick(index)}
+        aria-label={`Go to slide ${index + 1}`}
+      >
+        <span className="dot-bg"></span>
+        <span className="dot-inner"></span>
+      </button>
+    ))}
+  </div>
+</div>
+
+
     </section>
   );
 };
