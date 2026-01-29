@@ -136,9 +136,39 @@ const convertToUser = (dbSection: DatabaseAbout): AboutSection => {
       }
     }, []);
   console.log("SlideData:",SlideData)
-    useEffect(() => {
-      fetchUsers();
-    }, [fetchUsers]);
+
+  
+  useEffect(() => {
+    // Initial fetch
+    fetchUsers();
+  
+    // Setup realtime subscription
+    const channel = supabase
+      .channel('why-choose-us-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*', // Listen to all events: INSERT, UPDATE, DELETE
+          schema: 'public',
+          table: 'aboutSection',
+        },
+        (payload) => {
+          console.log('Change received!', payload);
+          
+          // Refresh data when any change occurs
+          fetchUsers();
+          
+          // OR handle updates more granularly:
+          // handleRealtimeUpdate(payload);
+        }
+      )
+      .subscribe();
+  
+    // Cleanup subscription on unmount
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [fetchUsers]);
   
 
 

@@ -16,6 +16,7 @@ import Navbar from "@/components/Navbar";
 import ServiceForm from  "@/components/ServiceDetails/ServiceForm";
 
 import { notFound } from "next/navigation";
+
 const Services = [
   {
     id: 1,

@@ -1,86 +1,114 @@
-.ourservices{
-    min-height: 60vh;
-    padding-block: 30px;
-    background: var(--ostech-black);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--ostech-white);
-}
-.head{
-    font-size: 30px;
-    font-weight: 900;
-    line-height: 40px;
+/* =========================
+   OUR SERVICES SECTION
+========================= */
 
+.ourservices {
+  padding: 60px 0;
+  background: var(--ostech-black);
+  color: var(--ostech-white);
 }
-.headspan{
-    font-size: 30px;
-    font-weight: 900;
-    line-height: 40px;
-    color: var(--ostech-base);
-}
-.ourservicesCard{
-    min-height:380px;
-    padding: 20px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    color: var(--ostech-white);
-    background: var(--ostech-black-soft);
-    border: 2px solid rgba(255, 255, 255, 0.08);
 
-    border-radius:25px 0 25px 0 ;
-    -webkit-border-radius:25px 0 25px 0 ;
-    -moz-border-radius:25px 0 25px 0 ;
-    -ms-border-radius:25px 0 25px 0 ;
-    -o-border-radius:25px 0 25px 0 ;
-    /* border: 2px solid var(--ostech-white); */
-    
+/* Heading */
+.head {
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 40px;
 }
-.ourservicesCard:hover,
-.ourservicesCard:focus
-{
+
+.headspan {
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 40px;
+  color: var(--ostech-base);
+}
+
+/* Card */
+.ourservicesCard {
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
   background: var(--ostech-black-soft);
-  box-shadow:    0 10px 30px rgba(0, 0, 0, 0.45),    0 0 0 1px rgba(255, 255, 255, 0.04);
-  transform: translateY(-7px);
-  transition:transform 1.45s cubic-bezier(0.22, 1, 0.36, 1);
-  -webkit-transition:transform 1.45s cubic-bezier(0.22, 1, 0.36, 1);
-  -moz-transition:transform 1.45s cubic-bezier(0.22, 1, 0.36, 1);
-  -ms-transition:transform 1.45s cubic-bezier(0.22, 1, 0.36, 1);
-  -o-transition:transform 1.45s cubic-bezier(0.22, 1, 0.36, 1);
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  border-radius: 25px 0 25px 0;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.6s ease;
 }
-.ouricon{
-    font-size: 35px;
-    font-weight: 900;
-    color: var(--ostech-black);
-    line-height: 40px;
 
+/* Hover only on desktop */
+@media (hover: hover) {
+  .ourservicesCard:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45),
+      0 0 0 1px rgba(255, 255, 255, 0.04);
+  }
 }
-.ouriconwrap{
-    height: 50px;
-    min-width: 50px;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid var(--ostech-white);
-    border-radius: 40px;
-    /* padding: 5px; */
-    background: var(--ostech-white);
-    -webkit-border-radius: 40px;
-    -moz-border-radius: 40px;
-    -ms-border-radius: 40px;
-    -o-border-radius: 40px;
+
+/* Icon */
+.ouriconwrap {
+  height: 50px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ostech-white);
+  border-radius: 40px;
+  border: 2px solid var(--ostech-white);
 }
-.ourdes{
-    font-size:15px ;
-    font-weight: 500;
-    color: var(--ostech-white);
+
+.ouricon {
+  font-size: 30px;
+  color: var(--ostech-black);
+}
+
+/* Text */
+.ourhead {
+  font-size: 25px;
+  font-weight: 800;
+  line-height: 30px;
+  margin-bottom: 0;
+}
+
+.ourdes {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 30px;
+  margin-top: 12px;
+}
+
+/* =========================
+   RESPONSIVE FIXES
+========================= */
+
+@media (max-width: 992px) {
+  .head,
+  .headspan {
+    font-size: 26px;
+    line-height: 34px;
+  }
+}
+
+@media (max-width: 768px) {
+  .head,
+  .headspan {
+    font-size: 22px;
     line-height: 30px;
-}
-.ourhead{
-    font-size:25px ;
-    font-weight: 800;
-    color: var(--ostech-white);
-    line-height: 30px;
+  }
+
+  .ourhead {
+    font-size: 20px;
+  }
+
+  .ourdes {
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .ourservicesCard {
+    padding: 16px;
+  }
+
+  .ouricon {
+    font-size: 24px;
+  }
 }

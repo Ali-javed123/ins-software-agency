@@ -537,8 +537,8 @@ const SLIDES: SliderItem[] = [
 
 const BUCKET_NAME = "home-banner";
 const STORAGE_TYPE = "bucket";
-const CHUNK_SIZE = 60000;
 const DELIMITER = '|||CHUNK|||';
+const CHUNK_SIZE = 60000;
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
 
 
@@ -618,10 +618,38 @@ const convertToUser = (dbUser: DatabaseUser): User => {
     }
   }, []);
 
-  useEffect(() => {
+useEffect(() => {
+    // Initial fetch
     fetchUsers();
+  
+    // Setup realtime subscription
+    const channel = supabase
+      .channel('why-choose-us-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*', // Listen to all events: INSERT, UPDATE, DELETE
+          schema: 'public',
+          table: 'home-banner',
+        },
+        (payload) => {
+          console.log('Change received!', payload);
+          
+          // Refresh data when any change occurs
+          fetchUsers();
+          
+          // OR handle updates more granularly:
+          // handleRealtimeUpdate(payload);
+        }
+      )
+      .subscribe();
+  
+    // Cleanup subscription on unmount
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [fetchUsers]);
-
+  
 
 
 const getSafeImageSrc = (

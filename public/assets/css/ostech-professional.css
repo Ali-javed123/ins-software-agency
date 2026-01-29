@@ -11499,6 +11499,7 @@ margin-top: -72px;
   color: var(--ostech-secondary, #232429);
   background: var(--ostech-base, #FFAA17);
   animation: topBottom 4s 2s ease-in-out infinite;
+  -webkit-animation: topBottom 4s 2s ease-in-out infinite;
 }
 @media (max-width: 575px) {
   .about-two__thumb__award {

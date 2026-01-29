@@ -386,13 +386,13 @@
 //   image: string;
 // }
 
-// export interface ServiceGroup {
+// export interface ServiceGroupOne {
 //   id: number;
 //   title: string;
 //   data: ServiceItem[];
 // }
 
-// export const Services: ServiceGroup[] = [
+// export const Services: ServiceGroupOne[] = [
 //   {
 //     id: 1,
 //     title: "Core Services",
@@ -667,7 +667,7 @@
 
 "use client";
 
-import React, { useRef, useState, useCallback, memo } from "react";
+import React, { useRef, useState, useCallback, memo ,useEffect} from "react";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
@@ -675,6 +675,11 @@ import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "./HomeService.css";
+import { supabase } from "@/lib/supabase-client"
+
+const BUCKET_NAME = "services-images";
+const USE_BUCKET_STORAGE = true; // true for bucket, false for base64
+const DELIMITER = '|||CHUNK|||' as const
 
 // Service Types
 export interface ServiceItem {
@@ -685,14 +690,71 @@ export interface ServiceItem {
   image: string;
 }
 
-export interface ServiceGroup {
+export interface ServiceGroupOne {
   id: number;
   title: string;
   data: ServiceItem[];
 }
 
+
+interface ServiceGroupDatabase {
+  id: string
+  created_at: string
+  title: string
+  slug: string
+}
+
+interface ServiceDatabase {
+  id: string
+  created_at: string
+  service_group_id: string
+  slug: string
+  title: string
+  icon: string
+  image: string | null  // base64 chunks store होंगे
+}
+
+interface Service {
+  id: string
+  slug: string
+  title: string
+  icon: string
+  image: string | null        // Base64 के लिए
+  imageUrl?: string | null    // Bucket के लिए
+}
+
+interface ServiceGroup {
+  id: string
+  title: string
+  slug: string
+  services: Service[]
+}
+
+const reconstructFromChunks = (chunkedString: string | null | undefined): string | null => {
+  if (!chunkedString) return null
+  if (!chunkedString.includes(DELIMITER)) {
+    return chunkedString
+  }
+  return chunkedString.split(DELIMITER).join('')
+}
+
+const getSafeImageUrl = (service: Service): string => {
+  if (USE_BUCKET_STORAGE) {
+    // For bucket storage
+    return service.imageUrl || '/assets/images/service/service-1-2.png';
+  } else {
+    // Existing base64 functionality
+    if (service.image) {
+      const base64Image = reconstructFromChunks(service.image);
+      if (base64Image) {
+        return `data:image/jpeg;base64,${base64Image}`;
+      }
+    }
+    return '/assets/images/service/service-1-2.png';
+  }
+};
 // Mock Data
-export const Services: ServiceGroup[] = [
+export const Services: ServiceGroupOne[] = [
   {
     id: 1,
     title: "Core Services",
@@ -723,8 +785,9 @@ export const Services: ServiceGroup[] = [
   },
 ];
 
+
 // Memoized Slide Item
-const ServiceSlide = memo(({ item }: { item: ServiceItem }) => (
+const ServiceSlide = memo(({ item }: { item: Service }) => (
   <Link href={`/services/${item.slug}`} className="block h-full">
     <div className="service-three__item h-full">
       <div className="service-three__item__inner h-full flex flex-col">
@@ -735,7 +798,8 @@ const ServiceSlide = memo(({ item }: { item: ServiceItem }) => (
         </div>
         <div className="service-three__item__thumb flex-1">
           <img
-            src={item.image}
+                                      src={getSafeImageUrl(item)}
+
             alt={item.title}
             className="w-full h-[300px] object-cover"
             loading="lazy"
@@ -767,6 +831,11 @@ export default function ServiceSlider() {
   const [activeIndices, setActiveIndices] = useState<number[]>(() =>
     Services.map(() => 0)
   );
+
+
+  const [serviceGroups, setServiceGroups] = useState<ServiceGroup[]>([])
+
+  const [loading, setLoading] = useState<boolean>(true)
 
   const handlePrev = useCallback((index: number) => {
     swiperRefs.current[index]?.slidePrev();
@@ -814,6 +883,85 @@ export default function ServiceSlider() {
     [activeIndices]
   );
 
+
+
+
+
+   const fetchServiceGroups = useCallback(async (): Promise<void> => {
+    try {
+      setLoading(true)
+      
+      const { data: groupsData, error: groupsError } = await supabase
+        .from('service_groups')
+        .select('*')
+        .order('created_at', { ascending: true })
+
+      if (groupsError) {
+        console.error('Error fetching service groups:', groupsError)
+        return
+      }
+
+      const { data: servicesData, error: servicesError } = await supabase
+        .from('services')
+        .select('*')
+        .order('created_at', { ascending: true })
+
+      if (servicesError) {
+        console.error('Error fetching services:', servicesError)
+        return
+      }
+
+      const processedGroups: ServiceGroup[] = (groupsData || []).map((group: ServiceGroupDatabase) => {
+        const groupServices = (servicesData || [])
+          .filter((service: ServiceDatabase) => service.service_group_id === group.id)
+          .map((service: ServiceDatabase) => convertToService(service))
+
+        return {
+          id: group.id,
+          title: group.title,
+          slug: group.slug,
+          services: groupServices
+        }
+      })
+
+      setServiceGroups(processedGroups)
+    } catch (error) {
+      console.error('Unexpected error:', error)
+    } finally {
+      setLoading(false)
+    }
+  }, [])
+
+  useEffect(() => {
+    fetchServiceGroups()
+  }, [fetchServiceGroups])
+
+  console.log("serviceGroups",serviceGroups)
+
+
+const convertToService = (dbService: ServiceDatabase): Service => {
+  if (USE_BUCKET_STORAGE) {
+    // For bucket storage
+    return {
+      id: dbService.id,
+      slug: dbService.slug,
+      title: dbService.title,
+      icon: dbService.icon,
+      image: null,
+      imageUrl: dbService.image // यहाँ bucket URL आएगी
+    };
+  } else {
+    // For Base64 storage (existing functionality)
+    return {
+      id: dbService.id,
+      slug: dbService.slug,
+      title: dbService.title,
+      icon: dbService.icon,
+      image: reconstructFromChunks(dbService.image)
+    };
+  }
+};
+
   return (
     <section className="service-three">
       <div
@@ -828,8 +976,8 @@ export default function ServiceSlider() {
               </div>
             </div> */}
 
-        {Services.map((group, groupIndex) => {
-          const visibleDots = getVisibleDots(groupIndex, group.data.length);
+        {serviceGroups?.map((group, groupIndex) => {
+          const visibleDots = getVisibleDots(groupIndex, group.services.length);
           return (
             <div key={group.id}>
 
@@ -898,7 +1046,7 @@ export default function ServiceSlider() {
                   }}
                   className="owl-carousel"
                 >
-                  {group.data.map((item) => (
+                  {group?.services?.map((item) => (
                     <SwiperSlide key={item.id}>
                       <ServiceSlide item={item} />
                     </SwiperSlide>

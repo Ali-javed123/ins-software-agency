@@ -2,8 +2,15 @@
 import React from 'react'
 import { useInView } from "react-intersection-observer";
 import Link from 'next/link'
+import { useParams } from "next/navigation";
 
-const Banner = ({ title,image }: { title: string,image?:string }) => {
+const Banner = ({ title, image }: { title: string, image?: string }) => {
+  const params = useParams();
+  const slug = params.slug;
+  
+    const serviceDetail = params?.serviceDetail as string;
+
+  console.log("slug",serviceDetail)
 
    const { ref, inView } = useInView({
     threshold: 0.2, // trigger when 20% of the element is visible
@@ -26,7 +33,7 @@ const Banner = ({ title,image }: { title: string,image?:string }) => {
   <div className="container">
         <h2 className={`page-header__title ${inView ? "animate-left-to-right" : ""}`}>
 
-            {title.toUpperCase()}</h2>
+            {serviceDetail?serviceDetail.replace("-"," "):title?.toUpperCase()}</h2>
     <ul
       className={`ostech-breadcrumb list-unstyled ${
         inView ? "animate-left-to-right" : ""
@@ -36,7 +43,7 @@ const Banner = ({ title,image }: { title: string,image?:string }) => {
         <Link href="/">Home</Link>
       </li>
       <li>
-        <span>{title.toUpperCase()}</span>
+        <span>{serviceDetail?serviceDetail.replace("-"," "):title?.toUpperCase()}</span>
       </li>
     </ul>
 

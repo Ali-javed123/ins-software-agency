@@ -22,6 +22,7 @@ import "@/public/assets/css/ostech-professional.css";
 import "@/public/assets/vendors/bootstrap/css/bootstrap.min.css";
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import "remixicon/fonts/remixicon.css";
 
 
 const barlow = Barlow({
