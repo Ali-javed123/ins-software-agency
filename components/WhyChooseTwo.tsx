@@ -269,7 +269,7 @@ console.log("sections",sections)
                 <div className="col-lg-6">
                   {e.features.map((item, i) => (
                     
-          <div key={i} className="why-choose-two__inner__left my-1">
+          <div key={i} className="why-choose-two__inner__left ">
             <div className="why-choose-two__inner__item wow fadeInUp" data-wow-delay="300ms ">
               <div className="why-choose-two__inner__item__content">
                 <div className="why-choose-two__inner__item__icon">

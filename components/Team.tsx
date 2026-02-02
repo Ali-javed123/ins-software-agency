@@ -1,6 +1,78 @@
-import React from 'react'
+"use client"
+import React, { useState, useEffect, useCallback } from 'react'
+import { supabase } from "@/lib/supabase-client"
+
+
+
+interface DatabaseTeam {
+  id: string;
+  title: string;
+  heading: string;
+  image: string | null;
+  created_at?: string;
+}
+
+interface Team {
+  id: string;
+  title: string;
+  heading: string;
+  image: string | null;
+  imageUrl?: string | null;
+  created_at?: string;
+
+}
+
+const BUCKET_NAME = "teams";
+const STORAGE_TYPE = "bucket";
+const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
+
 
 const Team = () => {
+  const [loading, setLoading] = useState(true)
+
+  const [teams, setTeams] = useState<Team[]>([])
+
+ const fetchTeams = useCallback(async () => {
+    try {
+      setLoading(true)
+      const { data, error } = await supabase
+        .from("teams")
+        .select("*")
+        .order("created_at", { ascending: true })
+
+      if (error) {
+        console.error("Error fetching teams:", error)
+        throw error
+      }
+
+      const processedTeams = (data || []).map((dbTeam: DatabaseTeam) => ({
+        id: dbTeam.id,
+        title: dbTeam.title,
+        heading: dbTeam.heading,
+        image: dbTeam.image,
+        imageUrl: STORAGE_TYPE === "bucket" ? dbTeam.image : null
+      }))
+
+      setTeams(processedTeams)
+    } catch (error) {
+      console.error("Unexpected error:", error)
+    } finally {
+      setLoading(false)
+    }
+  }, [])
+
+
+  useEffect(() => {
+    fetchTeams()
+  }, [fetchTeams])
+
+  const getImageUrl = (team: Team): string => {
+    if (team.image) {
+      return team.image
+    }
+    return '/assets/images/team/team-1-1.jpg' // Default fallback image
+  }
+console.log("teams",teams)
   return (
     <>
 <section className="team-one team-one--page">
@@ -11,17 +83,19 @@ const Team = () => {
                       </h1>
                   </div>
     <div className="row gutter-y-30">
-      <div className="col-md-6 col-lg-4">
+            {teams.map((item, k) => (
+              
+      <div key={k} className="col-md-6 col-lg-4">
         <div className="team-card wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="000ms">
           <div className="team-card__inner">
             <div className="team-card__image">
-              <img src="/assets/images/team/team-1-1.jpg" alt="Mike Hardson" />
+              <img src={getImageUrl(item)} alt="Mike Hardson" />
             </div>
             <div className="team-card__content">
               <div className="team-card__content__inner">
                 <div className="team-card__content__inner__item">
-                  <h3 className="team-card__content__title"><a href="team-details.html">MD Ismail Alam Khan</a></h3>
-                  <h6 className="team-card__content__designation">CO Founder</h6>
+                  <h3 className="team-card__content__title"><a href="team-details.html">{item.title}</a></h3>
+                  <h6 className="team-card__content__designation">{item.heading}</h6>
                 </div>
                 <div className="team-card__content__hover">
                   <div className="team-card__content__hover__icon">
@@ -38,147 +112,9 @@ const Team = () => {
             </div>
           </div>
         </div>
-      </div>{/* /.col-md-6 col-lg-4 */}
-      <div className="col-md-6 col-lg-4">
-        <div className="team-card wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="100ms">
-          <div className="team-card__inner">
-            <div className="team-card__image">
-              <img src="/assets/images/team/team-1-5.jpg" alt="aleesha brown" />
-            </div>
-            <div className="team-card__content">
-              <div className="team-card__content__inner">
-                <div className="team-card__content__inner__item">
-                  <h3 className="team-card__content__title"><a href="team-details.html">Mohammad Shoaib</a></h3>
-                  <h6 className="team-card__content__designation">Founder</h6>
-                </div>
-                <div className="team-card__content__hover">
-                  <div className="team-card__content__hover__icon">
-                    <i className="icon-share" />
-                  </div>
-                  <div className="team-card__content__hover__social">
-                    <a href="https://instagram.com/"> <i className="fab fa-youtube" aria-hidden="true" /> <span className="sr-only">Instagram</span></a>
-                    <a href="https://pinterest.com/"> <i className="fab fa-pinterest-p" aria-hidden="true" /> <span className="sr-only">Pinterest</span></a>
-                    <a href="https://twitter.com/"> <i className="fab fa-twitter" aria-hidden="true" /> <span className="sr-only">Twitter</span> </a>
-                    <a href="https://facebook.com/"> <i className="fab fa-facebook-f" aria-hidden="true" /> <span className="sr-only">Facebook</span> </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>{/* /.col-md-6 col-lg-4 */}
-      <div className="col-md-6 col-lg-4">
-        <div className="team-card wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="200ms">
-          <div className="team-card__inner">
-            <div className="team-card__image">
-              <img src="/assets/images/team/team-1-2.jpg" alt="david cooper" />
-            </div>
-            <div className="team-card__content">
-              <div className="team-card__content__inner">
-                <div className="team-card__content__inner__item">
-                  <h3 className="team-card__content__title"><a href="team-details.html">Amelia  henry</a></h3>
-                  <h6 className="team-card__content__designation">Project Manager</h6>
-                </div>
-                <div className="team-card__content__hover">
-                  <div className="team-card__content__hover__icon">
-                    <i className="icon-share" />
-                  </div>
-                  <div className="team-card__content__hover__social">
-                    <a href="https://instagram.com/"> <i className="fab fa-youtube" aria-hidden="true" /> <span className="sr-only">Instagram</span></a>
-                    <a href="https://pinterest.com/"> <i className="fab fa-pinterest-p" aria-hidden="true" /> <span className="sr-only">Pinterest</span></a>
-                    <a href="https://twitter.com/"> <i className="fab fa-twitter" aria-hidden="true" /> <span className="sr-only">Twitter</span> </a>
-                    <a href="https://facebook.com/"> <i className="fab fa-facebook-f" aria-hidden="true" /> <span className="sr-only">Facebook</span> </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>{/* /.col-md-6 col-lg-4 */}
-      <div className="col-md-6 col-lg-4">
-        <div className="team-card wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="000ms">
-          <div className="team-card__inner">
-            <div className="team-card__image">
-              <img src="/assets/images/team/team-1-4.jpg" alt="sarah albert" />
-            </div>
-            <div className="team-card__content">
-              <div className="team-card__content__inner">
-                <div className="team-card__content__inner__item">
-                  <h3 className="team-card__content__title"><a href="team-details.html">sarah albert</a></h3>
-                  <h6 className="team-card__content__designation">Web Developer</h6>
-                </div>
-                <div className="team-card__content__hover">
-                  <div className="team-card__content__hover__icon">
-                    <i className="icon-share" />
-                  </div>
-                  <div className="team-card__content__hover__social">
-                    <a href="https://instagram.com/"> <i className="fab fa-youtube" aria-hidden="true" /> <span className="sr-only">Instagram</span></a>
-                    <a href="https://pinterest.com/"> <i className="fab fa-pinterest-p" aria-hidden="true" /> <span className="sr-only">Pinterest</span></a>
-                    <a href="https://twitter.com/"> <i className="fab fa-twitter" aria-hidden="true" /> <span className="sr-only">Twitter</span> </a>
-                    <a href="https://facebook.com/"> <i className="fab fa-facebook-f" aria-hidden="true" /> <span className="sr-only">Facebook</span> </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>{/* /.col-md-6 col-lg-4 */}
-      <div className="col-md-6 col-lg-4">
-        <div className="team-card wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="100ms">
-          <div className="team-card__inner">
-            <div className="team-card__image">
-              <img src="/assets/images/team/team-1-3.jpg" alt="kevin martin" />
-            </div>
-            <div className="team-card__content">
-              <div className="team-card__content__inner">
-                <div className="team-card__content__inner__item">
-                  <h3 className="team-card__content__title"><a href="team-details.html">kevin martin</a></h3>
-                  <h6 className="team-card__content__designation">Web Developer</h6>
-                </div>
-                <div className="team-card__content__hover">
-                  <div className="team-card__content__hover__icon">
-                    <i className="icon-share" />
-                  </div>
-                  <div className="team-card__content__hover__social">
-                    <a href="https://instagram.com/"> <i className="fab fa-youtube" aria-hidden="true" /> <span className="sr-only">Instagram</span></a>
-                    <a href="https://pinterest.com/"> <i className="fab fa-pinterest-p" aria-hidden="true" /> <span className="sr-only">Pinterest</span></a>
-                    <a href="https://twitter.com/"> <i className="fab fa-twitter" aria-hidden="true" /> <span className="sr-only">Twitter</span> </a>
-                    <a href="https://facebook.com/"> <i className="fab fa-facebook-f" aria-hidden="true" /> <span className="sr-only">Facebook</span> </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>{/* /.col-md-6 col-lg-4 */}
-      <div className="col-md-6 col-lg-4">
-        <div className="team-card wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="200ms">
-          <div className="team-card__inner">
-            <div className="team-card__image">
-              <img src="/assets/images/team/team-1-6.jpg" alt="christine eve" />
-            </div>
-            <div className="team-card__content">
-              <div className="team-card__content__inner">
-                <div className="team-card__content__inner__item">
-                  <h3 className="team-card__content__title"><a href="team-details.html">christine eve</a></h3>
-                  <h6 className="team-card__content__designation">Backend Developer</h6>
-                </div>
-                <div className="team-card__content__hover">
-                  <div className="team-card__content__hover__icon">
-                    <i className="icon-share" />
-                  </div>
-                  <div className="team-card__content__hover__social">
-                    <a href="https://instagram.com/"> <i className="fab fa-youtube" aria-hidden="true" /> <span className="sr-only">Instagram</span></a>
-                    <a href="https://pinterest.com/"> <i className="fab fa-pinterest-p" aria-hidden="true" /> <span className="sr-only">Pinterest</span></a>
-                    <a href="https://twitter.com/"> <i className="fab fa-twitter" aria-hidden="true" /> <span className="sr-only">Twitter</span> </a>
-                    <a href="https://facebook.com/"> <i className="fab fa-facebook-f" aria-hidden="true" /> <span className="sr-only">Facebook</span> </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>{/* /.col-md-6 col-lg-4 */}
+      </div>
+            ))}
+      
     </div>{/* /.row */}
   </div>{/* /.container */}
 </section>
