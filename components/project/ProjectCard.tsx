@@ -1,7 +1,7 @@
 // components/ProjectCard.tsx
 'use client';
 
-import React from 'react';
+import React, { useState,useEffect ,useCallback} from 'react';
 import { motion } from 'framer-motion';
 
 export interface Project {
@@ -13,19 +13,77 @@ export interface Project {
   color: string;
 }
 
-interface ProjectCardProps {
-  project: Project;
-  index: number;
-  totalCards: number;
+
+
+
+
+interface DatabaseProjectItem {
+  id: string;
+  created_at: string;
+  para: string;
+  title: string;
+  heading: string;
+  btnText: string;
+  image: string | null;
+  project_id: string;
+}
+
+interface DatabaseProject {
+  id: string;
+  created_at: string;
+  title: string;
+  heading: string;
+  image: string | null;
+}
+
+interface ProjectItem {
+  id: string | number;
+  created_at?: string;
+  para?: string;
+  title?: string;
+  heading?: string;
+  btnText?: string;
+  imageUrl?: string | null;
+  project_id?: string;
+  index?: number;
+  totalCards?: number;
   activeIndex: number;
 }
 
+interface Projects {
+  id?: string | number;
+  created_at?: string;
+  title: string;
+  para?: string;
+  
+  btnText: string;
+
+  heading?: string;
+  imageUrl?: string | null;
+  index?: number;
+  totalCards?: number;
+  activeIndex?: number;
+  color?: string;
+
+  project?: ProjectItem[];
+}
+
+
+interface ProjectCardProps {
+  project: Projects;
+  index: number;
+  totalCards: number;
+  activeIndex: number;
+  id:string | number
+}
 const ProjectCard: React.FC<ProjectCardProps> = ({ 
   project, 
   index, 
   totalCards, 
   activeIndex 
 }) => {
+
+
   // Calculate distance from active card
   const distanceFromActive = Math.abs(index - activeIndex);
   
@@ -64,7 +122,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   const offset = calculateOffset();
   const scale = calculateScale();
   const opacity = calculateOpacity();
-  
+
+
+
+
   return (
     <motion.div 
       className="project-card"
@@ -116,24 +177,25 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </div>
         </div>
       </div> */}
-      <div className="card cards h-100 shadow-lg overflow-hidden">
+    
+      <div  className="card cards h-100 shadow-lg overflow-hidden">
   <div className="row g-0 h-100">
     <div className="col-md-6 d-flex align-items-center">
       <div className="card-body p-4 p-lg-5">
         <span className="btn btn-sm btn-outline-light bg-opacity-25 mb-3 px-2 py-1 rounded-pill">
-          {project.category}
+          {project.title}
         </span>
 
         <h3 className="card-title fw-bold mb-3">
-          {project.title}
+          {project.heading}
         </h3>
 
         <p className="card-text mb-4">
-          {project.description}
+          {project.para}
         </p>
 
         <button className=" ostech-btn ">
-          View Project
+               { project.btnText}
         </button>
       </div>
     </div>
@@ -143,7 +205,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <div
           className="w-100 h-100 rounded-3"
           style={{
-            backgroundImage: `url(${project.image})`,
+            backgroundImage: `url(${project.imageUrl})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
@@ -152,6 +214,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     </div>
   </div>
 </div>
+           
+
 
     </motion.div>
   );

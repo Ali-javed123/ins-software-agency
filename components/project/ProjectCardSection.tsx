@@ -5,6 +5,7 @@ import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import ProjectCard, { Project } from './ProjectCard';
 import './projectCard.css';
+import { supabase } from "@/lib/supabase-client"
 
 const sampleProjects: Project[] = [
   {
@@ -49,7 +50,57 @@ const sampleProjects: Project[] = [
   },
 ];
 
+
+
+const DELIMITER = '|||CHUNK|||';
+
+
+
+
+interface DatabaseProjectItem {
+  id: string;
+  created_at: string;
+  para: string;
+  title: string;
+  heading: string;
+  btnText: string;
+  image: string | null;
+  project_id: string;
+}
+
+interface DatabaseProject {
+  id: string;
+  created_at: string;
+  title: string;
+  heading: string;
+  image: string | null;
+}
+
+interface ProjectItem {
+  id: string;
+  created_at: string;
+  para: string;
+  title: string;
+  heading: string;
+  btnText: string;
+  imageUrl: string | null;
+  project_id: string;
+}
+
+interface Projects {
+  id: string;
+  created_at: string;
+  title: string;
+  heading: string;
+  imageUrl: string | null;
+  projectItems: ProjectItem[];
+}
 const ProjectCardSection: React.FC = () => {
+  const [projects, setProjects] = useState<Projects[]>([
+    
+  ]);
+  const [loading, setLoading] = useState<boolean>(true);
+
   const containerRef = useRef<HTMLDivElement>(null);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState<number>(0);
@@ -109,9 +160,91 @@ const ProjectCardSection: React.FC = () => {
     };
   }, [scrollProgress]);
   
+
+
+  const reconstructFromChunks = (chunkedString: string | null | undefined): string | null => {
+    if (!chunkedString) return null;
+  
+    if (!chunkedString.includes(DELIMITER)) {
+      return chunkedString;
+    }
+  
+    return chunkedString.split(DELIMITER).join('');
+  };
+     const fetchProjects = useCallback(async (): Promise<void> => {
+      try {
+        setLoading(true);
+        
+        const { data: projectsData, error: projectsError } = await supabase
+          .from("project")
+          .select("*")
+          .order("created_at", { ascending: false });
+  
+        if (projectsError) {
+          console.error('Projects fetch error:', projectsError);
+          throw projectsError;
+        }
+  
+        if (projectsData && projectsData.length > 0) {
+          const { data: allItemsData, error: itemsError } = await supabase
+            .from("projectItem")
+            .select("*")
+            .order("created_at", { ascending: true });
+  
+          if (itemsError) {
+            console.error('Project items fetch error:', itemsError);
+          }
+  
+          const processedProjects: Projects[] = projectsData.map((project: DatabaseProject) => {
+            const projectItems: ProjectItem[] = (allItemsData || [])
+              .filter((item: DatabaseProjectItem) => item.project_id === project.id)
+              .map((item: DatabaseProjectItem) => {
+                const imageUrl = reconstructFromChunks(item.image);
+                
+                return {
+                  id: item.id,
+                  created_at: item.created_at,
+                  para: item.para,
+                  title: item.title,
+                  heading: item.heading,
+                  btnText: item.btnText,
+                  imageUrl: imageUrl,
+                  project_id: item.project_id
+                };
+              });
+  
+            return {
+              id: project.id,
+              created_at: project.created_at,
+              title: project.title,
+              heading: project.heading,
+              imageUrl: project.image,
+              projectItems: projectItems
+            };
+          });
+  
+          setProjects(processedProjects);
+        } else {
+          setProjects([]);
+        }
+      } catch (error) {
+        console.error("Error in fetchProjects:", error);
+        setProjects([]);
+      } finally {
+        setLoading(false);
+      }
+    }, []);
+  
+    useEffect(() => {
+      fetchProjects();
+    }, [fetchProjects]);
+    
+  
+    console.log("projects:",projects)
   return (
     <section className="project-section py-5" ref={containerRef}>
-      <div className="container py-5">
+       {projects.map((proj,k) =>
+      <div key={`${k}`} className="container py-5">
         <div className="row mb-5">
           <div className="col-12 text-center">
             <motion.h2 
@@ -165,12 +298,22 @@ const ProjectCardSection: React.FC = () => {
               className="project-cards-container"
               ref={cardsContainerRef}
             >
-              {sampleProjects.map((project, index) => (
+              {proj.projectItems.map((item, index) => (
                 <ProjectCard 
-                  key={project.id}
-                  project={project}
+                  key={item.id}
+                  id={parseInt(item.id)}
+                  project={{
+      id: parseInt(item.id),  // ProjectCard expects number
+      title: item.title,
+      para: item.para,
+                    heading: item.heading,
+      btnText:item.btnText,
+      imageUrl: item.imageUrl || '',
+      color: 'var(--ostech-black-soft)',
+    }}
                   index={index}
-                  totalCards={sampleProjects.length}
+    totalCards={proj.projectItems.length}
+
                   activeIndex={activeIndex}
                 />
               ))}
@@ -223,7 +366,9 @@ const ProjectCardSection: React.FC = () => {
           </div>
         </div>
       </div>
-    </section>
+)}
+
+        </section>
   );
 };
 
