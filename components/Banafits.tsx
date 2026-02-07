@@ -18,14 +18,14 @@ interface DatabaseOurBenefits {
   id: string
   title: string
   heading: string
-   subHeading?: string  // New field
-  btnText?: string 
-  
+  sub_heading: string  // New field
+  btn_text: string     // New field
   image: string | null
   features: DatabaseFeature[] | null
-  featurelist: FeatureList[] | null
+  feature_list: FeatureList[] | null
   created_at?: string
 }
+
 
 interface Feature {
   title: string
@@ -40,10 +40,10 @@ interface OurBenefits {
   heading: string
   image: string | null 
   features: Feature[]
-  subHeading: string
+  sub_heading: string
   // New field
-  btnText: string 
-  featurelist: FeatureList[]
+  btn_text: string 
+  feature_list: FeatureList[]
   mainImageUrl: string | null
 }
 const MAIN_BUCKET_NAME = process.env.NEXT_PUBLIC_OUR_BENEFITS_BUCKET || "ourBenefits"
@@ -69,7 +69,7 @@ const Banafits = () => {
       }
 
       const { data, error } = await supabase
-        .from("ourBenefits")
+        .from("our_benefits")
         .select("*")
         .order("created_at", { ascending: true })
 
@@ -122,11 +122,11 @@ const convertToOurBenefits = (dbSection: DatabaseOurBenefits): OurBenefits => {
       id: dbSection.id,
       title: dbSection.title || "",
       heading: dbSection.heading || "",
-      subHeading: dbSection.subHeading || "",  // New field
-      btnText: dbSection.btnText || "",       // New field
+      sub_heading: dbSection.sub_heading || "",  // New field
+      btn_text: dbSection.btn_text || "",       // New field
       image: null,
       features: processedFeatures,
-      featurelist: dbSection.featurelist || [],
+      feature_list: dbSection.feature_list || [],
       mainImageUrl: STORAGE_TYPE === "bucket" ? dbSection.image : null
     };
   }
@@ -201,7 +201,7 @@ console.log("benefits",benefits)
                     
                   </div>
                   <ul className="list-unstyled benefit-one__list  wow fadeInUp" data-wow-delay="500ms">
-                    {benefit.featurelist.map((list, k) => (
+                    {benefit.feature_list.map((list, k) => (
                       
                       <li key={k} className="benefit-one__list__item"><i className={list.icon?list.icon:"fas fa-check-circle"} /> {list.title}</li>
                     ))}
@@ -210,8 +210,8 @@ console.log("benefits",benefits)
                 </div>
                 <div className="benefit-one__bottom  wow fadeInUp" data-wow-delay="500ms">
                   <div className="benefit-one__bottom__content">
-                    <h3 className="benefit-one__bottom__content__text">{benefit.subHeading}</h3>
-                    <a href="#" className="ostech-btn">{benefit.btnText}</a>
+                    <h3 className="benefit-one__bottom__content__text">{benefit.sub_heading}</h3>
+                    <a href="#" className="ostech-btn">{benefit.btn_text}</a>
                   </div>
                 </div>
               </div>

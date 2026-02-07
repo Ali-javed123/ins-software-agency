@@ -9,22 +9,23 @@ import { supabase } from "@/lib/supabase-client"
 
 const STORAGE_TYPE = "bucket";
 const DELIMITER = '|||CHUNK|||';
+const TableName="why_choose_us"
 
 interface Feature {
   icon: string
   title: string
-  para: string
+  paragraph: string
 }
 
 
 interface WhyChooseUs {
   id: string
   title: string
-  para: string
-  subHeading: string // NEW FIELD ADDED
+  paragraph: string
+  sub_heading: string // NEW FIELD ADDED
   images: string | null
-  bannerHeading: string
-  bannerButtun: string
+  heading: string
+  banner_buttun: string
   features: Feature[]
   imageUrl: string | null
 }
@@ -50,11 +51,11 @@ const convertToWhyChooseUs = (dbSection: WhyChooseUs) => {
       return {
         id: dbSection.id,
         title: dbSection.title || "",
-        para: dbSection.para || "",
-        subHeading: dbSection.subHeading || "", // NEW FIELD ADDED
+        paragraph: dbSection.paragraph || "",
+        sub_heading: dbSection.sub_heading || "", // NEW FIELD ADDED
         images: null,
-        bannerHeading: dbSection.bannerHeading || "",
-        bannerButtun: dbSection.bannerButtun || "",
+        heading: dbSection.heading || "",
+        banner_buttun: dbSection.banner_buttun || "",
         features: dbSection.features || [],
         imageUrl: dbSection.images
       }
@@ -62,11 +63,11 @@ const convertToWhyChooseUs = (dbSection: WhyChooseUs) => {
       return {
         id: dbSection.id,
         title: dbSection.title || "",
-        para: dbSection.para || "",
-        subHeading: dbSection.subHeading || "", // NEW FIELD ADDED
+        paragraph: dbSection.paragraph || "",
+        sub_heading: dbSection.sub_heading || "", // NEW FIELD ADDED
         images: reconstructFromChunks(dbSection.images),
-        bannerHeading: dbSection.bannerHeading || "",
-        bannerButtun: dbSection.bannerButtun || "",
+        heading: dbSection.heading || "",
+        banner_buttun: dbSection.banner_buttun || "",
         features: dbSection.features || [],
         imageUrl: null
       }
@@ -78,7 +79,7 @@ const convertToWhyChooseUs = (dbSection: WhyChooseUs) => {
  const fetchUsers = useCallback(async () => {
     try {
       const { data, error } = await supabase
-        .from("why-choose-us")
+        .from("why_choose_us")
         .select("*")
         .order("created_at", { ascending: true });
       console.log("Fetched users:", data);
@@ -111,7 +112,7 @@ useEffect(() => {
       {
         event: '*', // Listen to all events: INSERT, UPDATE, DELETE
         schema: 'public',
-        table: 'why-choose-us',
+        table: 'why_choose_us',
       },
       (payload) => {
         console.log('Change received!', payload);
@@ -250,7 +251,7 @@ console.log("sections",sections)
                 <h6 className="sec-title__tagline">{e?.title ? e?.title:"Why Choose Us"}</h6>
               </div>
                       <h3 className="sec-title__title">
-                        {e?.bannerHeading? e?.bannerHeading:"Why Our Technology Solutions Company Stands Out?"}
+                        {e?.heading? e?.heading:"Why Our Technology Solutions Company Stands Out?"}
                         </h3>
             </div>
           </div>
@@ -258,7 +259,7 @@ console.log("sections",sections)
         <div className="col-lg-6">
           <div className="why-choose-two__top__right wow fadeInUp" data-wow-delay="900ms">
                     <p className="about-two__top__text"> 
-                       {e?.para? e?.para:"There are many variations of passages of Lorem Ipsum avalable, but the majority have suffered choose eration in some form, by injected humour, or randomised words which don&apos;t look even slightly believable."}
+                       {e?.paragraph? e?.paragraph:"There are many variations of passages of Lorem Ipsum avalable, but the majority have suffered choose eration in some form, by injected humour, or randomised words which don&apos;t look even slightly believable."}
 
             </p>
           </div>
@@ -278,7 +279,7 @@ console.log("sections",sections)
                           <div className='my-2'>
                 {/* <h2 className="fw-bold why-choose-two__inner__item__text">{item.title}</h2>
                              */}
-                <h4 className="why-choose-two__inner__item__text">{item.para}</h4>
+                <h4 className="why-choose-two__inner__item__text">{item.paragraph}</h4>
                           </div>
               </div>
              
@@ -300,9 +301,9 @@ console.log("sections",sections)
         <div className="col-12">
           <div className="why-choose-two__cta wow fadeInUp" data-wow-delay="900ms">
             <div className="why-choose-two__cta__bg" style={{backgroundImage: `url( assets/images/shapes/cta-2-1.png)`}} />
-            <h3 className="why-choose-two__cta__title">{e.subHeading}</h3>
+            <h3 className="why-choose-two__cta__title">{e.heading}</h3>
             <div className="why-choose-two__cta__link">
-                      <a href="#" className="why-choose-two__cta__link__btn ostech-two-btn ">{e.bannerButtun}</a>
+                      <a href="#" className="why-choose-two__cta__link__btn ostech-two-btn ">{e.banner_buttun}</a>
             </div>
           </div>
         </div>

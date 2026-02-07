@@ -35,7 +35,7 @@ interface DatabaseFAQ {
 interface DatabaseFAQGroup {
   id: string
   created_at: string
-  mainHeading: string
+  main_heading: string
 }
 interface FAQ {
   id: string
@@ -49,7 +49,7 @@ interface FAQ {
 interface FAQGroup {
   id: string
   created_at: string
-  mainHeading: string
+  main_heading: string
   faqs: FAQ[]
 }
 
@@ -122,7 +122,7 @@ const FAQSection = () => {
 
       // Fetch all FAQ Groups
       const { data: faqGroupsData, error: faqGroupsError } = await supabase
-        .from("faqGroup")
+        .from("faq_group")
         .select("*")
         .order("created_at", { ascending: false })
 
@@ -161,7 +161,7 @@ const FAQSection = () => {
         return {
           id: group.id,
           created_at: group.created_at,
-          mainHeading: group.mainHeading || "",
+          main_heading: group.main_heading || "",
           faqs: groupFAQs
         }
       })
@@ -186,7 +186,7 @@ const FAQSection = () => {
       {faqGroups.map(group => (
         <div key={group.id} className="container mb-5">
           <h2 className="faq-title text-center mb-5">
-            {group.mainHeading}
+            {group.main_heading}
           </h2>
 
           {group.faqs.map(item => {

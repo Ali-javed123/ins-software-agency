@@ -535,7 +535,7 @@ const SLIDES: SliderItem[] = [
 ];
 
 
-const BUCKET_NAME = "home-banner";
+const BUCKET_NAME = "home_banner";
 const STORAGE_TYPE = "bucket";
 const DELIMITER = '|||CHUNK|||';
 const CHUNK_SIZE = 60000;
@@ -573,10 +573,10 @@ const convertToUser = (dbUser: DatabaseUser): User => {
         id: dbUser.id,
         title: dbUser.title,
         heading: dbUser.heading,
-        btnOne: dbUser.btnOne,
-        btnTwo: dbUser.btnTwo,
-        profileImage: null,
-        profileImageUrl: dbUser.profileImage || null
+        btn_one: dbUser.btn_one,
+        btn_two: dbUser.btn_two,
+        profile_image: null,
+        profile_imageUrl: dbUser.profile_image || null
       };
     } else {
       // For Base64 storage
@@ -584,10 +584,10 @@ const convertToUser = (dbUser: DatabaseUser): User => {
         id: dbUser.id,
         title: dbUser.title,
         heading: dbUser.heading,
-        btnOne: dbUser.btnOne,
-        btnTwo: dbUser.btnTwo,
-        profileImage: reconstructFromChunks(dbUser.profileImage),
-        profileImageUrl: null
+        btn_one: dbUser.btn_one,
+        btn_two: dbUser.btn_two,
+        profile_image: reconstructFromChunks(dbUser.profile_image),
+        profile_imageUrl: null
       };
     }
   };
@@ -597,7 +597,7 @@ const convertToUser = (dbUser: DatabaseUser): User => {
  const fetchUsers = useCallback(async () => {
     try {
       const { data, error } = await supabase
-        .from("home-banner")
+        .from("home_banner")
         .select("*")
         .order("created_at", { ascending: true });
       console.log("Fetched users:", data);
@@ -630,7 +630,7 @@ useEffect(() => {
         {
           event: '*', // Listen to all events: INSERT, UPDATE, DELETE
           schema: 'public',
-          table: 'home-banner',
+          table: 'home_banner',
         },
         (payload) => {
           console.log('Change received!', payload);
@@ -674,7 +674,7 @@ const getSafeImageSrc = (
   return `${img1}`;
 };
   const getImageUrl = (user: User): string | null => {
-    const url = STORAGE_TYPE === "bucket" ? user.profileImageUrl : user.profileImage;
+    const url = STORAGE_TYPE === "bucket" ? user.profile_imageUrl : user.profile_image;
     return url || null;
   };
 
@@ -706,10 +706,10 @@ console.log("users:", SlideData);
                       </h2>
                       <div className="main-slider-two__link">
                         <Link href="/services" className="ostech-two-btn">
-                          {slide.btnOne}
+                          {slide.btn_one}
                         </Link>
                         <Link href="/services" className="ostech-btn">
-                          {slide.btnTwo}
+                          {slide.btn_two}
 
                         </Link>
                       </div>

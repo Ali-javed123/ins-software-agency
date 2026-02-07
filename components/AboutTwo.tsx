@@ -7,49 +7,49 @@ import { supabase } from "@/lib/supabase-client"
 
 const DELIMITER = '|||CHUNK|||';
 const STORAGE_TYPE = "bucket";
+const TableName="about_section"
 
 
 interface AboutSection {
   id: string
   title: string
   heading: string
-  para: string
-  imgOne: string | null
-  imgTwo: string | null
+  paragraph: string
+  img_one: string | null
+  img_two: string | null
   
-  coliconOne: string
-  coliconTwo: string
-  colHeadOne: string
-  colHeadTwo: string
-  colparaOne: string
-  colparaTwo: string
+  col_icon_one: string
+  col_icon_two: string
+  col_head_one: string
+  col_head_two: string
+  col_paragraph_one: string
+  col_paragraph_two: string
  
-  highlightTitle: string
-  highlightDescription: string
-  colbtn: string
-  imgOneUrl?: string | null
-  imgTwoUrl?: string | null
+  highlight_title: string
+  highlight_description: string
+  col_btn: string
+  img_oneUrl?: string | null
+  img_twoUrl?: string | null
 }
 interface DatabaseAbout {
-   id: string
+  id: string
   title: string
   heading: string
-  para: string
-  imgOne: string | null
-  imgTwo: string | null
+  paragraph: string
+  img_one: string | null
+  img_two: string | null
   
-  coliconOne: string
-  coliconTwo: string
-  colHeadOne: string
-  colHeadTwo: string
-  colparaOne: string
-  colparaTwo: string
- 
-  highlightTitle: string
-  highlightDescription: string
-  colbtn: string
-  imgOneUrl?: string | null
-  imgTwoUrl?: string | null
+  col_icon_one: string
+  col_icon_two: string
+  col_head_one: string
+  col_head_two: string
+  col_paragraph_one: string
+  col_paragraph_two: string
+  col_btn: string
+  
+  highlight_title: string
+  highlight_description: string
+  created_at?: string
 }
 
 const AboutTwo = () => {
@@ -68,25 +68,25 @@ const reconstructFromChunks = (chunkedString: string | null | undefined): string
   };
 
 const convertToUser = (dbSection: DatabaseAbout): AboutSection => {
-    if (STORAGE_TYPE === "bucket") {
+     if (STORAGE_TYPE === "bucket") {
       return {
         id: dbSection.id,
         title: dbSection.title || "",
         heading: dbSection.heading || "",
-        para: dbSection.para || "",
-        imgOne: null,
-        imgTwo: null,
-        coliconOne: dbSection.coliconOne || "",
-        coliconTwo: dbSection.coliconTwo || "",
-        colHeadOne: dbSection.colHeadOne || "",
-        colHeadTwo: dbSection.colHeadTwo || "",
-        colparaOne: dbSection.colparaOne || "",
-        colparaTwo: dbSection.colparaTwo || "",
-        highlightTitle: dbSection.highlightTitle || "",
-        highlightDescription: dbSection.highlightDescription || "",
-        colbtn: dbSection.colbtn || "More Details",
-        imgOneUrl: dbSection.imgOne,
-        imgTwoUrl: dbSection.imgTwo
+        paragraph: dbSection.paragraph || "",
+        img_one: null,
+        img_two: null,
+        col_icon_one: dbSection.col_icon_one || "",
+        col_icon_two: dbSection.col_icon_two || "",
+        col_head_one: dbSection.col_head_one || "",
+        col_head_two: dbSection.col_head_two || "",
+        col_paragraph_one: dbSection.col_paragraph_one || "",
+        col_paragraph_two: dbSection.col_paragraph_two || "",
+        highlight_title: dbSection.highlight_title || "",
+        highlight_description: dbSection.highlight_description || "",
+        col_btn: dbSection.col_btn || "More Details",
+        img_oneUrl: dbSection.img_one,
+        img_twoUrl: dbSection.img_two
       }
     } else {
       // For Base64 storage
@@ -94,18 +94,18 @@ const convertToUser = (dbSection: DatabaseAbout): AboutSection => {
         id: dbSection.id,
         title: dbSection.title || "",
         heading: dbSection.heading || "",
-        para: dbSection.para || "",
-        imgOne: reconstructFromChunks(dbSection.imgOne),
-        imgTwo: reconstructFromChunks(dbSection.imgTwo),
-        coliconOne: dbSection.coliconOne || "",
-        coliconTwo: dbSection.coliconTwo || "",
-        colHeadOne: dbSection.colHeadOne || "",
-        colHeadTwo: dbSection.colHeadTwo || "",
-        colparaOne: dbSection.colparaOne || "",
-        colparaTwo: dbSection.colparaTwo || "",
-        highlightTitle: dbSection.highlightTitle || "",
-        highlightDescription: dbSection.highlightDescription || "",
-        colbtn: dbSection.colbtn || "More Details"
+        paragraph: dbSection.paragraph || "",
+        img_one: reconstructFromChunks(dbSection.img_one),
+        img_two: reconstructFromChunks(dbSection.img_two),
+        col_icon_one: dbSection.col_icon_one || "",
+        col_icon_two: dbSection.col_icon_two || "",
+        col_head_one: dbSection.col_head_one || "",
+        col_head_two: dbSection.col_head_two || "",
+        col_paragraph_one: dbSection.col_paragraph_one || "",
+        col_paragraph_two: dbSection.col_paragraph_two || "",
+        highlight_title: dbSection.highlight_title || "",
+        highlight_description: dbSection.highlight_description || "",
+        col_btn: dbSection.col_btn || "More Details"
       }
     }
   }
@@ -115,7 +115,7 @@ const convertToUser = (dbSection: DatabaseAbout): AboutSection => {
   const fetchUsers = useCallback(async () => {
       try {
         const { data, error } = await supabase
-          .from("aboutSection")
+          .from(`${TableName}`)
           .select("*")
           .order("created_at", { ascending: true });
         console.log("Fetched users:", data);
@@ -150,7 +150,7 @@ const convertToUser = (dbSection: DatabaseAbout): AboutSection => {
         {
           event: '*', // Listen to all events: INSERT, UPDATE, DELETE
           schema: 'public',
-          table: 'aboutSection',
+          table: `${TableName}`,
         },
         (payload) => {
           console.log('Change received!', payload);
@@ -187,11 +187,11 @@ const convertToUser = (dbSection: DatabaseAbout): AboutSection => {
 
 
   // Get image URL helper
-  const getImageUrl = (section: AboutSection, imageNumber: 1 | 2): string | null => {
+   const getImageUrl = (section: AboutSection, imageNumber: 1 | 2): string | null => {
   if (imageNumber === 1) {
-    return STORAGE_TYPE === "bucket" ? section.imgOneUrl : section.imgOne;
+    return STORAGE_TYPE === "bucket" ? section.img_oneUrl : section.img_one;
   } else {
-    return STORAGE_TYPE === "bucket" ? section.imgTwoUrl : section.imgTwo;
+    return STORAGE_TYPE === "bucket" ? section.img_twoUrl : section.img_two;
   }
 };
 
@@ -254,7 +254,7 @@ const convertToUser = (dbSection: DatabaseAbout): AboutSection => {
                 </h3>
             </div>
             <p className="about-two__top__text">
-{e.para ? e.para:"There are many variations of passages of Lorem Ipsum avalable, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&apos;t look even slightly believable."}
+{e.paragraph ? e.paragraph:"There are many variations of passages of Lorem Ipsum avalable, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&apos;t look even slightly believable."}
 
             </p>
           </div>
@@ -267,11 +267,11 @@ const convertToUser = (dbSection: DatabaseAbout): AboutSection => {
               </div>
               <div className="about-two__ostech__item__content">
                         <h4 className="about-two__ostech__item__title"><Link href="/aboutus">
-                     {e.highlightTitle ? e.highlightTitle:'Deliver Perfect Solution'}
+                     {e.highlight_title ? e.highlight_title:'Deliver Perfect Solution'}
                         
                         </Link></h4>
                         <p className="about-two__ostech__item__text">
-                  {e.highlightDescription ? e.highlightDescription:'There are inmaniy variations passages of Lorem Ipsum available, but the majority'}
+                  {e.highlight_description ? e.highlight_description:'There are inmaniy variations passages of Lorem Ipsum available, but the majority'}
                         </p>
               </div>
             </div>
@@ -283,19 +283,19 @@ const convertToUser = (dbSection: DatabaseAbout): AboutSection => {
                           {/* <i className="icon-nanotechnology-1" /> */}
                                            <div 
         dangerouslySetInnerHTML={{
-          __html: `<i class="${e.coliconOne || 'icon-nanotechnology-1'}"></i>`
+          __html: `<i class="${e.col_icon_one || 'icon-nanotechnology-1'}"></i>`
         }}
         className="flex items-center justify-center w-full h-full"
       />
                 </div>
                         <h4 className="about-two__feature__top__title">
                           
-                     {e.colHeadOne ? e.colHeadOne:'Manage Tech <br />Services'}
+                     {e.col_head_one ? e.col_head_one:'Manage Tech <br />Services'}
                         
                         </h4>
               </div>
                       <p className="about-two__feature__item__text">
-                     {e.colparaOne ? e.colparaOne:'There are many variations of passages of Lorem'}
+                     {e.col_paragraph_one ? e.col_paragraph_one:'There are many variations of passages of Lorem'}
                         
               </p>
             </div>
@@ -305,26 +305,26 @@ const convertToUser = (dbSection: DatabaseAbout): AboutSection => {
                           {/* <i className="icon-it-service-1" /> */}
                                                         <div 
         dangerouslySetInnerHTML={{
-          __html: `<i class="${e.coliconTwo || 'icon-it-service-1'}"></i>`
+          __html: `<i class="${e.col_icon_two || 'icon-it-service-1'}"></i>`
         }}
         className="flex items-center justify-center w-full h-full"
       />
                 </div>
                         <h4 className="about-two__feature__top__title">
-                     {e.colHeadTwo ? e.colHeadTwo:'It Consulting <br />Solution'}
+                     {e.col_paragraph_two ? e.col_paragraph_two:'It Consulting <br />Solution'}
                         
                         </h4>
               </div>
                       <p className="about-two__feature__item__text">
                         
-                     {e.colparaTwo ? e.colparaTwo:'There are many variations of passages of Lorem'}
+                     {e.col_paragraph_two ? e.col_paragraph_two:'There are many variations of passages of Lorem'}
 
               </p>
             </div>
           </div>
           <div className="about-two__btn">
                     <Link href="/aboutus" className="ostech-btn">
-                {e.colbtn}
+                {e.col_btn}
                     
                     </Link>
           </div>

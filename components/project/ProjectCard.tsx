@@ -20,10 +20,10 @@ export interface Project {
 interface DatabaseProjectItem {
   id: string;
   created_at: string;
-  para: string;
+  paragraph: string;
   title: string;
   heading: string;
-  btnText: string;
+  btn_text: string;
   image: string | null;
   project_id: string;
 }
@@ -39,10 +39,10 @@ interface DatabaseProject {
 interface ProjectItem {
   id: string | number;
   created_at?: string;
-  para?: string;
+  paragraph?: string;
   title?: string;
   heading?: string;
-  btnText?: string;
+  btn_text?: string;
   imageUrl?: string | null;
   project_id?: string;
   index?: number;
@@ -54,9 +54,9 @@ interface Projects {
   id?: string | number;
   created_at?: string;
   title: string;
-  para?: string;
+  paragraph?: string;
   
-  btnText: string;
+  btn_text: string;
 
   heading?: string;
   imageUrl?: string | null;
@@ -90,6 +90,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   // Calculate z-index based on scroll position
   // Cards closer to active index get higher z-index
   const calculateZIndex = () => {
+    // if (index === activeIndex) return totalCards + 10; // Active card on top
     if (index === activeIndex) return totalCards + 10; // Active card on top
     if (index < activeIndex) return totalCards - (activeIndex - index); // Cards above active
     return totalCards - (index - activeIndex); // Cards below active
@@ -191,11 +192,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         </h3>
 
         <p className="card-text mb-4">
-          {project.para}
+          {project.paragraph}
         </p>
 
         <button className=" ostech-btn ">
-               { project.btnText}
+               { project.btn_text}
         </button>
       </div>
     </div>

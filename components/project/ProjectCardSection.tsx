@@ -60,10 +60,10 @@ const DELIMITER = '|||CHUNK|||';
 interface DatabaseProjectItem {
   id: string;
   created_at: string;
-  para: string;
+  paragraph: string;
   title: string;
   heading: string;
-  btnText: string;
+  btn_text: string;
   image: string | null;
   project_id: string;
 }
@@ -79,10 +79,10 @@ interface DatabaseProject {
 interface ProjectItem {
   id: string;
   created_at: string;
-  para: string;
+  paragraph: string;
   title: string;
   heading: string;
-  btnText: string;
+  btn_text: string;
   imageUrl: string | null;
   project_id: string;
 }
@@ -187,7 +187,7 @@ const ProjectCardSection: React.FC = () => {
   
         if (projectsData && projectsData.length > 0) {
           const { data: allItemsData, error: itemsError } = await supabase
-            .from("projectItem")
+            .from("project_item")
             .select("*")
             .order("created_at", { ascending: true });
   
@@ -204,10 +204,10 @@ const ProjectCardSection: React.FC = () => {
                 return {
                   id: item.id,
                   created_at: item.created_at,
-                  para: item.para,
+                  paragraph: item.paragraph,
                   title: item.title,
                   heading: item.heading,
-                  btnText: item.btnText,
+                  btn_text: item.btn_text,
                   imageUrl: imageUrl,
                   project_id: item.project_id
                 };
@@ -305,9 +305,9 @@ const ProjectCardSection: React.FC = () => {
                   project={{
       id: parseInt(item.id),  // ProjectCard expects number
       title: item.title,
-      para: item.para,
+      paragraph: item.paragraph,
                     heading: item.heading,
-      btnText:item.btnText,
+      btn_text:item.btn_text,
       imageUrl: item.imageUrl || '',
       color: 'var(--ostech-black-soft)',
     }}

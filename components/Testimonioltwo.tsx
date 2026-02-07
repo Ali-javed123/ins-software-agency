@@ -13,9 +13,9 @@ interface DatabaseTestimonial {
   id: string;
   created_at: string;
   img: string | null;
-  imgLable: string;
-  imgpara: string;
-  para: string;
+  img_lable: string;
+  img_paragraph: string;
+  paragraph: string;
   testmonial_id: string;
 }
 
@@ -29,9 +29,9 @@ interface DatabaseTestimonialGroup {
 interface Testimonial {
   id: string;
   created_at: string;
-  imgLable: string;
-  imgpara: string;
-  para: string;
+  img_lable: string;
+  img_paragraph: string;
+  paragraph: string;
   testmonial_id: string;
   profileImage: string | null; // Base64 के लिए
   profileImageUrl: string | null; // Bucket के लिए
@@ -192,7 +192,7 @@ const [testimonialGroups, setTestimonialGroups] = useState<TestimonialGroup[]>([
 
       // Fetch Testimonial Groups
       const { data: testimonialGroupsData, error: testimonialGroupsError } = await supabase
-        .from("testimonialGroup")
+        .from("testimonial_group")
         .select("*")
         .order("created_at", { ascending: false });
 
@@ -255,9 +255,9 @@ const reconstructFromChunks = (chunkedString: string | null | undefined): string
       return {
         id: dbTestimonial.id,
         created_at: dbTestimonial.created_at,
-        imgLable: dbTestimonial.imgLable,
-        imgpara: dbTestimonial.imgpara,
-        para: dbTestimonial.para,
+        img_lable: dbTestimonial.img_lable,
+        img_paragraph: dbTestimonial.img_paragraph,
+        paragraph: dbTestimonial.paragraph,
         testmonial_id: dbTestimonial.testmonial_id,
         profileImage: null,
         profileImageUrl: dbTestimonial.img || null
@@ -267,9 +267,9 @@ const reconstructFromChunks = (chunkedString: string | null | undefined): string
       return {
         id: dbTestimonial.id,
         created_at: dbTestimonial.created_at,
-        imgLable: dbTestimonial.imgLable,
-        imgpara: dbTestimonial.imgpara,
-        para: dbTestimonial.para,
+        img_lable: dbTestimonial.img_lable,
+        img_paragraph: dbTestimonial.img_paragraph,
+        paragraph: dbTestimonial.paragraph,
         testmonial_id: dbTestimonial.testmonial_id,
         profileImage: reconstructFromChunks(dbTestimonial.img),
         profileImageUrl: null
@@ -404,20 +404,20 @@ testimonialGroups.map((testimonialGroup: TestimonialGroup, k: number) => (
                               }
 
                             </div>
-                            <p className="testimonial-two__item__text">{testimonial.para}</p>
+                            <p className="testimonial-two__item__text">{testimonial.paragraph}</p>
                             <div className="testimonial-two__item__author">
                               <div className="testimonial-two__item__author__thumb">
                                 <img
                                   src={getImageUrl(testimonial)!}
-                                  alt={testimonial.imgLable}
+                                  alt={testimonial.img_lable}
                                 //   onError={(e) => {
                                 //     e.target.src = "https://via.placeholder.com/60x60?text=User";
                                 //   }}
                                 />
                               </div>
                               <div className="testimonial-two__item__author__content">
-                                <h5 className="testimonial-two__item__author__title">{testimonial.imgLable}</h5>
-                                <span className="testimonial-two__item__author__deg">{testimonial.imgpara}</span>
+                                <h5 className="testimonial-two__item__author__title">{testimonial.img_lable}</h5>
+                                <span className="testimonial-two__item__author__deg">{testimonial.img_paragraph}</span>
                               </div>
                             </div>
                             <div className="testimonial-two__item__quite">
