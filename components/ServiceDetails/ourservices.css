@@ -6,6 +6,7 @@
   padding: 60px 0;
   background: var(--ostech-black);
   color: var(--ostech-white);
+
 }
 
 /* Heading */
@@ -31,8 +32,16 @@
   background: var(--ostech-black-soft);
   border: 2px solid rgba(255, 255, 255, 0.08);
   border-radius: 25px 0 25px 0;
-  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.6s ease;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),              box-shadow 0.6s ease;
+  -webkit-transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),              box-shadow 0.6s ease;
+  -moz-transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),              box-shadow 0.6s ease;
+  -ms-transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),              box-shadow 0.6s ease;
+  -o-transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),              box-shadow 0.6s ease;
+  -webkit-border-radius: 25px 0 25px 0;
+  -moz-border-radius: 25px 0 25px 0;
+  -ms-border-radius: 25px 0 25px 0;
+  /*howtosettransitionduration*/transition: all 1s;
+  -o-border-radius: 25px 0 25px 0;
 }
 
 /* Hover only on desktop */
@@ -58,7 +67,7 @@
 
 .ouricon {
   font-size: 30px;
-  color: var(--ostech-black);
+  color: var(--ostech-base);
 }
 
 /* Text */

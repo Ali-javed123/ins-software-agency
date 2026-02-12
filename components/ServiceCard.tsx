@@ -707,7 +707,7 @@ interface ServiceGroupDatabase {
 interface ServiceDatabase {
   id: string
   created_at: string
-  service_group_id: string
+  service_group_id?: string
   slug: string
   title: string
   icon: string
@@ -721,6 +721,8 @@ interface Service {
   icon: string
   image: string | null        // Base64 के लिए
   imageUrl?: string | null    // Bucket के लिए
+    service_group_id?: string // ✅ Service group ID add करें
+
 }
 
 interface ServiceGroup {
@@ -786,9 +788,30 @@ export const Services: ServiceGroupOne[] = [
 ];
 
 
+interface ServiceSlideProps {
+  item: Service;
+  service_group_id?: string; // Make it optional
+}
+
+
 // Memoized Slide Item
-const ServiceSlide = memo(({ item }: { item: Service }) => (
-  <Link href={`/services/${item.slug}`} className="block h-full">
+const ServiceSlide = memo(({ item ,service_group_id}: ServiceSlideProps) => (
+
+ 
+  // <Link href={`/services/${item.slug}`
+      <Link
+  href={{
+    pathname: `/services/${item.slug}`,
+    query: {
+      sid: item.id,
+      gid: service_group_id,
+    },
+  }}
+  className="block h-full"
+
+
+  
+   >
     <div className="service-three__item h-full">
       <div className="service-three__item__inner h-full flex flex-col">
         <div className="service-three__item__icon">
@@ -1048,7 +1071,8 @@ const convertToService = (dbService: ServiceDatabase): Service => {
                 >
                   {group?.services?.map((item) => (
                     <SwiperSlide key={item.id}>
-                      <ServiceSlide item={item} />
+                      <ServiceSlide item={item}      service_group_id={group.id} 
+ />
                     </SwiperSlide>
                   ))}
                 </Swiper>

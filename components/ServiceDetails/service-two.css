@@ -4,6 +4,11 @@
   color: var(--base-white);
   padding: 60px; /* Add horizontal padding for mobile */
   position: relative;
+  display: flex ;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
 }
 
 /* Row children */
@@ -16,7 +21,8 @@
 /* Image styling */
 .detailImage img {
   width: 100%;
-  height: auto; /* Make image responsive */
+
+  height: 450px; /* Make image responsive */
   object-fit: cover;
   border-radius: 8px; /* optional */
 }

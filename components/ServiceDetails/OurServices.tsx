@@ -1,53 +1,353 @@
-import React from "react";
+// import React from "react";
+// import "./ourservices.css";
+// import { DiAndroid } from "react-icons/di";
+// import { FaApple, FaReact } from "react-icons/fa";
+// import { FaFlutter } from "react-icons/fa6";
+
+
+
+"use client"
+import { useState, useCallback, useEffect } from "react";
 import "./ourservices.css";
 import { DiAndroid } from "react-icons/di";
 import { FaApple, FaReact } from "react-icons/fa";
 import { FaFlutter } from "react-icons/fa6";
+import { supabase } from "@/lib/supabase-client"
+import { useParams } from "next/navigation";
 
-const OurServices = () => {
+interface Service {
+  id: string;
+  title: string;
+  description?: string;
+  created_at: string;
+  slug: string;
+  service_group_id: string;
+  icon: string;
+  image: string | null;
+}
+
+interface ServiceGroup {
+  id: string;
+  title: string;
+  description?: string;
+  created_at: string;
+  slug: string;
+}
+
+interface ServiceDetailOne {
+  id: string;
+  created_at: string;
+  icon: string;
+  heading: string;
+  des: string;
+  service_id: string;
+}
+
+interface ServiceDetailOneGroup {
+  id: string;
+  created_at: string;
+  heading: string;
+  des: string;
+  service_group_id: string;
+  service_id: string;
+  service_groups?: ServiceGroup;
+  services?: Service;
+  service_detail_ones: ServiceDetailOne[];
+}
+
+interface PageProps {
+  serviceId?: string;
+  groupId?: string;
+}
+const OurServices = ({ groupId, serviceId }: PageProps) => {
+
+
+
+
+    console.log("Received props - groupId:", groupId, "serviceId:", serviceId);
+
+  const params = useParams();
+  const slug = params?.slug as string;
+
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [serviceGroups, setServiceGroups] = useState<ServiceGroup[]>([]);
+  const [serviceDetailOneGroups, setServiceDetailOneGroups] = useState<ServiceDetailOneGroup[]>([]);
+  const [services, setServices] = useState<Service[]>([]);
+  const [currentServiceGroup, setCurrentServiceGroup] = useState<ServiceGroup | null>(null);
+  const [currentService, setCurrentService] = useState<Service | null>(null);
+  const [filteredServiceDetailOneGroups, setFilteredServiceDetailOneGroups] = useState<ServiceDetailOneGroup[]>([]);
+
+  // Fetch Service Groups
+  const fetchServiceGroups = useCallback(async () => {
+    try {
+      const { data, error } = await supabase
+        .from('service_groups')
+        .select('id, title, slug, created_at')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Service Groups Error:', error);
+        setError(`Service Groups Error: ${error.message}`);
+        return;
+      }
+      setServiceGroups(data || []);
+    } catch (error) {
+      console.error('Error fetching service groups:', error);
+      setError('Failed to load service groups');
+    }
+  }, []);
+
+  // Fetch Services
+  const fetchServices = useCallback(async () => {
+    try {
+      const { data, error } = await supabase
+        .from('services')
+        .select('id, title, slug, created_at, service_group_id, icon, image')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Services Error:', error);
+        setError(`Services Error: ${error.message}`);
+        return;
+      }
+      setServices(data || []);
+    } catch (error) {
+      console.error('Error fetching services:', error);
+      setError('Failed to load services');
+    }
+  }, []);
+
+  // Fetch Service Detail One Groups (Optimized Version)
+  const fetchServiceDetailOneGroups = useCallback(async () => {
+    try {
+      setLoading(true);
+      
+      let query = supabase
+        .from('service_one_group')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      // Priority 1: If both serviceId and groupId are provided via props
+      if (serviceId && groupId) {
+        console.log("Filtering by both serviceId and groupId:", { serviceId, groupId });
+        query = query
+          .eq('service_id', serviceId)
+          .eq('service_group_id', groupId);
+      } 
+      // Priority 2: If only serviceId is provided via props
+      else if (serviceId) {
+        console.log("Filtering by serviceId only:", serviceId);
+        query = query.eq('service_id', serviceId);
+      } 
+      // Priority 3: If only groupId is provided via props
+      else if (groupId) {
+        console.log("Filtering by groupId only:", groupId);
+        query = query.eq('service_group_id', groupId);
+      } 
+      // Priority 4: If slug is provided via URL (backward compatibility)
+      else if (slug) {
+        console.log("Using slug from URL:", slug);
+        const { data: serviceData } = await supabase
+          .from('services')
+          .select('id, service_group_id')
+          .eq('slug', slug)
+          .single();
+
+        if (serviceData) {
+          query = query.eq('service_id', serviceData.id);
+        }
+      }
+
+      const { data: groups, error: groupsError } = await query;
+
+      if (groupsError) throw groupsError;
+
+      if (!groups || groups.length === 0) {
+        setServiceDetailOneGroups([]);
+        setFilteredServiceDetailOneGroups([]);
+        return;
+      }
+
+      // Fetch related data
+      const serviceGroupIds = [...new Set(groups.map(g => g.service_group_id))];
+      const serviceIds = [...new Set(groups.map(g => g.service_id))];
+      const groupIds = groups.map(g => g.id);
+
+      const [
+        { data: serviceGroupsData },
+        { data: servicesData },
+        { data: detailOnesData }
+      ] = await Promise.all([
+        supabase.from('service_groups').select('*').in('id', serviceGroupIds),
+        supabase.from('services').select('*').in('id', serviceIds),
+        supabase.from('service_detail_one').select('*').in('service_id', groupIds).order('created_at', { ascending: true })
+      ]);
+
+      // Map data
+      const serviceGroupsMap = new Map(serviceGroupsData?.map(sg => [sg.id, sg]));
+      const servicesMap = new Map(servicesData?.map(s => [s.id, s]));
+      const detailsMap = new Map<string, ServiceDetailOne[]>();
+      
+      detailOnesData?.forEach(detail => {
+        if (!detailsMap.has(detail.service_id)) {
+          detailsMap.set(detail.service_id, []);
+        }
+        detailsMap.get(detail.service_id)!.push(detail);
+      });
+
+      const groupsWithDetails = groups.map(group => ({
+        ...group,
+        service_groups: serviceGroupsMap.get(group.service_group_id),
+        services: servicesMap.get(group.service_id),
+        service_detail_ones: detailsMap.get(group.id) || []
+      }));
+
+      setServiceDetailOneGroups(groupsWithDetails);
+      setFilteredServiceDetailOneGroups(groupsWithDetails);
+      
+      // Set current service and service group based on props
+      if (serviceId && servicesMap.has(serviceId)) {
+        const foundService = servicesMap.get(serviceId);
+        if (foundService) {
+          setCurrentService(foundService);
+          
+          if (groupId && serviceGroupsMap.has(groupId)) {
+            setCurrentServiceGroup(serviceGroupsMap.get(groupId)!);
+          } else if (foundService.service_group_id) {
+            const serviceGroup = serviceGroupsMap.get(foundService.service_group_id);
+            if (serviceGroup) {
+              setCurrentServiceGroup(serviceGroup);
+            }
+          }
+        }
+      } else if (slug) {
+        // Fallback to slug logic
+        const foundService = Array.from(servicesMap.values()).find(s => s.slug === slug);
+        if (foundService) {
+          setCurrentService(foundService);
+          const serviceGroup = serviceGroupsMap.get(foundService.service_group_id);
+          if (serviceGroup) {
+            setCurrentServiceGroup(serviceGroup);
+          }
+        }
+      }
+      
+      setError(null);
+    } catch (error) {
+      console.error('Error fetching service detail groups:', error);
+      setError('Failed to load service detail groups.');
+    } finally {
+      setLoading(false);
+    }
+  }, [slug, serviceId, groupId]);
+
+  // Determine which data to display
+  const displayServiceDetailOneGroups = filteredServiceDetailOneGroups;
+
+  // Initial fetch
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        await fetchServiceGroups();
+        await fetchServices();
+        await fetchServiceDetailOneGroups();
+      } catch (error) {
+        console.error('Error loading data:', error);
+        setError('Failed to load data. Please check console for details.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, [fetchServiceGroups, fetchServices, fetchServiceDetailOneGroups]);
+
+  // Log for debugging
+  useEffect(() => {
+    console.log("Filtered service detail groups:", filteredServiceDetailOneGroups);
+    console.log("Current service:", currentService);
+    console.log("Current service group:", currentServiceGroup);
+    console.log("Total groups fetched:", serviceDetailOneGroups.length);
+  }, [filteredServiceDetailOneGroups, currentService, currentServiceGroup, serviceDetailOneGroups]);
+
+  //   if (loading) {
+//     return (
+//       <section className="ourservices">
+//         <div className="container">
+//           <div className="row justify-content-center">
+//             <div className="col-md-8 text-center">
+//               <div className="spinner-border text-primary" role="status">
+//                 <span className="visually-hidden">Loading...</span>
+//               </div>
+//               <p className="mt-3">Loading services...</p>
+//             </div>
+//           </div>
+//         </div>
+//       </section>
+//     )
+//   }
+
+//   if (error) {
+//     return (
+//       <section className="ourservices">
+//         <div className="container">
+//           <div className="row justify-content-center">
+//             <div className="col-md-8 text-center">
+//               <div className="alert alert-danger" role="alert">
+//                 {error}
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </section>
+//     )
+//   }
   return (
     <section className="ourservices">
-      <div className="container">
+      {filteredServiceDetailOneGroups.length > 0 &&
+        filteredServiceDetailOneGroups.map((e, i) => (
+      <div key={i} className="container">
         {/* Heading */}
         <div className="row justify-content-center mb-4">
           <div className="col-md-8 text-center">
             <h2 className="head">
-              Our Advanced{" "}
-              <span className="headspan">Mobile App Development</span> Services
+              {e.heading}
             </h2>
             <p className="mt-3">
-              As a leading mobile app development company trusted by global
-              innovators, we deliver end-to-end custom app development services
-              that blend technology, design, and strategy.
+             {e.des}
             </p>
           </div>
         </div>
 
         {/* Cards */}
         <div className="row">
-          {/* Android */}
-          <div className="col-lg-4 col-md-6 mb-4">
+              {/* Android */}
+              {e.service_detail_ones.map((item, index) => (
+                
+          <div key={index} className="col-lg-4 col-md-6 mb-4">
             <div className="ourservicesCard">
               <div className="row align-items-center mb-2">
                 <div className="col-3">
                   <div className="ouriconwrap">
-                    <DiAndroid className="ouricon" />
+                    <i className={`${item.icon} ouricon`} />
                   </div>
                 </div>
                 <div className="col-9">
-                  <h3 className="ourhead">Android App Development</h3>
+                  <h3 className="ourhead">{item.heading}</h3>
                 </div>
               </div>
               <p className="ourdes">
-                We deliver scalable, high-performance Android applications using
-                Kotlin and Jetpack libraries, ensuring smooth UX and long-term
-                maintainability across all Android devices.
+                {item.des}
               </p>
             </div>
           </div>
+              )) }
 
           {/* iOS */}
-          <div className="col-lg-4 col-md-6 mb-4">
+          {/* <div className="col-lg-4 col-md-6 mb-4">
             <div className="ourservicesCard">
               <div className="row align-items-center mb-2">
                 <div className="col-3">
@@ -65,10 +365,10 @@ const OurServices = () => {
                 high-quality user experiences.
               </p>
             </div>
-          </div>
+          </div> */}
 
           {/* React Native */}
-          <div className="col-lg-4 col-md-6 mb-4">
+          {/* <div className="col-lg-4 col-md-6 mb-4">
             <div className="ourservicesCard">
               <div className="row align-items-center mb-2">
                 <div className="col-3">
@@ -86,10 +386,10 @@ const OurServices = () => {
                 both Android and iOS platforms.
               </p>
             </div>
-          </div>
+          </div> */}
 
           {/* Flutter */}
-          <div className="col-lg-4 col-md-6 mb-4">
+          {/* <div className="col-lg-4 col-md-6 mb-4">
             <div className="ourservicesCard">
               <div className="row align-items-center mb-2">
                 <div className="col-3">
@@ -107,9 +407,12 @@ const OurServices = () => {
                 products.
               </p>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
+        
+      ))
+      }
     </section>
   );
 };

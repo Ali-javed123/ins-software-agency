@@ -17,7 +17,7 @@ justify-content: flex-start;
     background: var(--ostech-black-soft);
     width: 100%;
     min-height: 45vh;
-    padding: 20px;
+    padding: 14px;
     color: var(--ostech-white);
  border: 2px solid rgba(255, 255, 255, 0.08);
 
@@ -43,8 +43,8 @@ justify-content: flex-start;
   -o-transform: translateY(-7px);
 }
 .titlenum{
-color: var(--ostech-base);
-font-size: 30px ;
+color: rgb(212, 212, 212) !important;
+font-size: 32px ;
 font-weight: 900;
 line-height: 42px;
 }

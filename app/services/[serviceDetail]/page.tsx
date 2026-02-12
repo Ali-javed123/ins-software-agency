@@ -9,7 +9,7 @@ import ContactUs from "@/components/ContactUsForm";
 import ServiceThree from "@/components/ServiceDetails/ServiceThree";
 import OurServices from "@/components/ServiceDetails/OurServices";
 import Highvalue from "@/components/ServiceDetails/HighValue";
-import Testimonial from "@/components/Testimonials";
+import Testimonial from "@/components/Testimonioltwo";
 import Faq from "@/components/ServiceDetails/Faq";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
@@ -152,10 +152,26 @@ export async function generateStaticParams() {
     }))
   );
 }
+interface PageProps {
+  params: {
+    slug: string;
+  };
+  searchParams: {
+    sid?: string;
+    gid?: string;
+  };
+}
+
 
 // ✅ MUST be async in Next 15+
-const ServiceDetail = async ({ params }) => {
+const ServiceDetail = async ({ params,
+  searchParams,
+ }) => {
   const { serviceDetail } = await params; // ✅ REQUIRED
+
+  const { sid, gid } = await searchParams; // ✅ query params
+  console.log("serviceId:", sid, "groupId:", gid);
+
 
   const service = Services
     .flatMap(group => group.data)
@@ -171,12 +187,12 @@ const ServiceDetail = async ({ params }) => {
       <Navbar/>
       <Banner title={service?.title} />
         {/* <Brand /> */}
-        <Highvalue/>
-        <OurServices/>
-        <ServiceDetailTwo />
-        <ServiceThree />
+        <OurServices serviceId={sid} groupId={ gid} />
+        <Highvalue serviceId={sid} groupId={ gid}/>
+        <ServiceDetailTwo serviceId={sid} groupId={ gid}/>
+        <ServiceThree serviceId={sid} groupId={ gid}/>
         <ServiceFour />
-        <ServiceFive />
+        <ServiceFive serviceId={sid} groupId={ gid}/>
         {/* <Review/> */}
         <Testimonial />
         <Faq/>
