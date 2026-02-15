@@ -195,7 +195,7 @@ const ServiceDetail = async ({ params,
         <ServiceFive serviceId={sid} groupId={ gid}/>
         {/* <Review/> */}
         <Testimonial />
-        <Faq/>
+        <Faq serviceId={sid} groupId={ gid}/>
         {/* <ContactUs /> */}
         <ServiceForm />
         <Footer/>

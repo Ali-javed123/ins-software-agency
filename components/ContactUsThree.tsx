@@ -1,4 +1,66 @@
+"use client";
+
+import { FC, useState } from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { supabase } from "@/lib/supabase-client";
+
+interface ContactFormValues {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
+
 const ContactUsThree = () => {
+const [loading, setLoading] = useState<boolean>(false);
+const [success, setSuccess] = useState<string>("");
+const formik = useFormik<ContactFormValues>({
+  initialValues: {
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  },
+  validationSchema: Yup.object({
+    name: Yup.string().required("Name is required"),
+    email: Yup.string()
+      .email("Invalid email")
+      .required("Email is required"),
+    subject: Yup.string().required("Subject is required"),
+    message: Yup.string().required("Message is required"),
+  }),
+  onSubmit: async (values, { resetForm }) => {
+    try {
+      setLoading(true);
+      setSuccess("");
+
+      const { error } = await supabase.from("contact_us").insert([
+        {
+          user_name: values.name,
+          email: values.email,
+          subject: values.subject,
+          description: values.message,
+        },
+      ]);
+
+      if (error) {
+        throw error;
+      }
+
+      setSuccess("Message sent successfully!");
+      resetForm();
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        alert(error.message);
+      }
+    } finally {
+      setLoading(false);
+    }
+  },
+});
+
+
 
     return (
     <section className="contact-two">
@@ -26,22 +88,72 @@ const ContactUsThree = () => {
           </div>
           <div className="contact-two__content">
             <div className="contact-two__form__inner">
-              <form className="contact-two__form contact-form-validated form-one wow fadeInUp" data-wow-duration="1500ms" action="#">
+              <form
+                    onSubmit={formik.handleSubmit}
+ className="contact-two__form contact-form-validated form-one wow fadeInUp" data-wow-duration="1500ms" action="#">
                 <div className="form-one__group">
                   <div className="form-one__control form-one__control--full">
-                    <input type="text" name="name" placeholder="Your Name" />
+                    <input type="text"                           name="name"
+                          placeholder="Your Name"
+                          value={formik.values.name}
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
+                          />
+                                                  {formik.touched.name && formik.errors.name && (
+                          <small className="text-danger">
+                            {formik.errors.name}
+                          </small>
+                        )}
+
                   </div>{/* /.form-one__control form-one__control__full */}
                   <div className="form-one__control form-one__control--full">
-                    <input type="email" name="email" placeholder="Email Address" />
+                          <input type="email" name="email" placeholder="Email Address"
+                                                    value={formik.values.email}
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
+
+                          />
+                                                  {formik.touched.email && formik.errors.email && (
+                          <small className="text-danger">
+                            {formik.errors.email}
+                          </small>
+                        )}
+
                   </div>{/* /.form-one__control form-one__control__full */}
                   <div className="form-one__control form-one__control--full">
-                    <input type="text" name="subject" placeholder="Subject" />
+                          <input type="text" name="subject" placeholder="Subject"
+                                                    value={formik.values.subject}
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
+
+                          />
+                                                  {formik.touched.subject && formik.errors.subject && (
+                          <small className="text-danger">
+                            {formik.errors.subject}
+                          </small>
+                        )}
+
                   </div>{/* /.form-one__control form-one__control__full */}
                   <div className="form-one__control form-one__control--full">
-                    <textarea name="message" placeholder="Write a Message" defaultValue={""} />
+                          <textarea name="message" placeholder="Write a Message" 
+                    
+                                              value={formik.values.message}
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
+
+                          />
+                                                  {formik.touched.message && formik.errors.message && (
+                          <small className="text-danger">
+                            {formik.errors.message}
+                          </small>
+                        )}
+
                   </div>{/* /.form-one__control */}
                   <div className="form-one__control form-one__control--full">
-                    <button type="submit" className="ostech-btn">Send a Message</button>
+                    <button type="submit" className="ostech-btn"                           disabled={loading}
+                          >
+                            {loading ? "Sending..." : "Send a Message"}
+</button>
                   </div>{/* /.form-one__control */}
                 </div>{/* /.form-one__group */}
               </form>

@@ -1,12 +1,58 @@
 "use client";
+
+import { useState, useEffect } from 'react';
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import { useInView } from "react-intersection-observer";
+import { supabase } from "@/lib/supabase-client";
+
+
+interface EmailField {
+  email: string;
+}
+
+interface PhoneField {
+  number: string;
+}
+
+interface ContactUsCard {
+  id?: number;
+  email: EmailField[];
+  number: PhoneField[];
+  created_at?: string;
+}
 
 const ContactUsCard = () => {
+   const [loading, setLoading] = useState(false);
+  const [cards, setCards] = useState<ContactUsCard[]>([]);
+
     const { ref, inView } = useInView({
       threshold: 0.2, // trigger when 20% of the element is visible
       // triggerOnce: true, // animation only triggers once
     });
+
+
+    const fetchCards = async () => {
+    setLoading(true);
+    try {
+      const { data, error } = await supabase
+        .from('contact_us_card')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setCards(data || []);
+    } catch (error) {
+      console.error('Error fetching cards:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchCards();
+  }, []);
+
+  console.log("contactUs cards",cards)
   return (
       <>
       
@@ -109,7 +155,7 @@ const ContactUsCard = () => {
     </div>
   </div>
 </section> */}
-
+      {cards.length > 0 && (
         <section className="contact-feature my-3" ref={ref}>
         <div className="container">
           <div className="text-center my-4">
@@ -127,19 +173,17 @@ const ContactUsCard = () => {
               </div>
                 <h4 className="contact-card__title">Phone Numbers</h4>
   <div className="row">
-                  <div className={` d-flex justify-content-center align-content-center ${inView ? "animate-left-to-right" : ""}`}>
-                    <div className="text-start">
-
-              <p className="contact-card__text">
-                <span>01</span> +880 1715-956363
+                    <div className={` d-flex justify-content-center align-content-center ${inView ? "animate-left-to-right" : ""}`}>
+                
+                              {cards.map((card) => (
+          <div key={card.id} className=" w-100">
+            {card.number.map((phoneItem, idx) => (
+              <p key={idx} className="contact-card__text">
+                <span className='fs-sm fw-bold'>{String(idx + 1).padStart(2, '0')}</span> {phoneItem.number}
               </p>
-              <p className="contact-card__text">
-                <span>02</span> +92 323 0217282
-              </p>
-              {/* <p className="contact-card__text">
-                <span>PK</span> +92 2332 3432 76
-              </p> */}
-</div>
+            ))}
+          </div>
+        ))}
 </div>
 </div>
 
@@ -159,18 +203,15 @@ const ContactUsCard = () => {
               <h4 className="contact-card__title">Email Address</h4>
      <div className="row">
                   <div className={` d-flex justify-content-center align-content-center ${inView ? "animate-left-to-right" : ""}`}>
-                    <div className="text-start">
-
-              <p className="contact-card__text">
-                <span>01</span> support@instechlab.com
+                                      {cards.map((card) => (
+          <div key={card.id} className=" w-100">
+            {card.email.map((phoneItem, idx) => (
+              <p key={idx} className="contact-card__text">
+                <span className='fs-sm fw-bold'>{String(idx + 1).padStart(2, '0')}</span> {phoneItem.email}
               </p>
-              {/* <p className="contact-card__text">
-                <span>02</span> support@mail.com
-              </p>
-              <p className="contact-card__text">
-                <span>03</span> sales@mail.com
-                      </p> */}
-                      </div>
+            ))}
+          </div>
+        ))}
                       </div>
                       </div>
 
@@ -215,6 +256,9 @@ const ContactUsCard = () => {
         </div>
       </div>
     </section>
+          
+)}
+       
       </>
 
 )
