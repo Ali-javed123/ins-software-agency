@@ -1,4 +1,3 @@
-// components/ProjectCard.tsx
 'use client';
 
 import React, { useState,useEffect ,useCallback} from 'react';
@@ -139,7 +138,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         opacity,
       }}
       transition={{
-        duration: 0.9,
+        duration: 0.3,
         ease: "easeOut"
       }}
       initial={false}

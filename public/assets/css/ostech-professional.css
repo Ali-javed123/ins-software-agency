@@ -3621,6 +3621,15 @@ textarea::placeholder {
     margin-left: 70px;
   }
 }
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
 .main-header--one {
   z-index: 111;
   background: transparent;
@@ -3628,6 +3637,19 @@ textarea::placeholder {
   top: 0;
   width: 100%;
 }
+.main-header--one.active {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--ostech-black);
+  box-shadow: 0px 3px 18px rgba(var(--ostech-secondary-rgb, 35, 36, 41), 0.15);
+  animation: slideDown 0.5s ease-in-out;
+  z-index: 1000;
+  -webkit-animation: slideDown 0.5s ease-in-out;
+}
+
+
 .main-header--two {
   border-bottom: 0px solid rgba(var(--ostech-white-rgb, 255, 255, 255), 0.2);
   background: var(--ostech-white, #fff);

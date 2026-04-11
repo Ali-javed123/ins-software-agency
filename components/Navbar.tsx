@@ -1,17 +1,41 @@
-import React from 'react'
+"use client"
+import React, { useState, useEffect } from 'react';
+
 import Image from 'next/image'
 import Link from 'next/link'
 
 const Navbar = () => {
+  const [isSticky, setIsSticky] = useState(false);
+
+    useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      if (scrollPosition > 100) { // Adjust this value as needed
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    
+    // Cleanup
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+
   return (
     <>
-     <header className="main-header main-header--one sticky-header sticky-header--normal d-none d-lg-block">
+          <header className={`main-header main-header--one sticky-header sticky-header--normal d-none d-lg-block ${isSticky ? 'active' : ''}`}>
+
   <div className="container-fluid">
     <div className="main-header__inner">
       <div className="main-header__logo logo-ostech">
               <Link href="/">
-                            <img loading='lazy'
-              decoding="async" src="/assets/images/logos.png" alt="Ostech HTML" width="226px"/>
+                <Image loading='lazy'
+                  decoding="async" src="/assets/images/logos.png" alt="Ostech HTML" width={226} height={ 128} />
 
             {/* <span className='mylogo'>InS Tech Lab</span> */}
         </Link>
